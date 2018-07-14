@@ -97,6 +97,7 @@ export default {
             image: new Icon({
               src: 'https://skylines.aero/images/glider_symbol.png',
               rotation,
+              rotateWithView: true,
             }),
           }),
         );
