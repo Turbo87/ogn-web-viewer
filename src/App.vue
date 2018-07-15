@@ -27,6 +27,7 @@ export default {
   beforeCreate() {
     this.aircraftSource = new VectorSource({ features: [] });
     this.aircraftStyles = new WeakMap();
+    this.shadowStyles = new WeakMap();
 
     this.map = new olMap({
       layers: [
@@ -36,6 +37,11 @@ export default {
         new VectorLayer({
           source: this.aircraftSource,
           style: (feature, resolution) => this.getAircraftFeatureStyle(feature, resolution),
+        }),
+        new VectorLayer({
+          opacity: 0.2,
+          source: this.aircraftSource,
+          style: (feature, resolution) => this.getShadowFeatureStyle(feature, resolution),
         }),
       ],
       view: new View({
@@ -116,6 +122,36 @@ export default {
       return style;
     },
 
+    getShadowFeatureStyle(feature) {
+      let { course, altitude } = feature.getProperties();
+      let rotation = course * (Math.PI / 180);
+      let sin = Math.sin(rotation);
+      let cos = Math.cos(rotation);
+
+      let shadowDistance = Math.min(0.2, altitude / 10000);
+      let anchor = [0.5 - shadowDistance * sin, 0.5 - shadowDistance * cos];
+
+      let style = this.shadowStyles.get(feature);
+      if (style) {
+        let icon = style.getImage();
+        icon.setRotation(rotation);
+        icon.setAnchor(anchor);
+      } else {
+        style = new Style({
+          image: new CustomIcon({
+            anchor,
+            src: 'https://skylines.aero/images/glider_symbol.png',
+            rotation,
+            rotateWithView: true,
+          }),
+        });
+
+        this.shadowStyles.set(feature, style);
+      }
+
+      return style;
+    },
+
     sendBBox() {
       if (!this.ws) return;
 
@@ -130,6 +166,14 @@ export default {
     },
   },
 };
+
+// see https://github.com/openlayers/openlayers/pull/8383
+class CustomIcon extends Icon {
+  setAnchor(anchor) {
+    this.anchor_ = anchor.slice();
+    this.normalizedAnchor_ = null;
+  }
+}
 
 function parseMessage(message) {
   var fields = message.split('|');
