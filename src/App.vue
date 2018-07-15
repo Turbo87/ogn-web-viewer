@@ -15,6 +15,7 @@ import VectorLayer from 'ol/layer/Vector';
 import { transform, transformExtent } from 'ol/proj';
 import OSMSource from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
+import XYZSource from 'ol/source/XYZ';
 import { Icon, Style } from 'ol/style';
 
 import Sockette from 'sockette';
@@ -39,6 +40,11 @@ export default {
       layers: [
         new TileLayer({
           source: new OSMSource(),
+        }),
+        new TileLayer({
+          source: new XYZSource({
+            url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/{z}/{x}/{y}.png',
+          }),
         }),
         new VectorLayer({
           source: this.aircraftSource,
