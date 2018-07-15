@@ -117,7 +117,7 @@ export default {
       } else {
         style = new Style({
           image: new Icon({
-            src: 'https://skylines.aero/images/glider_symbol.png',
+            src: 'https://skylines.aero/images/glider_symbol.svg',
             rotation,
             rotateWithView: true,
           }),
