@@ -103,7 +103,7 @@ export default {
         this.aircraftSource.addFeature(feature);
       }
 
-      feature.setProperties({ timestamp: record.timestamp });
+      feature.setProperties(record);
     },
 
     sendBBox() {
