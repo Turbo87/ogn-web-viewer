@@ -80,13 +80,13 @@ export default {
       let feature = this.aircraftSource.getFeatureById(record.id);
       if (feature) {
         let props = feature.getProperties();
-        if (props.timestamp < record.timestamp) {
-          feature.setGeometry(geometry);
-          feature
-            .getStyle()
-            .getImage()
-            .setRotation(rotation);
-        }
+        if (props.timestamp >= record.timestamp) return;
+
+        feature.setGeometry(geometry);
+        feature
+          .getStyle()
+          .getImage()
+          .setRotation(rotation);
       } else {
         feature = new Feature(geometry);
         feature.setId(record.id);
