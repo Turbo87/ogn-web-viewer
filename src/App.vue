@@ -24,16 +24,16 @@ let EPSG_3857 = 'EPSG:3857';
 export default {
   name: 'app',
 
-  data() {
-    let aircraftSource = new VectorSource({ features: [] });
+  beforeCreate() {
+    this.aircraftSource = new VectorSource({ features: [] });
 
-    let map = new olMap({
+    this.map = new olMap({
       layers: [
         new TileLayer({
           source: new OSMSource(),
         }),
         new VectorLayer({
-          source: aircraftSource,
+          source: this.aircraftSource,
         }),
       ],
       view: new View({
@@ -41,12 +41,6 @@ export default {
         zoom: 7,
       }),
     });
-
-    return { aircraftSource, map };
-  },
-
-  mounted() {
-    this.map.setTarget('map');
 
     this.map.on('moveend', () => this.sendBBox());
 
@@ -63,6 +57,10 @@ export default {
       onclose: e => console.log('Closed!', e),
       onerror: e => console.log('Error:', e),
     });
+  },
+
+  mounted() {
+    this.map.setTarget('map');
   },
 
   beforeDestroy() {
