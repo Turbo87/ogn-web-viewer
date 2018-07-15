@@ -16,7 +16,7 @@ import { transform, transformExtent } from 'ol/proj';
 import OSMSource from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
-import { Icon, Style } from 'ol/style';
+import { Icon, Style, Text, Stroke } from 'ol/style';
 
 import Sockette from 'sockette';
 
@@ -29,6 +29,7 @@ export default {
   beforeCreate() {
     this.aircraftSource = new VectorSource({ features: [] });
     this.aircraftStyles = new WeakMap();
+    this.aircraftLabelStyles = new WeakMap();
     this.shadowStyles = new WeakMap();
 
     this.map = new olMap({
@@ -113,7 +114,7 @@ export default {
     },
 
     getAircraftFeatureStyle(feature) {
-      let { course } = feature.getProperties();
+      let { course, id } = feature.getProperties();
       let rotation = course * (Math.PI / 180);
 
       let style = this.aircraftStyles.get(feature);
@@ -131,7 +132,24 @@ export default {
         this.aircraftStyles.set(feature, style);
       }
 
-      return style;
+      let label = id.substr(id.length - 2);
+
+      let labelStyle = this.aircraftLabelStyles.get(feature);
+      if (!labelStyle) {
+        labelStyle = new Style({
+          text: new Text({
+            text: label,
+            font: '14px sans-serif',
+            stroke: new Stroke({ color: '#fff', width: 3 }),
+            textAlign: 'left',
+            offsetX: 25,
+          }),
+        });
+
+        this.aircraftLabelStyles.set(feature, labelStyle);
+      }
+
+      return [style, labelStyle];
     },
 
     getShadowFeatureStyle(feature) {
