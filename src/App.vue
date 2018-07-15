@@ -130,6 +130,7 @@ function parseMessage(message) {
     longitude: parseFloat(fields[2]),
     latitude: parseFloat(fields[3]),
     course: parseInt(fields[4], 10),
+    altitude: parseInt(fields[5], 10),
   };
 }
 </script>
