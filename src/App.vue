@@ -52,6 +52,7 @@ export default {
         }),
         new VectorLayer({
           opacity: 0.2,
+          maxResolution: 500,
           source: this.aircraftSource,
           style: (feature, resolution) => this.getShadowFeatureStyle(feature, resolution),
         }),
