@@ -67,8 +67,6 @@ export default {
     this.map.on('moveend', () => this.sendBBox());
 
     this.ws = new Sockette('wss://ogn.fva.cloud/api/live', {
-      timeout: 5e3,
-      maxAttempts: 10,
       onopen: e => {
         console.log('Connected!', e);
         this.sendBBox();
