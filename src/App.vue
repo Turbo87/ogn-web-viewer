@@ -18,6 +18,7 @@ import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Icon, Style, Text, Stroke } from 'ol/style';
 
+import axios from 'axios';
 import Sockette from 'sockette';
 
 let EPSG_4326 = 'EPSG:4326';
@@ -27,6 +28,8 @@ export default {
   name: 'app',
 
   beforeCreate() {
+    this.devices = {};
+
     this.aircraftSource = new VectorSource({ features: [] });
     this.aircraftStyles = new WeakMap();
     this.aircraftLabelStyles = new WeakMap();
@@ -81,6 +84,8 @@ export default {
   },
 
   mounted() {
+    this.downloadOGNDDB();
+
     this.map.setTarget('map');
   },
 
@@ -132,10 +137,11 @@ export default {
         this.aircraftStyles.set(feature, style);
       }
 
-      let label = id.substr(id.length - 2);
-
       let labelStyle = this.aircraftLabelStyles.get(feature);
       if (!labelStyle) {
+        let device = this.devices[id];
+        let label = device ? device.cn || device.registration : '';
+
         labelStyle = new Style({
           text: new Text({
             text: label,
@@ -194,8 +200,36 @@ export default {
         // ignore
       }
     },
+
+    async downloadOGNDDB() {
+      let response = await axios('https://ogn.fva.cloud/ogn-ddb.json');
+      let { devices } = response.data;
+
+      devices.forEach(device => {
+        let id = toAPRSSenderID(device.device_type, device.device_id);
+
+        this.devices[id] = {
+          aircraft_model: device.aircraft_model,
+          cn: device.cn,
+          registration: device.registration,
+        };
+      });
+
+      this.aircraftLabelStyles = new WeakMap();
+    },
   },
 };
+
+const PREFIXES = {
+  F: 'FLR',
+  O: 'OGN',
+  I: 'ICA',
+};
+
+function toAPRSSenderID(type, id) {
+  let prefix = PREFIXES[type] || '??';
+  return `${prefix}${id}`;
+}
 
 // see https://github.com/openlayers/openlayers/pull/8383
 class CustomIcon extends Icon {
