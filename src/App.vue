@@ -26,6 +26,7 @@ export default {
 
   beforeCreate() {
     this.aircraftSource = new VectorSource({ features: [] });
+    this.aircraftStyles = new WeakMap();
 
     this.map = new olMap({
       layers: [
@@ -34,6 +35,7 @@ export default {
         }),
         new VectorLayer({
           source: this.aircraftSource,
+          style: (feature, resolution) => this.getAircraftFeatureStyle(feature, resolution),
         }),
       ],
       view: new View({
@@ -75,7 +77,6 @@ export default {
       let record = parseMessage(msg);
 
       let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
-      let rotation = record.course * (Math.PI / 180);
 
       let feature = this.aircraftSource.getFeatureById(record.id);
       if (feature) {
@@ -83,27 +84,36 @@ export default {
         if (props.timestamp >= record.timestamp) return;
 
         feature.setGeometry(geometry);
-        feature
-          .getStyle()
-          .getImage()
-          .setRotation(rotation);
       } else {
         feature = new Feature(geometry);
         feature.setId(record.id);
-        feature.setStyle(
-          new Style({
-            image: new Icon({
-              src: 'https://skylines.aero/images/glider_symbol.png',
-              rotation,
-              rotateWithView: true,
-            }),
-          }),
-        );
 
         this.aircraftSource.addFeature(feature);
       }
 
       feature.setProperties(record);
+    },
+
+    getAircraftFeatureStyle(feature) {
+      let { course } = feature.getProperties();
+      let rotation = course * (Math.PI / 180);
+
+      let style = this.aircraftStyles.get(feature);
+      if (style) {
+        style.getImage().setRotation(rotation);
+      } else {
+        style = new Style({
+          image: new Icon({
+            src: 'https://skylines.aero/images/glider_symbol.png',
+            rotation,
+            rotateWithView: true,
+          }),
+        });
+
+        this.aircraftStyles.set(feature, style);
+      }
+
+      return style;
     },
 
     sendBBox() {
