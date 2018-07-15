@@ -9,6 +9,7 @@ import 'ol/ol.css';
 
 import { Feature, Map as olMap, View } from 'ol';
 import { Point } from 'ol/geom';
+import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { transform, transformExtent } from 'ol/proj';
@@ -30,6 +31,11 @@ export default {
     this.shadowStyles = new WeakMap();
 
     this.map = new olMap({
+      interactions: interactionDefaults({
+        altShiftDragRotate: false,
+        pinchRotate: false,
+      }),
+
       layers: [
         new TileLayer({
           source: new OSMSource(),
@@ -44,6 +50,7 @@ export default {
           style: (feature, resolution) => this.getShadowFeatureStyle(feature, resolution),
         }),
       ],
+
       view: new View({
         center: [750998, 6567417],
         zoom: 7,
