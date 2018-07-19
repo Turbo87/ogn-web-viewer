@@ -1,6 +1,9 @@
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style } from 'ol/style';
 
+import { imageSrcForDevice } from './aircraft';
+import ddbService from "../services/ddb";
+
 export default class AircraftShadowLayer extends VectorLayer {
   constructor(options) {
     const baseOptions = { ...options };
@@ -14,11 +17,16 @@ export default class AircraftShadowLayer extends VectorLayer {
   }
 
   _getFeatureStyle(feature) {
+    let { id } = feature.getProperties();
+    let device = ddbService.devices[id] || {};
+
+    let imageSrc = imageSrcForDevice(device);
+
     let style = this._iconStyles.get(feature);
-    if (!style) {
+    if (!style || style.getImage().getSrc() !== imageSrc) {
       style = new Style({
         image: new CustomIcon({
-          src: '/aircraft/duo.svg',
+          src: imageSrc,
           rotateWithView: true,
         }),
       });

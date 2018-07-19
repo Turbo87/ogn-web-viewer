@@ -20,11 +20,13 @@ export default class AircraftLayer extends VectorLayer {
     let { course, id } = feature.getProperties();
     let device = ddbService.devices[id] || {};
 
+    let imageSrc = imageSrcForDevice(device);
+
     let style = this._iconStyles.get(feature);
-    if (!style) {
+    if (!style || style.getImage().getSrc() !== imageSrc) {
       style = new Style({
         image: new Icon({
-          src: '/aircraft/duo.svg',
+          src: imageSrc,
           rotateWithView: true,
         }),
       });
@@ -54,4 +56,38 @@ export default class AircraftLayer extends VectorLayer {
 
     return [style, labelStyle];
   }
+}
+
+/*
+ * `category` means:
+ *
+ * 1 => Gliders/Motorgliders
+ * 2 => Planes
+ * 3 => Ultralights
+ * 4 => Helicoters
+ * 5 => Drones/UAV
+ * 6 => Others
+ */
+export function imageSrcForDevice(device) {
+  if (device.category === 2 || device.category === 4) {
+    return '/aircraft/dr400.svg';
+  }
+
+  if (device.category === 4) {
+    return '/aircraft/ec135.svg';
+  }
+
+  if (device.category === 1) {
+    if (device.model) {
+      if (device.model.includes('Libelle')) {
+        return '/aircraft/libelle.svg';
+      } else if (device.model.includes('Hornet')) {
+        return '/aircraft/hornet.svg';
+      }
+    }
+
+    return '/aircraft/duo.svg';
+  }
+
+  return '/aircraft/duo.svg';
 }
