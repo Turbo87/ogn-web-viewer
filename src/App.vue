@@ -13,7 +13,7 @@ import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { transform, transformExtent } from 'ol/proj';
-import OSMSource from 'ol/source/OSM';
+import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Icon, Style, Text, Stroke } from 'ol/style';
@@ -43,7 +43,11 @@ export default {
 
       layers: [
         new TileLayer({
-          source: new OSMSource(),
+          source: new TileJSON({
+            opacity: 0.5,
+            url: 'https://maps.tilehosting.com/styles/topo.json?key=TT3Oo3SiDCq2wNJ6Rgs9',
+            crossOrigin: 'anonymous',
+          }),
         }),
         new TileLayer({
           source: new XYZSource({
