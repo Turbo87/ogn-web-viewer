@@ -16,9 +16,9 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 
-import axios from 'axios';
 import Sockette from 'sockette';
 
+import ddbService from './services/ddb';
 import { AircraftLayer, AircraftShadowLayer } from './layers';
 
 let EPSG_4326 = 'EPSG:4326';
@@ -28,8 +28,6 @@ export default {
   name: 'app',
 
   beforeCreate() {
-    this.devices = {};
-
     this.aircraftSource = new VectorSource({ features: [] });
 
     this.aircraftLayer = new AircraftLayer({
@@ -89,7 +87,7 @@ export default {
   },
 
   mounted() {
-    this.downloadOGNDDB();
+    ddbService.update();
 
     this.map.setTarget('map');
   },
@@ -140,11 +138,6 @@ export default {
       } catch (e) {
         // ignore
       }
-    },
-
-    async downloadOGNDDB() {
-      let response = await axios('https://ogn.fva.cloud/api/ddb');
-      this.aircraftLayer.setDevices(response.data);
     },
   },
 };

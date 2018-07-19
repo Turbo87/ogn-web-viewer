@@ -1,6 +1,8 @@
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style, Text, Stroke } from 'ol/style';
 
+import ddbService from '../services/ddb';
+
 export default class AircraftLayer extends VectorLayer {
   constructor(options) {
     const baseOptions = { ...options };
@@ -10,16 +12,14 @@ export default class AircraftLayer extends VectorLayer {
       style: (...args) => this._getFeatureStyle(...args),
     });
 
-    this._devices = {};
     this._iconStyles = new WeakMap();
     this._labelStyles = new WeakMap();
   }
 
-  setDevices(devices) {
-    this._devices = devices;
-  }
-
   _getFeatureStyle(feature) {
+    let { course, id } = feature.getProperties();
+    let device = ddbService.devices[id] || {};
+
     let style = this._iconStyles.get(feature);
     if (!style) {
       style = new Style({
@@ -46,14 +46,10 @@ export default class AircraftLayer extends VectorLayer {
       this._labelStyles.set(feature, labelStyle);
     }
 
-    let { course, id } = feature.getProperties();
     let rotation = course * (Math.PI / 180);
-
     style.getImage().setRotation(rotation);
 
-    let device = this._devices[id] || {};
     let label = device.callsign || device.registration;
-
     labelStyle.getText().setText(label);
 
     return [style, labelStyle];
