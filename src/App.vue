@@ -31,9 +31,6 @@ export default {
     this.devices = {};
 
     this.aircraftSource = new VectorSource({ features: [] });
-    this.aircraftStyles = new WeakMap();
-    this.aircraftLabelStyles = new WeakMap();
-    this.shadowStyles = new WeakMap();
 
     this.map = new olMap({
       interactions: interactionDefaults({
@@ -55,15 +52,14 @@ export default {
             url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/{z}/{x}/{y}.png',
           }),
         }),
-        new VectorLayer({
+        new AircraftLayer({
           source: this.aircraftSource,
-          style: (feature, resolution) => this.getAircraftFeatureStyle(feature, resolution),
+          devices: this.devices,
         }),
-        new VectorLayer({
+        new AircraftShadowLayer({
           opacity: 0.2,
           maxResolution: 500,
           source: this.aircraftSource,
-          style: (feature, resolution) => this.getShadowFeatureStyle(feature, resolution),
         }),
       ],
 
@@ -123,76 +119,6 @@ export default {
       feature.setProperties(record);
     },
 
-    getAircraftFeatureStyle(feature) {
-      let { course, id } = feature.getProperties();
-      let rotation = course * (Math.PI / 180);
-
-      let style = this.aircraftStyles.get(feature);
-      if (style) {
-        style.getImage().setRotation(rotation);
-      } else {
-        style = new Style({
-          image: new Icon({
-            src: 'https://skylines.aero/images/glider_symbol.svg',
-            rotation,
-            rotateWithView: true,
-          }),
-        });
-
-        this.aircraftStyles.set(feature, style);
-      }
-
-      let labelStyle = this.aircraftLabelStyles.get(feature);
-      if (!labelStyle) {
-        let device = this.devices[id];
-        let label = device ? device.cn || device.registration : '';
-
-        labelStyle = new Style({
-          text: new Text({
-            text: label,
-            font: '14px sans-serif',
-            stroke: new Stroke({ color: '#fff', width: 3 }),
-            textAlign: 'left',
-            offsetX: 25,
-          }),
-        });
-
-        this.aircraftLabelStyles.set(feature, labelStyle);
-      }
-
-      return [style, labelStyle];
-    },
-
-    getShadowFeatureStyle(feature) {
-      let { course, altitude } = feature.getProperties();
-      let rotation = course * (Math.PI / 180);
-      let sin = Math.sin(rotation);
-      let cos = Math.cos(rotation);
-
-      let shadowDistance = Math.min(0.2, altitude / 10000);
-      let anchor = [0.5 - shadowDistance * sin, 0.5 - shadowDistance * cos];
-
-      let style = this.shadowStyles.get(feature);
-      if (style) {
-        let icon = style.getImage();
-        icon.setRotation(rotation);
-        icon.setAnchor(anchor);
-      } else {
-        style = new Style({
-          image: new CustomIcon({
-            anchor,
-            src: 'https://skylines.aero/images/glider_symbol.png',
-            rotation,
-            rotateWithView: true,
-          }),
-        });
-
-        this.shadowStyles.set(feature, style);
-      }
-
-      return style;
-    },
-
     sendBBox() {
       if (!this.ws) return;
 
@@ -224,6 +150,106 @@ export default {
     },
   },
 };
+
+class AircraftLayer extends VectorLayer {
+  constructor(options) {
+    const baseOptions = { ...options };
+
+    delete baseOptions.devices;
+
+    super({
+      ...baseOptions,
+      style: (...args) => this._getFeatureStyle(...args),
+    });
+
+    this._devices = options.devices;
+    this._iconStyles = new WeakMap();
+    this._labelStyles = new WeakMap();
+  }
+
+  _getFeatureStyle(feature) {
+    let { course, id } = feature.getProperties();
+    let rotation = course * (Math.PI / 180);
+
+    let style = this._iconStyles.get(feature);
+    if (style) {
+      style.getImage().setRotation(rotation);
+    } else {
+      style = new Style({
+        image: new Icon({
+          src: 'https://skylines.aero/images/glider_symbol.svg',
+          rotation,
+          rotateWithView: true,
+        }),
+      });
+
+      this._iconStyles.set(feature, style);
+    }
+
+    let labelStyle = this._labelStyles.get(feature);
+    if (!labelStyle) {
+      let device = this._devices[id];
+      let label = device ? device.cn || device.registration : '';
+
+      labelStyle = new Style({
+        text: new Text({
+          text: label,
+          font: '14px sans-serif',
+          stroke: new Stroke({ color: '#fff', width: 3 }),
+          textAlign: 'left',
+          offsetX: 25,
+        }),
+      });
+
+      this._labelStyles.set(feature, labelStyle);
+    }
+
+    return [style, labelStyle];
+  }
+}
+
+class AircraftShadowLayer extends VectorLayer {
+  constructor(options) {
+    const baseOptions = { ...options };
+
+    super({
+      ...baseOptions,
+      style: (...args) => this._getFeatureStyle(...args),
+    });
+
+    this._iconStyles = new WeakMap();
+  }
+
+  _getFeatureStyle(feature) {
+    let { course, altitude } = feature.getProperties();
+    let rotation = course * (Math.PI / 180);
+    let sin = Math.sin(rotation);
+    let cos = Math.cos(rotation);
+
+    let shadowDistance = Math.min(0.2, altitude / 10000);
+    let anchor = [0.5 - shadowDistance * sin, 0.5 - shadowDistance * cos];
+
+    let style = this._iconStyles.get(feature);
+    if (style) {
+      let icon = style.getImage();
+      icon.setRotation(rotation);
+      icon.setAnchor(anchor);
+    } else {
+      style = new Style({
+        image: new CustomIcon({
+          anchor,
+          src: 'https://skylines.aero/images/glider_symbol.png',
+          rotation,
+          rotateWithView: true,
+        }),
+      });
+
+      this._iconStyles.set(feature, style);
+    }
+
+    return style;
+  }
+}
 
 const PREFIXES = {
   F: 'FLR',
