@@ -18,7 +18,7 @@ export default class AircraftShadowLayer extends VectorLayer {
     if (!style) {
       style = new Style({
         image: new CustomIcon({
-          src: 'https://skylines.aero/images/glider_symbol.png',
+          src: '/aircraft/duo.svg',
           rotateWithView: true,
         }),
       });

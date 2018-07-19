@@ -24,7 +24,7 @@ export default class AircraftLayer extends VectorLayer {
     if (!style) {
       style = new Style({
         image: new Icon({
-          src: 'https://skylines.aero/images/glider_symbol.svg',
+          src: '/aircraft/duo.svg',
           rotateWithView: true,
         }),
       });
