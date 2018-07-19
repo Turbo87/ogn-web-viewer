@@ -51,8 +51,8 @@ export default class AircraftLayer extends VectorLayer {
 
     style.getImage().setRotation(rotation);
 
-    let device = this._devices[id];
-    let label = device ? device.callsign || device.registration : '';
+    let device = this._devices[id] || {};
+    let label = device.callsign || device.registration;
 
     labelStyle.getText().setText(label);
 
