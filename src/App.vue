@@ -103,6 +103,12 @@ export default {
 
   methods: {
     handleMessage(msg) {
+      for (let line of msg.split('\n')) {
+        this.handleRecordMessage(line);
+      }
+    },
+
+    handleRecordMessage(msg) {
       let record = parseMessage(msg);
 
       let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
