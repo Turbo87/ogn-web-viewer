@@ -14,7 +14,20 @@ export default class AircraftShadowLayer extends VectorLayer {
   }
 
   _getFeatureStyle(feature) {
+    let style = this._iconStyles.get(feature);
+    if (!style) {
+      style = new Style({
+        image: new CustomIcon({
+          src: 'https://skylines.aero/images/glider_symbol.png',
+          rotateWithView: true,
+        }),
+      });
+
+      this._iconStyles.set(feature, style);
+    }
+
     let { course, altitude } = feature.getProperties();
+
     let rotation = course * (Math.PI / 180);
     let sin = Math.sin(rotation);
     let cos = Math.cos(rotation);
@@ -22,23 +35,9 @@ export default class AircraftShadowLayer extends VectorLayer {
     let shadowDistance = Math.min(0.2, altitude / 10000);
     let anchor = [0.5 - shadowDistance * sin, 0.5 - shadowDistance * cos];
 
-    let style = this._iconStyles.get(feature);
-    if (style) {
-      let icon = style.getImage();
-      icon.setRotation(rotation);
-      icon.setAnchor(anchor);
-    } else {
-      style = new Style({
-        image: new CustomIcon({
-          anchor,
-          src: 'https://skylines.aero/images/glider_symbol.png',
-          rotation,
-          rotateWithView: true,
-        }),
-      });
-
-      this._iconStyles.set(feature, style);
-    }
+    let icon = style.getImage();
+    icon.setRotation(rotation);
+    icon.setAnchor(anchor);
 
     return style;
   }

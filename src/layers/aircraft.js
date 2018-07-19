@@ -18,17 +18,11 @@ export default class AircraftLayer extends VectorLayer {
   }
 
   _getFeatureStyle(feature) {
-    let { course, id } = feature.getProperties();
-    let rotation = course * (Math.PI / 180);
-
     let style = this._iconStyles.get(feature);
-    if (style) {
-      style.getImage().setRotation(rotation);
-    } else {
+    if (!style) {
       style = new Style({
         image: new Icon({
           src: 'https://skylines.aero/images/glider_symbol.svg',
-          rotation,
           rotateWithView: true,
         }),
       });
@@ -38,12 +32,8 @@ export default class AircraftLayer extends VectorLayer {
 
     let labelStyle = this._labelStyles.get(feature);
     if (!labelStyle) {
-      let device = this._devices[id];
-      let label = device ? device.cn || device.registration : '';
-
       labelStyle = new Style({
         text: new Text({
-          text: label,
           font: '14px sans-serif',
           stroke: new Stroke({ color: '#fff', width: 3 }),
           textAlign: 'left',
@@ -53,6 +43,16 @@ export default class AircraftLayer extends VectorLayer {
 
       this._labelStyles.set(feature, labelStyle);
     }
+
+    let { course, id } = feature.getProperties();
+    let rotation = course * (Math.PI / 180);
+
+    style.getImage().setRotation(rotation);
+
+    let device = this._devices[id];
+    let label = device ? device.cn || device.registration : '';
+
+    labelStyle.getText().setText(label);
 
     return [style, labelStyle];
   }
