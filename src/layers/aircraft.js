@@ -69,6 +69,12 @@ export default class AircraftLayer extends VectorLayer {
  * 6 => Others
  */
 export function imageSrcForDevice(device) {
+  if (device.registration) {
+    if (device.registration.startsWith('D-H')) {
+      return '/aircraft/ec135.svg';
+    }
+  }
+
   if (device.category === 2 || device.category === 4) {
     return '/aircraft/dr400.svg';
   }
