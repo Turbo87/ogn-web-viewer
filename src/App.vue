@@ -32,6 +32,10 @@ export default {
 
     this.aircraftSource = new VectorSource({ features: [] });
 
+    this.aircraftLayer = new AircraftLayer({
+      source: this.aircraftSource,
+    });
+
     this.map = new olMap({
       interactions: interactionDefaults({
         altShiftDragRotate: false,
@@ -46,16 +50,16 @@ export default {
             crossOrigin: 'anonymous',
           }),
         }),
+
         new TileLayer({
           maxResolution: 2500,
           source: new XYZSource({
             url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/{z}/{x}/{y}.png',
           }),
         }),
-        new AircraftLayer({
-          source: this.aircraftSource,
-          devices: this.devices,
-        }),
+
+        this.aircraftLayer,
+
         new AircraftShadowLayer({
           opacity: 0.2,
           maxResolution: 500,
@@ -133,34 +137,11 @@ export default {
     },
 
     async downloadOGNDDB() {
-      let response = await axios('https://ogn.fva.cloud/ogn-ddb.json');
-      let { devices } = response.data;
-
-      devices.forEach(device => {
-        let id = toAPRSSenderID(device.device_type, device.device_id);
-
-        this.devices[id] = {
-          aircraft_model: device.aircraft_model,
-          cn: device.cn,
-          registration: device.registration,
-        };
-      });
-
-      this.aircraftLabelStyles = new WeakMap();
+      let response = await axios('https://ogn.fva.cloud/api/ddb');
+      this.aircraftLayer.setDevices(response.data);
     },
   },
 };
-
-const PREFIXES = {
-  F: 'FLR',
-  O: 'OGN',
-  I: 'ICA',
-};
-
-function toAPRSSenderID(type, id) {
-  let prefix = PREFIXES[type] || '??';
-  return `${prefix}${id}`;
-}
 
 function parseMessage(message) {
   var fields = message.split('|');

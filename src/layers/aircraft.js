@@ -5,16 +5,18 @@ export default class AircraftLayer extends VectorLayer {
   constructor(options) {
     const baseOptions = { ...options };
 
-    delete baseOptions.devices;
-
     super({
       ...baseOptions,
       style: (...args) => this._getFeatureStyle(...args),
     });
 
-    this._devices = options.devices;
+    this._devices = {};
     this._iconStyles = new WeakMap();
     this._labelStyles = new WeakMap();
+  }
+
+  setDevices(devices) {
+    this._devices = devices;
   }
 
   _getFeatureStyle(feature) {
@@ -50,7 +52,7 @@ export default class AircraftLayer extends VectorLayer {
     style.getImage().setRotation(rotation);
 
     let device = this._devices[id];
-    let label = device ? device.cn || device.registration : '';
+    let label = device ? device.callsign || device.registration : '';
 
     labelStyle.getText().setText(label);
 
