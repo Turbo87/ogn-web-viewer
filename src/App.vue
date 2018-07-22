@@ -8,15 +8,20 @@
 import 'ol/ol.css';
 
 import URLSearchParams from 'url-search-params';
+import axios from 'axios';
 
 import { Feature, Map as olMap, View } from 'ol';
-import { Point } from 'ol/geom';
+import { scaleFromCenter } from 'ol/extent';
+import { Point, LineString } from 'ol/geom';
 import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
 import { transform, transformExtent } from 'ol/proj';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
+import GeoJSON from 'ol/format/GeoJSON';
+import { Style, Stroke, Fill } from 'ol/style';
 
 import ddbService from './services/ddb';
 import ws from './services/ws';
@@ -26,17 +31,36 @@ import { loadFilter } from './filter';
 let EPSG_4326 = 'EPSG:4326';
 let EPSG_3857 = 'EPSG:3857';
 
+const TASK_LEGS_STYLE = new Style({
+  stroke: new Stroke({
+    color: '#5590ff',
+    width: 3,
+  }),
+});
+
+const TASK_AREA_STYLE = new Style({
+  stroke: new Stroke({
+    color: '#5590ff',
+    width: 3,
+  }),
+  fill: new Fill({
+    color: '#5590ff22',
+  }),
+});
+
 export default {
   name: 'app',
 
   data() {
     return {
+      task: null,
       deviceFilter: null,
     };
   },
 
   beforeCreate() {
     this.aircraftSource = new VectorSource({ features: [] });
+    this.taskSource = new VectorSource({ features: [] });
 
     this.aircraftLayer = new AircraftLayer({
       source: this.aircraftSource,
@@ -64,6 +88,14 @@ export default {
           }),
         }),
 
+        new VectorLayer({
+          source: this.taskSource,
+          style(feature) {
+            let id = feature.getId();
+            return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
+          },
+        }),
+
         this.aircraftLayer,
 
         new AircraftShadowLayer({
@@ -86,6 +118,10 @@ export default {
     params.forEach(async (value, key) => {
       if (key === 'lst') {
         this.deviceFilter = await loadFilter(value);
+      } else {
+        let { readTaskFromString } = await import('aeroscore/dist/src/read-task');
+        let { data } = await axios(`https://cors-anywhere.herokuapp.com/${value}`);
+        this.task = readTaskFromString(data);
       }
     });
   },
@@ -104,6 +140,32 @@ export default {
     ws.stop();
 
     this.map.setTarget(null);
+  },
+
+  watch: {
+    task(task) {
+      let geoJson = new GeoJSON({
+        featureProjection: EPSG_3857,
+      });
+
+      let legsFeature = new Feature({
+        geometry: new LineString(task.points.map(pt => transform(pt.shape.center, EPSG_4326, EPSG_3857))),
+      });
+      legsFeature.setId('legs');
+
+      let areas = task.points.map(pt => geoJson.readFeature(pt.shape.toGeoJSON()));
+
+      this.taskSource.clear();
+      this.taskSource.addFeature(legsFeature);
+      this.taskSource.addFeatures(areas);
+
+      // zoom map in on the task area
+      let bbox = task.bbox.slice();
+      scaleFromCenter(bbox, 0.3);
+      let extent = transformExtent(bbox, EPSG_4326, EPSG_3857);
+
+      this.map.getView().fit(extent);
+    },
   },
 
   methods: {
