@@ -2,7 +2,7 @@ import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style } from 'ol/style';
 
 import { imageSrcForDevice } from './aircraft';
-import ddbService from "../services/ddb";
+import ddbService from '../services/ddb';
 
 export default class AircraftShadowLayer extends VectorLayer {
   constructor(options) {
