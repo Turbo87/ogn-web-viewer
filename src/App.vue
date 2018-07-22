@@ -16,9 +16,8 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 
-import Sockette from 'sockette';
-
 import ddbService from './services/ddb';
+import ws from './services/ws';
 import { AircraftLayer, AircraftShadowLayer } from './layers';
 
 let EPSG_4326 = 'EPSG:4326';
@@ -71,44 +70,27 @@ export default {
       }),
     });
 
-    this.map.on('moveend', () => this.sendBBox());
-
-    this.ws = new Sockette('wss://ogn.fva.cloud/api/live', {
-      onopen: e => {
-        console.log('Connected!', e);
-        this.sendBBox();
-      },
-      onmessage: e => this.handleMessage(e.data),
-      onreconnect: e => console.log('Reconnecting...', e),
-      onmaximum: e => console.log('Stop Attempting!', e),
-      onclose: e => console.log('Closed!', e),
-      onerror: e => console.log('Error:', e),
-    });
+    this.map.on('moveend', () => ws.setBBox(this.getBBox()));
   },
 
   mounted() {
     ddbService.update();
 
+    ws.start();
+    ws.$on('record', this.handleRecord);
+
     this.map.setTarget('map');
   },
 
   beforeDestroy() {
-    this.ws.close();
-    this.ws = null;
+    ws.$off('record', this.handleRecord);
+    ws.stop();
 
     this.map.setTarget(null);
   },
 
   methods: {
-    handleMessage(msg) {
-      for (let line of msg.split('\n')) {
-        this.handleRecordMessage(line);
-      }
-    },
-
-    handleRecordMessage(msg) {
-      let record = parseMessage(msg);
-
+    handleRecord(record) {
       let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
 
       let feature = this.aircraftSource.getFeatureById(record.id);
@@ -127,33 +109,12 @@ export default {
       feature.setProperties(record);
     },
 
-    sendBBox() {
-      if (!this.ws) return;
-
+    getBBox() {
       let extent = this.map.getView().calculateExtent();
-      let command = ['bbox', ...transformExtent(extent, EPSG_3857, EPSG_4326)].join('|');
-
-      try {
-        this.ws.send(command);
-      } catch (e) {
-        // ignore
-      }
+      return transformExtent(extent, EPSG_3857, EPSG_4326);
     },
   },
 };
-
-function parseMessage(message) {
-  var fields = message.split('|');
-
-  return {
-    id: fields[0],
-    timestamp: parseInt(fields[1], 10),
-    longitude: parseFloat(fields[2]),
-    latitude: parseFloat(fields[3]),
-    course: parseInt(fields[4], 10),
-    altitude: parseInt(fields[5], 10),
-  };
-}
 </script>
 
 <style>
