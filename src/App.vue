@@ -7,6 +7,8 @@
 <script>
 import 'ol/ol.css';
 
+import URLSearchParams from 'url-search-params';
+
 import { Feature, Map as olMap, View } from 'ol';
 import { Point } from 'ol/geom';
 import { defaults as interactionDefaults } from 'ol/interaction';
@@ -19,12 +21,19 @@ import XYZSource from 'ol/source/XYZ';
 import ddbService from './services/ddb';
 import ws from './services/ws';
 import { AircraftLayer, AircraftShadowLayer } from './layers';
+import { loadFilter } from './filter';
 
 let EPSG_4326 = 'EPSG:4326';
 let EPSG_3857 = 'EPSG:3857';
 
 export default {
   name: 'app',
+
+  data() {
+    return {
+      deviceFilter: null,
+    };
+  },
 
   beforeCreate() {
     this.aircraftSource = new VectorSource({ features: [] });
@@ -71,6 +80,14 @@ export default {
     });
 
     this.map.on('moveend', () => ws.setBBox(this.getBBox()));
+
+    let hash = location.hash || '';
+    let params = new URLSearchParams(hash.substr(1));
+    params.forEach(async (value, key) => {
+      if (key === 'lst') {
+        this.deviceFilter = await loadFilter(value);
+      }
+    });
   },
 
   mounted() {
