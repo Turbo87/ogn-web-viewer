@@ -16,7 +16,7 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
-import { defaults as defaultControls, ScaleLine } from 'ol/control.js';
+import { defaults as defaultControls, ScaleLine, FullScreen } from 'ol/control.js';
 
 import pMap from 'p-map';
 
@@ -63,7 +63,7 @@ export default {
     });
 
     this.map = new olMap({
-      controls: defaultControls().extend([new ScaleLine()]),
+      controls: defaultControls().extend([new ScaleLine(), new FullScreen({ source: this.$el })]),
 
       interactions: interactionDefaults({
         altShiftDragRotate: false,
