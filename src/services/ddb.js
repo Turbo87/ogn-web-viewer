@@ -6,7 +6,7 @@ class DDBService {
   }
 
   async update() {
-    let response = await axios('https://ogn.fva.cloud/api/ddb');
+    let response = await axios(`${process.env.VUE_APP_API_HOST}/api/ddb`);
     this.devices = response.data;
   }
 }

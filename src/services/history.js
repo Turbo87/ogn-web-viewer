@@ -9,7 +9,7 @@ class HistoryService {
     let after = Math.round(Date.now() / 1000) - 8 * 60 * 60;
 
     // TODO Add CORS headers to the gateway
-    let url = `/api/records/${id}?after=${after}`;
+    let url = `${process.env.VUE_APP_API_HOST}/api/records/${id}?after=${after}`;
     let { data } = await axios(url, {
       transformResponse(data) {
         return JSON.parse(data).map(row => {
