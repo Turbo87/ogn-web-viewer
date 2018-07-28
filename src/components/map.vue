@@ -19,6 +19,7 @@ import { Style, Stroke, Fill } from 'ol/style';
 
 import ddbService from '../services/ddb';
 import ws from '../services/ws';
+import history from '../services/history';
 import { AircraftLayer, AircraftShadowLayer } from '../layers/index';
 import GeoJSON from '../geojson-converter';
 
@@ -112,6 +113,7 @@ export default {
     if (this.deviceFilter) {
       for (let row of this.deviceFilter) {
         ws.subscribeToId(row.ID);
+        history.loadForId(row.ID);
       }
     }
 
@@ -151,6 +153,17 @@ export default {
 
   methods: {
     handleRecord(record) {
+      if (this.deviceFilter) {
+        history.addRecords(record.id, [
+          {
+            time: record.time * 1000,
+            coordinate: [record.longitude, record.latitude],
+            valid: true,
+            altitude: record.altitude,
+          },
+        ]);
+      }
+
       let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
 
       let feature = this.aircraftSource.getFeatureById(record.id);
