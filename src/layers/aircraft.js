@@ -16,8 +16,8 @@ export default class AircraftLayer extends VectorLayer {
     this._labelStyles = new WeakMap();
   }
 
-  _getFeatureStyle(feature) {
-    let { course, id } = feature.getProperties();
+  _getFeatureStyle(feature, resolution) {
+    let { course, id, altitude } = feature.getProperties();
     let device = ddbService.devices[id] || {};
 
     let imageSrc = imageSrcForDevice(device);
@@ -51,8 +51,15 @@ export default class AircraftLayer extends VectorLayer {
     let rotation = course * (Math.PI / 180);
     style.getImage().setRotation(rotation);
 
-    let label = device.callsign || device.registration;
-    labelStyle.getText().setText(label);
+    let labelParts = [
+      device.callsign || device.registration,
+    ];
+
+    if (resolution < 100) {
+      labelParts.push(`${altitude}m`);
+    }
+
+    labelStyle.getText().setText(labelParts.filter(Boolean).join('\n'));
 
     return [style, labelStyle];
   }
