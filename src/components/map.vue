@@ -160,7 +160,7 @@ export default {
       if (deviceFilter.hasFilter()) {
         history.addRecords(record.id, [
           {
-            time: record.time * 1000,
+            time: record.timestamp * 1000,
             coordinate: [record.longitude, record.latitude],
             valid: true,
             altitude: record.altitude,
