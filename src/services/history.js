@@ -5,14 +5,19 @@ class HistoryService {
     this._byId = {};
   }
 
-  async loadForId(id) {
+  async loadForIds(...ids) {
     let after = Math.round(Date.now() / 1000) - 8 * 60 * 60;
 
     // TODO Add CORS headers to the gateway
-    let url = `${process.env.VUE_APP_API_HOST}/api/records/${id}?after=${after}`;
-    let { data } = await axios(url, {
-      transformResponse(data) {
-        return JSON.parse(data).map(row => {
+    let url = `${process.env.VUE_APP_API_HOST}/api/records/${ids.join(',')}?after=${after}`;
+    let { data } = await axios(url);
+
+    for (let id of ids) {
+      let list = data[id] || [];
+
+      this.addRecords(
+        id,
+        list.map(row => {
           let fields = row.split('|');
 
           return {
@@ -21,11 +26,9 @@ class HistoryService {
             valid: true,
             altitude: 0, // TODO add altitude to gateway responses
           };
-        });
-      },
-    });
-
-    this.addRecords(id, data);
+        }),
+      );
+    }
   }
 
   forId(id) {
