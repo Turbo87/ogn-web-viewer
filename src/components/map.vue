@@ -16,6 +16,7 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
+import { defaults as defaultControls, ScaleLine } from 'ol/control.js';
 
 import ddbService from '../services/ddb';
 import ws from '../services/ws';
@@ -60,6 +61,8 @@ export default {
     });
 
     this.map = new olMap({
+      controls: defaultControls().extend([new ScaleLine()]),
+
       interactions: interactionDefaults({
         altShiftDragRotate: false,
         pinchRotate: false,
