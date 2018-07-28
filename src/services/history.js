@@ -24,7 +24,7 @@ class HistoryService {
             time: parseInt(fields[0], 10) * 1000,
             coordinate: [parseFloat(fields[1]), parseFloat(fields[2])],
             valid: true,
-            altitude: 0, // TODO add altitude to gateway responses
+            altitude: parseInt(fields[3], 10),
           };
         }),
       );
