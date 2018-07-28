@@ -7042,6 +7042,10 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
+vue-timers@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/vue-timers/-/vue-timers-1.7.3.tgz#e18504bb6ad5dd0a3126d712f71d934f004bf785"
+
 vue2-sentry@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/vue2-sentry/-/vue2-sentry-1.2.1.tgz#851a4f82787baac57bb7d7c480d21d0c2d52483c"

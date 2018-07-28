@@ -1,6 +1,28 @@
 <template>
-  <div id="map"></div>
+  <div class="map-wrapper">
+    <div id="map" :style="{ width: '100%', height: hasDeviceFilter && task ? '70%' : '100%' }"></div>
+    <div v-if="hasDeviceFilter && task" class="scores-wrapper">
+      <ScoreTable :task="task"></ScoreTable>
+    </div>
+  </div>
 </template>
+
+<style>
+.map-wrapper {
+  position: fixed;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.scores-wrapper {
+  overflow: auto;
+  border-top: 1px solid #666;
+}
+</style>
 
 <script>
 import 'ol/ol.css';
@@ -24,6 +46,7 @@ import history from '../services/history';
 import deviceFilter from '../services/filter';
 import { AircraftLayer, AircraftShadowLayer } from '../layers/index';
 import GeoJSON from '../geojson-converter';
+import ScoreTable from './score-table';
 
 let EPSG_4326 = 'EPSG:4326';
 let EPSG_3857 = 'EPSG:3857';
@@ -48,8 +71,18 @@ const TASK_AREA_STYLE = new Style({
 export default {
   name: 'Map',
 
+  components: {
+    ScoreTable,
+  },
+
   props: {
     task: Object,
+  },
+
+  data() {
+    return {
+      hasDeviceFilter: deviceFilter.hasFilter(),
+    };
   },
 
   mounted() {
@@ -193,10 +226,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#map {
-  width: 100%;
-  height: 100%;
-}
-</style>
