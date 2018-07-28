@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <template v-if="loaded">
-      <Map :task="task" :deviceFilter="deviceFilter"></Map>
+      <Map :task="task"></Map>
     </template>
     <div class="loading" v-else>Loading...</div>
   </div>
@@ -12,7 +12,7 @@ import URLSearchParams from 'url-search-params';
 import axios from 'axios';
 
 import Map from './components/map';
-import { loadFilter } from './filter';
+import deviceFilter from './services/filter';
 
 export default {
   name: 'app',
@@ -24,7 +24,6 @@ export default {
   data() {
     return {
       loaded: false,
-      deviceFilter: null,
       task: null,
     };
   },
@@ -45,7 +44,7 @@ export default {
 
     async loadDeviceFilter(url) {
       if (url) {
-        this.deviceFilter = await loadFilter(url);
+        await deviceFilter.load(url);
       }
     },
 

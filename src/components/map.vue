@@ -20,6 +20,7 @@ import { Style, Stroke, Fill } from 'ol/style';
 import ddbService from '../services/ddb';
 import ws from '../services/ws';
 import history from '../services/history';
+import deviceFilter from '../services/filter';
 import { AircraftLayer, AircraftShadowLayer } from '../layers/index';
 import GeoJSON from '../geojson-converter';
 
@@ -47,7 +48,6 @@ export default {
   name: 'Map',
 
   props: {
-    deviceFilter: Array,
     task: Object,
   },
 
@@ -105,13 +105,13 @@ export default {
     });
 
     this.map.on('moveend', () => {
-      if (!this.deviceFilter) {
+      if (!deviceFilter.hasFilter()) {
         ws.setBBox(this.getBBox());
       }
     });
 
-    if (this.deviceFilter) {
-      for (let row of this.deviceFilter) {
+    if (deviceFilter.hasFilter()) {
+      for (let row of deviceFilter.filter) {
         ws.subscribeToId(row.ID);
         history.loadForId(row.ID);
       }
@@ -153,7 +153,7 @@ export default {
 
   methods: {
     handleRecord(record) {
-      if (this.deviceFilter) {
+      if (deviceFilter.hasFilter()) {
         history.addRecords(record.id, [
           {
             time: record.time * 1000,
