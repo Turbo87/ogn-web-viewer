@@ -18,6 +18,8 @@ import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
 import { defaults as defaultControls, ScaleLine } from 'ol/control.js';
 
+import pMap from 'p-map';
+
 import ddbService from '../services/ddb';
 import ws from '../services/ws';
 import history from '../services/history';
@@ -116,8 +118,9 @@ export default {
     if (deviceFilter.hasFilter()) {
       for (let row of deviceFilter.filter) {
         ws.subscribeToId(row.ID);
-        history.loadForId(row.ID);
       }
+
+      pMap(deviceFilter.filter, row => history.loadForId(row.ID), { concurrency: 2 });
     }
 
     this.map.setTarget('map');
