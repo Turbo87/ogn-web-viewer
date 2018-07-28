@@ -7,6 +7,7 @@ class WebsocketService extends Vue {
 
     this._ws = null;
     this._bbox = null;
+    this._subscriptions = [];
   }
 
   start() {
@@ -14,6 +15,10 @@ class WebsocketService extends Vue {
       onopen: () => {
         console.log('Connected!');
         this._sendBBox();
+
+        for (let id of this._subscriptions) {
+          this._ws.send(`+id|${id}`);
+        }
       },
       onmessage: e => this.onMessage(e.data),
       onreconnect: () => console.log('Reconnecting...'),
@@ -35,6 +40,24 @@ class WebsocketService extends Vue {
 
   onRecord(record) {
     this.$emit('record', record);
+  }
+
+  subscribeToId(id) {
+    this._subscriptions.push(id);
+    try {
+      this._ws.send(`+id|${id}`);
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  unsubscribeFromId(id) {
+    this._subscriptions = this._subscriptions.filter(_id => _id !== id);
+    try {
+      this._ws.send(-`+id|${id}`);
+    } catch (e) {
+      // ignore
+    }
   }
 
   setBBox(bbox) {

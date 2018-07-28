@@ -103,7 +103,17 @@ export default {
       }),
     });
 
-    this.map.on('moveend', () => ws.setBBox(this.getBBox()));
+    this.map.on('moveend', () => {
+      if (!this.deviceFilter) {
+        ws.setBBox(this.getBBox());
+      }
+    });
+
+    if (this.deviceFilter) {
+      for (let row of this.deviceFilter) {
+        ws.subscribeToId(row.ID);
+      }
+    }
 
     this.map.setTarget('map');
 
