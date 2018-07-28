@@ -51,7 +51,7 @@ export default {
     async loadTask(url) {
       if (url) {
         let { readTaskFromString } = await import('aeroscore/dist/src/read-task');
-        let { data } = await axios(`https://cors-anywhere.herokuapp.com/${url}`);
+        let { data } = await axios(`/api/cors-proxy/${url}`);
         this.task = readTaskFromString(data);
       }
     },

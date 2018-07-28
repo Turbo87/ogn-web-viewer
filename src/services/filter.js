@@ -8,7 +8,7 @@ class DeviceFilterService {
 
   async load(url) {
     // TODO we should find a better solution for this...
-    let response = await axios(`https://cors-anywhere.herokuapp.com/${url}`, {
+    let response = await axios(`/api/cors-proxy/${url}`, {
       responseType: 'text',
     });
 
