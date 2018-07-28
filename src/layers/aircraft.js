@@ -2,6 +2,7 @@ import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style, Text, Stroke } from 'ol/style';
 
 import ddbService from '../services/ddb';
+import deviceFilter from '../services/filter';
 
 export default class AircraftLayer extends VectorLayer {
   constructor(options) {
@@ -51,8 +52,10 @@ export default class AircraftLayer extends VectorLayer {
     let rotation = course * (Math.PI / 180);
     style.getImage().setRotation(rotation);
 
+    let filterRow = deviceFilter.filter.find(row => row.ID === id) || {};
+
     let labelParts = [
-      device.callsign || device.registration,
+      filterRow.CN || filterRow.CALL || device.callsign || device.registration,
     ];
 
     if (resolution < 100) {
