@@ -54,9 +54,7 @@ export default class AircraftLayer extends VectorLayer {
 
     let filterRow = deviceFilter.filter.find(row => row.ID === id) || {};
 
-    let labelParts = [
-      filterRow.CN || filterRow.CALL || device.callsign || device.registration,
-    ];
+    let labelParts = [filterRow.CN || filterRow.CALL || device.callsign || device.registration];
 
     if (resolution < 100) {
       labelParts.push(`${altitude}m`);
