@@ -8,6 +8,8 @@
 </template>
 
 <style>
+@import '~ol/ol.css';
+
 .map-wrapper {
   position: fixed;
 
@@ -25,8 +27,6 @@
 </style>
 
 <script>
-import 'ol/ol.css';
-
 import { Feature, Map as olMap, View } from 'ol';
 import { scaleFromCenter } from 'ol/extent';
 import { Point, LineString } from 'ol/geom';
