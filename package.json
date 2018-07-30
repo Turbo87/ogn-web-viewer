@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "aeroscore": "^0.1.0",
+    "aeroscore": "^0.2.1",
     "axios": "^0.18.0",
     "neat-csv": "^2.1.0",
     "ol": "^5.0.3",

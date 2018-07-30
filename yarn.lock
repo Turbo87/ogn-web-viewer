@@ -1184,9 +1184,9 @@ address@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.3.tgz#b5f50631f8d6cec8bd20c963963afb55e06cbce9"
 
-aeroscore@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/aeroscore/-/aeroscore-0.1.0.tgz#53cdaf37c6fcab5f1dcc1d478b72c04a748b364f"
+aeroscore@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/aeroscore/-/aeroscore-0.2.1.tgz#1ee98896917331c372402642b8d13a3f4db2b116"
   dependencies:
     "@turf/bbox" "^6.0.1"
     "@turf/bearing" "^6.0.1"
