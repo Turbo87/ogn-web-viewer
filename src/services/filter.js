@@ -17,7 +17,7 @@ class DeviceFilterService {
     this.filter = data.map(row => ({
       ...row,
       ID: parseID(row.ID),
-      HANDICAP: parseFloat(row.HANDICAP),
+      HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
     }));
   }
 
