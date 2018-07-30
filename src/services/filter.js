@@ -16,6 +16,7 @@ class DeviceFilterService {
 
     this.filter = data.map(row => ({
       ...row,
+      ID: parseID(row.ID),
       HANDICAP: parseFloat(row.HANDICAP),
     }));
   }
@@ -23,6 +24,18 @@ class DeviceFilterService {
   hasFilter() {
     return this.filter.length !== 0;
   }
+}
+
+function parseID(id) {
+  if (id.startsWith('06') && id.length === 8) {
+    return `FLR${id.substr(2)}`;
+  }
+
+  if (id.length === 6) {
+    return `FLR${id}`;
+  }
+
+  return id;
 }
 
 let service = new DeviceFilterService();
