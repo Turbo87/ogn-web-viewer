@@ -13,7 +13,7 @@
   "scripts": {
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
-    "lint:js": "eslint .",
+    "lint:js": "eslint . --cache",
     "start": "ember serve",
     "test": "ember test"
   },
