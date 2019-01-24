@@ -21,6 +21,8 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+
+    API_HOST: process.env.API_HOST || 'https://ogn.fva.cloud',
   };
 
   if (environment === 'development') {
@@ -32,6 +34,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'test') {
+    ENV.API_HOST = '';
+
     // Testem prefers this...
     ENV.locationType = 'none';
 
