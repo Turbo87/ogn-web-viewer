@@ -6763,6 +6763,13 @@ mktemp@~0.4.0:
   resolved "https://registry.yarnpkg.com/mktemp/-/mktemp-0.4.0.tgz#6d0515611c8a8c84e484aa2000129b98e981ff0b"
   integrity sha1-bQUVYRyKjITkhKogABKbmOmB/ws=
 
+mock-socket@^8.0.5:
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/mock-socket/-/mock-socket-8.0.5.tgz#4ce8909601b2bcdf5f7680f35c2f7b34beb2afc4"
+  integrity sha512-dE2EbcxJKQCeYLZSsI7BAiMZCe/bHbJ2LHb5aGwUuDmfoOINEJ8QI6qYJ85NHsSNkNa90F3s6onZcmt/+MppFA==
+  dependencies:
+    url-parse "^1.2.0"
+
 morgan@^1.9.0, morgan@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.9.1.tgz#0a8d16734a1d9afbc824b99df87e738e58e2da59"
@@ -8466,6 +8473,11 @@ socket.io@^2.1.0:
     socket.io-client "2.2.0"
     socket.io-parser "~3.3.0"
 
+sockette@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/sockette/-/sockette-2.0.5.tgz#e72cc2958e5a11a1aa49bc9a052093650b8de5d3"
+  integrity sha512-jQbd/n+bHKdOfd9ii95aZ+TTHlaNCbKUpOW4YxiNx/U8OxfhvM9g/SpMSHl/hGSZ5BUYtltXBz02p+ih11M3WQ==
+
 sort-object-keys@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/sort-object-keys/-/sort-object-keys-1.1.2.tgz#d3a6c48dc2ac97e6bc94367696e03f6d09d37952"
@@ -9205,7 +9217,7 @@ urix@^0.1.0:
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
   integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
 
-url-parse@^1.4.4:
+url-parse@^1.2.0, url-parse@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.4.tgz#cac1556e95faa0303691fec5cf9d5a1bc34648f8"
   integrity sha512-/92DTTorg4JjktLNLe6GPS2/RvAd/RGr6LuktmWSMLEOa6rjnlrFXNgSbSmkNvCoL2T028A0a1JaJLzRMlFoHg==
