@@ -23,6 +23,7 @@ module.exports = function(environment) {
     },
 
     API_HOST: process.env.API_HOST || 'https://ogn.fva.cloud',
+    WS_HOST: (process.env.API_HOST && process.env.API_HOST.replace(/^http/, 'ws')) || 'wss://ogn.fva.cloud',
   };
 
   if (environment === 'development') {
