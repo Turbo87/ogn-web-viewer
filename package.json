@@ -46,6 +46,7 @@
     "loader.js": "^4.7.0",
     "lolex": "^3.0.0",
     "mock-socket": "^8.0.5",
+    "neat-csv": "^4.0.0",
     "prettier": "1.16.1",
     "qunit-dom": "^0.8.0",
     "sockette": "^2.0.5"
