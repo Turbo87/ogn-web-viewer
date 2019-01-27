@@ -1,7 +1,14 @@
-# ogn-web-viewer
+ogn-web-viewer
+==============================================================================
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+[OpenGliderNet] WebViewer
+
+This project contains a webapplication that connects to the [OGN WebGateway],
+and shows live aircraft positions on a map including relevant metadata.
+
+[OpenGliderNet]: http://wiki.glidernet.org/
+[OGN WebGateway]: https://github.com/Turbo87/ogn-web-gateway
+
 
 Competition
 ------------------------------------------------------------------------------
@@ -34,56 +41,41 @@ Example:
 https://ogn.fva.cloud/#tsk=https://gist.githubusercontent.com/Turbo87/62167f4f16f3e94f7bd04d7d6388d79d/raw/club.tsk&lst=https://gist.githubusercontent.com/Turbo87/62167f4f16f3e94f7bd04d7d6388d79d/raw/club-filter.csv
 ```
 
-## Prerequisites
 
-You will need the following things properly installed on your computer.
+Contributing
+------------------------------------------------------------------------------
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/)
-* [Yarn](https://yarnpkg.com/)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+### Project setup
+```
+yarn install
+```
 
-## Installation
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-* `git clone <repository-url>` this repository
-* `cd ogn-web-viewer`
-* `yarn install`
+### Compiles and minifies for production
+```
+yarn build
+```
 
-## Running / Development
+### Lints and fixes files
+```
+yarn lint:js
+yarn lint:hbs
+```
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
-### Code Generators
+License
+------------------------------------------------------------------------------
 
-Make use of the many generators for code, try `ember help generate` for more details
+This project is licensed under either of
 
-### Running Tests
+ - Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+   <http://www.apache.org/licenses/LICENSE-2.0>)
+   
+ - MIT license ([LICENSE-MIT](LICENSE-MIT) or
+   <http://opensource.org/licenses/MIT>)
 
-* `ember test`
-* `ember test --server`
-
-### Linting
-
-* `yarn lint:hbs`
-* `yarn lint:js`
-* `yarn lint:js --fix`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](https://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+at your option.
