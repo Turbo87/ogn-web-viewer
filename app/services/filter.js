@@ -1,6 +1,6 @@
 import Service from '@ember/service';
 import { notEmpty } from '@ember/object/computed';
-import fetch from 'fetch';
+import fetchText from 'ogn-web-viewer/utils/fetch-text';
 
 export default Service.extend({
   init() {
@@ -22,15 +22,6 @@ export default Service.extend({
 
   hasFilter: notEmpty('filter'),
 });
-
-async function fetchText(url) {
-  let response = await fetch(url);
-  if (response.ok) {
-    return response.text();
-  }
-
-  throw response;
-}
 
 async function loadNeatCSV() {
   let neatCSV = await import('neat-csv');
