@@ -7,6 +7,13 @@ module.exports = function(defaults) {
     babel: {
       plugins: [require('ember-auto-import/babel-plugin')],
     },
+    autoImport: {
+      webpack: {
+        node: {
+          fs: 'empty',
+        },
+      },
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
