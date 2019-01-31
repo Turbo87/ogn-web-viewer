@@ -1,28 +1,32 @@
 <table class="score-table">
-  <tr>
-    <th></th>
-    <th></th>
-    <th style="text-align: left">Name</th>
-    <th style="text-align: right">Altitude</th>
-    <th style="text-align: left">Aircraft</th>
-    <th style="text-align: right">Start</th>
-    <th style="text-align: right">Time</th>
-    <th style="text-align: right">Distance</th>
-    <th style="text-align: right">Speed</th>
-    <th style="text-align: right">Score</th>
-  </tr>
-  {{#each rows as |row|}}
+  <thead>
     <tr>
-      <td>{{row.num}}</td>
-      <td>{{row.cn}}</td>
-      <td>{{row.name}}</td>
-      <td style="text-align: right">{{row.altitude}}</td>
-      <td>{{row.type}}</td>
-      <td style="text-align: right">{{row.startTime}}</td>
-      <td style="text-align: right">{{row.time}}</td>
-      <td style="text-align: right">{{row.distance}}</td>
-      <td style="text-align: right">{{row.speed}}</td>
-      <td style="text-align: right">{{row.score}}</td>
+      <th></th>
+      <th></th>
+      <th style="text-align: left">Name</th>
+      <th style="text-align: right">Altitude</th>
+      <th style="text-align: left">Aircraft</th>
+      <th style="text-align: right">Start</th>
+      <th style="text-align: right">Time</th>
+      <th style="text-align: right">Distance</th>
+      <th style="text-align: right">Speed</th>
+      <th style="text-align: right">Score</th>
     </tr>
-  {{/each}}
+  </thead>
+  <tbody>
+    {{#each rows as |row|}}
+      <tr>
+        <td>{{row.num}}</td>
+        <td>{{row.cn}}</td>
+        <td>{{row.name}}</td>
+        <td style="text-align: right">{{row.altitude}}</td>
+        <td>{{row.type}}</td>
+        <td style="text-align: right">{{row.startTime}}</td>
+        <td style="text-align: right">{{row.time}}</td>
+        <td style="text-align: right">{{row.distance}}</td>
+        <td style="text-align: right">{{row.speed}}</td>
+        <td style="text-align: right">{{row.score}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
 </table>
