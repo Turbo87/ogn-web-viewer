@@ -1,17 +1,39 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
-  'extends': [
-    'plugin:vue/essential',
-    '@vue/prettier'
-  ],
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  },
+  parser: 'babel-eslint',
   parserOptions: {
-    parser: 'babel-eslint'
-  }
-}
+    ecmaVersion: 2017,
+    sourceType: 'module',
+  },
+  plugins: ['ember', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:ember/recommended', 'prettier'],
+  env: {
+    browser: true,
+  },
+  rules: {
+    'prettier/prettier': 'error',
+  },
+  overrides: [
+    // node files
+    {
+      files: [
+        '.eslintrc.js',
+        '.prettierrc.js',
+        '.template-lintrc.js',
+        'ember-cli-build.js',
+        'testem.js',
+        'blueprints/*/index.js',
+        'config/**/*.js',
+        'lib/*/index.js',
+      ],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2015,
+      },
+      env: {
+        browser: false,
+        node: true,
+      },
+    },
+  ],
+};

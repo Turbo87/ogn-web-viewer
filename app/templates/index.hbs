@@ -1,0 +1,5 @@
+{{#if loadDataTask.isRunning}}
+  <div class="loading">Loading...</div>
+{{else}}
+  <Map @task={{this.task}}/>
+{{/if}}

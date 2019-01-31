@@ -3,7 +3,7 @@
 set -e
 
 # build app
-yarn build --modern
+ember build --prod
 
 # upload files
 scp -rC ./dist/* ogn-web-gateway:ogn-web-viewer

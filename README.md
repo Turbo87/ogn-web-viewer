@@ -9,6 +9,7 @@ and shows live aircraft positions on a map including relevant metadata.
 [OpenGliderNet]: http://wiki.glidernet.org/
 [OGN WebGateway]: https://github.com/Turbo87/ogn-web-gateway
 
+
 Competition
 ------------------------------------------------------------------------------
 ogn-web-viewer is also designed to follow competition with filtering gliders, drawing task and realtime scoring.
@@ -61,7 +62,8 @@ yarn build
 
 ### Lints and fixes files
 ```
-yarn lint
+yarn lint:js
+yarn lint:hbs
 ```
 
 
