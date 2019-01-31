@@ -24,6 +24,11 @@ module.exports = function(environment) {
 
     API_HOST: process.env.API_HOST || 'https://ogn.fva.cloud',
     WS_HOST: (process.env.API_HOST && process.env.API_HOST.replace(/^http/, 'ws')) || 'wss://ogn.fva.cloud',
+
+    sentry: {
+      development: true,
+      dsn: 'https://fb74a283ef1f4414a61cd89e5eabcd10@sentry.io/1243387',
+    },
   };
 
   if (environment === 'development') {
@@ -49,7 +54,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    // here you can enable a production-specific feature
+    ENV.sentry.development = false;
   }
 
   return ENV;
