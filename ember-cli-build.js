@@ -14,6 +14,10 @@ module.exports = function(defaults) {
         },
       },
     },
+    sourcemaps: {
+      enabled: true,
+      extensions: ['css', 'js'],
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated
