@@ -83,7 +83,7 @@ export function imageSrcForDevice(device) {
     }
   }
 
-  if (device.category === 2 || device.category === 4) {
+  if (device.category === 2 || device.category === 3) {
     return '/aircraft/dr400.svg';
   }
 
