@@ -116,8 +116,6 @@ export default Component.extend({
       );
     }
 
-    this.ddb.update();
-
     this.ws.start();
     this.ws.on('record', this, 'handleRecord');
   },
