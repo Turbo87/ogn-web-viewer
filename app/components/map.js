@@ -75,14 +75,6 @@ export default Component.extend({
       }
     });
 
-    if (this.filter.hasFilter) {
-      for (let row of this.filter.filter) {
-        this.ws.subscribeToId(row.ID);
-      }
-
-      this.history.loadForIds(...this.filter.filter.map(row => row.ID));
-    }
-
     this.map.setTarget('map');
 
     if (this.task) {
@@ -116,13 +108,11 @@ export default Component.extend({
       );
     }
 
-    this.ws.start();
     this.ws.on('record', this, 'handleRecord');
   },
 
   willDestroyElement() {
     this.ws.off('record', this, 'handleRecord');
-    this.ws.stop();
 
     this.map.setTarget(null);
 
