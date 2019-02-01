@@ -2,18 +2,13 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 
-import { Feature, Map as olMap, View } from 'ol';
+import { Feature } from 'ol';
 import { scaleFromCenter } from 'ol/extent';
 import { Point, LineString } from 'ol/geom';
-import { defaults as interactionDefaults } from 'ol/interaction';
-import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { transform, transformExtent } from 'ol/proj';
-import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
-import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
-import { Zoom, Attribution, ScaleLine, FullScreen } from 'ol/control.js';
 
 import { AircraftLayer, AircraftShadowLayer } from '../layers';
 import GeoJSON from '../geojson-converter';
@@ -39,15 +34,16 @@ const TASK_AREA_STYLE = new Style({
 });
 
 export default Component.extend({
-  media: service(),
   ddb: service(),
   filter: service(),
   history: service(),
   ws: service(),
+  mapService: service('map'),
 
   tagName: '',
 
   hasDeviceFilter: alias('filter.hasFilter'),
+  map: alias('mapService.map'),
 
   didInsertElement() {
     this._super(...arguments);
@@ -62,62 +58,27 @@ export default Component.extend({
       source: this.aircraftSource,
     });
 
-    let controls = [new ScaleLine(), new Attribution()];
-    if (!this.media.coarsePointer) {
-      controls.push(new Zoom());
-    }
-    if (!this.media.isStandalone) {
-      controls.push(new FullScreen({ source: this.element }));
-    }
-
-    this.map = new olMap({
-      controls,
-
-      interactions: interactionDefaults({
-        altShiftDragRotate: false,
-        pinchRotate: false,
+    this.map.addLayer(
+      new VectorLayer({
+        source: this.taskSource,
+        style(feature) {
+          let id = feature.getId();
+          return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
+        },
       }),
+    );
 
-      layers: [
-        new TileLayer({
-          source: new TileJSON({
-            opacity: 0.5,
-            url: 'https://maps.tilehosting.com/styles/topo.json?key=TT3Oo3SiDCq2wNJ6Rgs9',
-            crossOrigin: 'anonymous',
-          }),
-        }),
+    this.map.addLayer(this.aircraftLayer);
 
-        new TileLayer({
-          maxResolution: 2500,
-          source: new XYZSource({
-            url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/{z}/{x}/{y}.png',
-          }),
-        }),
+    this.map.addLayer(
+      new AircraftShadowLayer({
+        ddbService: this.ddb,
 
-        new VectorLayer({
-          source: this.taskSource,
-          style(feature) {
-            let id = feature.getId();
-            return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
-          },
-        }),
-
-        this.aircraftLayer,
-
-        new AircraftShadowLayer({
-          ddbService: this.ddb,
-
-          opacity: 0.2,
-          maxResolution: 500,
-          source: this.aircraftSource,
-        }),
-      ],
-
-      view: new View({
-        center: [750998, 6567417],
-        zoom: 7,
+        opacity: 0.2,
+        maxResolution: 500,
+        source: this.aircraftSource,
       }),
-    });
+    );
 
     this.map.on('moveend', () => {
       if (!this.filter.hasFilter) {
