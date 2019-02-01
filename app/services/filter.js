@@ -5,7 +5,7 @@ import fetchText from 'ogn-web-viewer/utils/fetch-text';
 export default Service.extend({
   init() {
     this._super(...arguments);
-    this.filter = [];
+    this.set('filter', []);
   },
 
   async load(url) {
@@ -13,11 +13,14 @@ export default Service.extend({
 
     let data = await neatCSV(text);
 
-    this.filter = data.map(row => ({
-      ...row,
-      ID: parseID(row.ID),
-      HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
-    }));
+    this.set(
+      'filter',
+      data.map(row => ({
+        ...row,
+        ID: parseID(row.ID),
+        HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
+      })),
+    );
   },
 
   hasFilter: notEmpty('filter'),
