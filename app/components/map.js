@@ -4,34 +4,14 @@ import { alias } from '@ember/object/computed';
 
 import { Feature } from 'ol';
 import { scaleFromCenter } from 'ol/extent';
-import { Point, LineString } from 'ol/geom';
-import VectorLayer from 'ol/layer/Vector';
+import { Point } from 'ol/geom';
 import { transform, transformExtent } from 'ol/proj';
 import VectorSource from 'ol/source/Vector';
-import { Style, Stroke, Fill } from 'ol/style';
 
 import { AircraftLayer, AircraftShadowLayer } from '../layers';
-import GeoJSON from '../geojson-converter';
 
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
-
-const TASK_LEGS_STYLE = new Style({
-  stroke: new Stroke({
-    color: '#5590ff',
-    width: 3,
-  }),
-});
-
-const TASK_AREA_STYLE = new Style({
-  stroke: new Stroke({
-    color: '#5590ff',
-    width: 3,
-  }),
-  fill: new Fill({
-    color: '#5590ff22',
-  }),
-});
 
 export default Component.extend({
   ddb: service(),
@@ -78,34 +58,12 @@ export default Component.extend({
     this.map.setTarget('map');
 
     if (this.task) {
-      let taskSource = new VectorSource({ features: [] });
-
-      let legsFeature = new Feature({
-        geometry: new LineString(this.task.points.map(pt => transform(pt.shape.center, EPSG_4326, EPSG_3857))),
-      });
-      legsFeature.setId('legs');
-
-      let areas = this.task.points.map(pt => GeoJSON.readFeature(pt.shape.toGeoJSON()));
-
-      taskSource.addFeature(legsFeature);
-      taskSource.addFeatures(areas);
-
       // zoom map in on the task area
       let bbox = this.task.bbox.slice();
       scaleFromCenter(bbox, 0.3);
       let extent = transformExtent(bbox, EPSG_4326, EPSG_3857);
 
       this.map.getView().fit(extent);
-
-      this.map.addLayer(
-        new VectorLayer({
-          source: taskSource,
-          style(feature) {
-            let id = feature.getId();
-            return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
-          },
-        }),
-      );
     }
 
     this.ws.on('record', this, 'handleRecord');
