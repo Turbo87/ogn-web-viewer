@@ -5,4 +5,5 @@ export default {
   jumbo: '(min-width: 1201px)',
 
   standalone: '(display-mode: standalone)',
+  prefersReducedMotion: '(prefers-reduced-motion: reduce)',
 };
