@@ -13,7 +13,7 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
-import { defaults as defaultControls, ScaleLine, FullScreen } from 'ol/control.js';
+import { Zoom, Attribution, ScaleLine, FullScreen } from 'ol/control.js';
 
 import { AircraftLayer, AircraftShadowLayer } from '../layers';
 import GeoJSON from '../geojson-converter';
@@ -62,8 +62,10 @@ export default Component.extend({
       source: this.aircraftSource,
     });
 
-    let controls = defaultControls();
-    controls.push(new ScaleLine());
+    let controls = [new ScaleLine(), new Attribution()];
+    if (!this.media.coarsePointer) {
+      controls.push(new Zoom());
+    }
     if (!this.media.isStandalone) {
       controls.push(new FullScreen({ source: this.element }));
     }

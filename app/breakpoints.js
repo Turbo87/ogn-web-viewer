@@ -4,6 +4,7 @@ export default {
   desktop: '(min-width: 992px) and (max-width: 1200px)',
   jumbo: '(min-width: 1201px)',
 
+  coarsePointer: '(pointer: coarse)',
   standalone: '(display-mode: standalone)',
   prefersReducedMotion: '(prefers-reduced-motion: reduce)',
 };
