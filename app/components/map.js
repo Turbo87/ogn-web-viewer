@@ -13,7 +13,7 @@ import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import XYZSource from 'ol/source/XYZ';
 import { Style, Stroke, Fill } from 'ol/style';
-import { defaults as defaultControls, ScaleLine, FullScreen } from 'ol/control.js';
+import { Zoom, Attribution, ScaleLine, FullScreen } from 'ol/control.js';
 
 import { AircraftLayer, AircraftShadowLayer } from '../layers';
 import GeoJSON from '../geojson-converter';
@@ -39,6 +39,7 @@ const TASK_AREA_STYLE = new Style({
 });
 
 export default Component.extend({
+  media: service(),
   ddb: service(),
   filter: service(),
   history: service(),
@@ -61,8 +62,16 @@ export default Component.extend({
       source: this.aircraftSource,
     });
 
+    let controls = [new ScaleLine(), new Attribution()];
+    if (!this.media.coarsePointer) {
+      controls.push(new Zoom());
+    }
+    if (!this.media.isStandalone) {
+      controls.push(new FullScreen({ source: this.element }));
+    }
+
     this.map = new olMap({
-      controls: defaultControls().extend([new ScaleLine(), new FullScreen({ source: this.$el })]),
+      controls,
 
       interactions: interactionDefaults({
         altShiftDragRotate: false,

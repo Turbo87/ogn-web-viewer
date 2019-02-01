@@ -33,6 +33,16 @@
       .loading.fade {
         opacity: 0;
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        .loading {
+          transition: none;
+        }
+
+        .loading > svg > g {
+          animation: none !important;
+        }
+      }
     </style>
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ogn-web-viewer.css">
