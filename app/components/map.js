@@ -39,6 +39,7 @@ const TASK_AREA_STYLE = new Style({
 });
 
 export default Component.extend({
+  media: service(),
   ddb: service(),
   filter: service(),
   history: service(),
@@ -61,8 +62,14 @@ export default Component.extend({
       source: this.aircraftSource,
     });
 
+    let controls = defaultControls();
+    controls.push(new ScaleLine());
+    if (!this.media.isStandalone) {
+      controls.push(new FullScreen({ source: this.element }));
+    }
+
     this.map = new olMap({
-      controls: defaultControls().extend([new ScaleLine(), new FullScreen({ source: this.$el })]),
+      controls,
 
       interactions: interactionDefaults({
         altShiftDragRotate: false,
