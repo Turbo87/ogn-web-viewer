@@ -49,7 +49,6 @@ export default Component.extend({
     this._super(...arguments);
 
     this.aircraftSource = new VectorSource({ features: [] });
-    this.taskSource = new VectorSource({ features: [] });
 
     this.aircraftLayer = new AircraftLayer({
       ddbService: this.ddb,
@@ -57,16 +56,6 @@ export default Component.extend({
 
       source: this.aircraftSource,
     });
-
-    this.map.addLayer(
-      new VectorLayer({
-        source: this.taskSource,
-        style(feature) {
-          let id = feature.getId();
-          return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
-        },
-      }),
-    );
 
     this.map.addLayer(this.aircraftLayer);
 
@@ -97,6 +86,8 @@ export default Component.extend({
     this.map.setTarget('map');
 
     if (this.task) {
+      let taskSource = new VectorSource({ features: [] });
+
       let legsFeature = new Feature({
         geometry: new LineString(this.task.points.map(pt => transform(pt.shape.center, EPSG_4326, EPSG_3857))),
       });
@@ -104,8 +95,8 @@ export default Component.extend({
 
       let areas = this.task.points.map(pt => GeoJSON.readFeature(pt.shape.toGeoJSON()));
 
-      this.taskSource.addFeature(legsFeature);
-      this.taskSource.addFeatures(areas);
+      taskSource.addFeature(legsFeature);
+      taskSource.addFeatures(areas);
 
       // zoom map in on the task area
       let bbox = this.task.bbox.slice();
@@ -113,6 +104,16 @@ export default Component.extend({
       let extent = transformExtent(bbox, EPSG_4326, EPSG_3857);
 
       this.map.getView().fit(extent);
+
+      this.map.addLayer(
+        new VectorLayer({
+          source: taskSource,
+          style(feature) {
+            let id = feature.getId();
+            return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
+          },
+        }),
+      );
     }
 
     this.ddb.update();
