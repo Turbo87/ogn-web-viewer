@@ -1,8 +1,14 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const getRepoInfo = require('git-repo-info');
 
 module.exports = function(defaults) {
+  let env = EmberApp.env();
+  let isProductionEnv = env === 'production';
+
+  let repoInfo = getRepoInfo();
+
   let app = new EmberApp(defaults, {
     babel: {
       plugins: [require('ember-auto-import/babel-plugin')],
@@ -17,6 +23,33 @@ module.exports = function(defaults) {
     sourcemaps: {
       enabled: true,
       extensions: ['css', 'js'],
+    },
+    fingerprint: {
+      // see https://github.com/davewasmer/ember-cli-favicon/issues/78
+      exclude: ['android-chrome', 'coast', 'firefox_app', 'yandex-browser'],
+    },
+    'ember-cli-favicon': {
+      enabled: env !== 'test',
+      faviconsConfig: {
+        appName: 'OGN WebViewer',
+        appShortName: 'OGN',
+        appDescription: 'WebViewer for the OpenGliderNet live tracking service',
+        developerName: 'Tobias Bieniek',
+        developerURL: 'https://github.com/Turbo87/',
+        version: repoInfo.abbreviatedSha,
+        background: '#fff',
+        theme_color: '#d3382f',
+        icons: {
+          favicons: true,
+          android: true,
+          appleIcon: isProductionEnv,
+          appleStartup: false,
+          coast: isProductionEnv,
+          firefox: isProductionEnv,
+          windows: isProductionEnv,
+          yandex: isProductionEnv,
+        },
+      },
     },
   });
 
