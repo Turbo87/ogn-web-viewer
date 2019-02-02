@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 
-import { Attribution, ScaleLine, Zoom } from 'ol/control';
+import { Attribution, ScaleLine } from 'ol/control';
 import { Map, View } from 'ol';
 import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
@@ -16,9 +16,6 @@ export default Service.extend({
   get map() {
     if (!this._map) {
       let controls = [new ScaleLine(), new Attribution()];
-      if (!this.media.coarsePointer) {
-        controls.push(new Zoom());
-      }
 
       this._map = new Map({
         controls,

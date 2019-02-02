@@ -7,6 +7,10 @@
     {{#if (not (media "isStandalone"))}}
       <FullscreenButton @map={{this.map}}/>
     {{/if}}
+
+    {{#if (not (media "coarsePointer"))}}
+      <ZoomButtons @map={{this.map}}/>
+    {{/if}}
   </div>
   {{#if (and hasDeviceFilter @task)}}
     <div class="scores-wrapper">
