@@ -2,13 +2,8 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
 
-import { Feature } from 'ol';
 import { scaleFromCenter } from 'ol/extent';
-import { Point } from 'ol/geom';
-import { transform, transformExtent } from 'ol/proj';
-import VectorSource from 'ol/source/Vector';
-
-import { AircraftLayer, AircraftShadowLayer } from '../layers';
+import { transformExtent } from 'ol/proj';
 
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
@@ -27,27 +22,6 @@ export default Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-
-    this.aircraftSource = new VectorSource({ features: [] });
-
-    this.aircraftLayer = new AircraftLayer({
-      ddbService: this.ddb,
-      deviceFilter: this.filter,
-
-      source: this.aircraftSource,
-    });
-
-    this.map.addLayer(this.aircraftLayer);
-
-    this.map.addLayer(
-      new AircraftShadowLayer({
-        ddbService: this.ddb,
-
-        opacity: 0.2,
-        maxResolution: 500,
-        source: this.aircraftSource,
-      }),
-    );
 
     this.map.on('moveend', () => {
       if (!this.filter.hasFilter) {
@@ -88,23 +62,6 @@ export default Component.extend({
         },
       ]);
     }
-
-    let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
-
-    let feature = this.aircraftSource.getFeatureById(record.id);
-    if (feature) {
-      let props = feature.getProperties();
-      if (props.timestamp >= record.timestamp) return;
-
-      feature.setGeometry(geometry);
-    } else {
-      feature = new Feature(geometry);
-      feature.setId(record.id);
-
-      this.aircraftSource.addFeature(feature);
-    }
-
-    feature.setProperties(record);
   },
 
   getBBox() {

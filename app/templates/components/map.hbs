@@ -1,5 +1,7 @@
 <div class="map-wrapper">
   <div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}">
+    <AircraftLayer/>
+    <AircraftShadowLayer/>
     <TaskLayer @task={{@task}}/>
   </div>
   {{#if (and hasDeviceFilter @task)}}
