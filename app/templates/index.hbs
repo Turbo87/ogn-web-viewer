@@ -2,4 +2,9 @@
   <div class="loading">Loading...</div>
 {{else}}
   <Map @task={{this.task}}/>
+  {{#if (and hasDeviceFilter this.task)}}
+    <div class="scores-wrapper">
+      <ScoreTable @task={{this.task}}/>
+    </div>
+  {{/if}}
 {{/if}}

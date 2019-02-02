@@ -1,12 +1,15 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 import { task } from 'ember-concurrency';
 
 import fetchText from 'ogn-web-viewer/utils/fetch-text';
 
 export default Controller.extend({
   filter: service(),
+
   task: null,
+  hasDeviceFilter: alias('filter.hasFilter'),
 
   loadDataTask: task(function*() {
     let hash = location.hash || '';
