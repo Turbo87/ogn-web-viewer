@@ -9,6 +9,12 @@ export default Route.extend({
 
   afterModel() {
     this._super(...arguments);
+
+    // remove loading spinner from the page (see `index.html`)
+    let spinnner = document.querySelector('#initial-load-spinner');
+    spinnner.classList.add('fade');
+    setTimeout(() => spinnner.remove(), 1500);
+
     this.ddb.update();
 
     this.ws.start();
