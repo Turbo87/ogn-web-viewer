@@ -3,6 +3,10 @@
     <AircraftLayer/>
     <AircraftShadowLayer/>
     <TaskLayer @task={{@task}}/>
+
+    {{#if (not (media "isStandalone"))}}
+      <FullscreenButton @map={{this.map}}/>
+    {{/if}}
   </div>
   {{#if (and hasDeviceFilter @task)}}
     <div class="scores-wrapper">
