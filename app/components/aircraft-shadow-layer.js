@@ -5,7 +5,7 @@ import { alias } from '@ember/object/computed';
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style } from 'ol/style';
 
-import { imageSrcForDevice } from '../layers/aircraft';
+import { imageSrcForDevice } from './aircraft-layer';
 
 export default Component.extend({
   aircraft: service(),
