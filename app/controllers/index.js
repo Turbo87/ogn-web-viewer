@@ -7,6 +7,7 @@ import fetchText from 'ogn-web-viewer/utils/fetch-text';
 
 export default Controller.extend({
   filter: service(),
+  mapService: service('map'),
 
   task: null,
   hasDeviceFilter: alias('filter.hasFilter'),
@@ -16,6 +17,8 @@ export default Controller.extend({
     let params = new URLSearchParams(hash.substr(1));
 
     yield Promise.all([this.loadDeviceFilter(params.get('lst')), this.loadTask(params.get('tsk'))]);
+
+    this.mapService.map.updateSize();
   }),
 
   async loadDeviceFilter(url) {
