@@ -36,3 +36,30 @@ body {
 .score-table th {
   padding: 4px;
 }
+
+.notification {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: white;
+  display: flex;
+  padding: 6px 8px;
+  border-radius: 20px;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  box-shadow:
+    0 3px 6px hsla(0, 0%, 0%, .15),
+    0 2px 4px hsla(0, 0%, 0%, .12);
+}
+
+.notification img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.notification span {
+  margin: 0 5px 0 10px;
+}
