@@ -1,25 +1,45 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style, Text, Stroke } from 'ol/style';
 
-export default class AircraftLayer extends VectorLayer {
-  constructor(options) {
-    const baseOptions = { ...options };
+export default Component.extend({
+  aircraft: service(),
+  ddb: service(),
+  filter: service(),
+  mapService: service('map'),
 
-    super({
-      ...baseOptions,
-      style: (...args) => this._getFeatureStyle(...args),
-    });
+  tagName: '',
 
-    this.ddbService = options.ddbService;
-    this.deviceFilter = options.deviceFilter;
+  map: alias('mapService.map'),
+
+  init() {
+    this._super(...arguments);
 
     this._iconStyles = new WeakMap();
     this._labelStyles = new WeakMap();
-  }
+
+    this.layer = new VectorLayer({
+      source: this.aircraft.source,
+      style: (...args) => this._getFeatureStyle(...args),
+    });
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.map.addLayer(this.layer);
+  },
+
+  willDestroyElement() {
+    this.map.removeLayer(this.layer);
+    this._super(...arguments);
+  },
 
   _getFeatureStyle(feature, resolution) {
     let { course, id, altitude } = feature.getProperties();
-    let device = this.ddbService.devices[id] || {};
+    let device = this.ddb.devices[id] || {};
 
     let imageSrc = imageSrcForDevice(device);
 
@@ -52,7 +72,7 @@ export default class AircraftLayer extends VectorLayer {
     let rotation = course * (Math.PI / 180);
     style.getImage().setRotation(rotation);
 
-    let filterRow = this.deviceFilter.filter.find(row => row.ID === id) || {};
+    let filterRow = this.filter.filter.find(row => row.ID === id) || {};
 
     let labelParts = [filterRow.CN || filterRow.CALL || device.callsign || device.registration];
 
@@ -63,8 +83,8 @@ export default class AircraftLayer extends VectorLayer {
     labelStyle.getText().setText(labelParts.filter(Boolean).join('\n'));
 
     return [style, labelStyle];
-  }
-}
+  },
+});
 
 /*
  * `category` means:

@@ -1,32 +1,54 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
+
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style } from 'ol/style';
 
-import { imageSrcForDevice } from './aircraft';
+import { imageSrcForDevice } from './aircraft-layer';
 
-export default class AircraftShadowLayer extends VectorLayer {
-  constructor(options) {
-    const baseOptions = { ...options };
+export default Component.extend({
+  aircraft: service(),
+  ddb: service(),
+  mapService: service('map'),
 
-    super({
-      ...baseOptions,
-      style: (...args) => this._getFeatureStyle(...args),
-    });
+  tagName: '',
 
-    this.ddbService = options.ddbService;
+  map: alias('mapService.map'),
+
+  init() {
+    this._super(...arguments);
 
     this._iconStyles = new WeakMap();
-  }
+
+    this.layer = new VectorLayer({
+      source: this.aircraft.source,
+      opacity: 0.2,
+      maxResolution: 500,
+      style: (...args) => this._getFeatureStyle(...args),
+    });
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.map.addLayer(this.layer);
+  },
+
+  willDestroyElement() {
+    this.map.removeLayer(this.layer);
+    this._super(...arguments);
+  },
 
   _getFeatureStyle(feature) {
     let { id } = feature.getProperties();
-    let device = this.ddbService.devices[id] || {};
+    let device = this.ddb.devices[id] || {};
 
     let imageSrc = imageSrcForDevice(device);
 
     let style = this._iconStyles.get(feature);
     if (!style || style.getImage().getSrc() !== imageSrc) {
       style = new Style({
-        image: new CustomIcon({
+        image: new Icon({
           src: imageSrc,
           rotateWithView: true,
         }),
@@ -49,13 +71,5 @@ export default class AircraftShadowLayer extends VectorLayer {
     icon.setAnchor(anchor);
 
     return style;
-  }
-}
-
-// see https://github.com/openlayers/openlayers/pull/8383
-class CustomIcon extends Icon {
-  setAnchor(anchor) {
-    this.anchor_ = anchor.slice();
-    this.normalizedAnchor_ = null;
-  }
-}
+  },
+});
