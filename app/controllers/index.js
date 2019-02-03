@@ -13,9 +13,9 @@ const EPSG_3857 = 'EPSG:3857';
 
 export default Controller.extend({
   filter: service(),
+  scoring: service(),
   mapService: service('map'),
 
-  task: null,
   hasDeviceFilter: alias('filter.hasFilter'),
 
   loadDataTask: task(function*() {
@@ -37,7 +37,7 @@ export default Controller.extend({
     if (url) {
       let { readTaskFromString } = await import('aeroscore/dist/src/read-task');
       let task = readTaskFromString(await fetchText(url));
-      this.set('task', task);
+      this.scoring.set('task', task);
 
       // zoom map in on the task area
       let bbox = task.bbox.slice();
