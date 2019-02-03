@@ -10,28 +10,6 @@ body {
   border-top: 1px solid #666;
 }
 
-.score-table {
-  width: 100%;
-
-  border-collapse: collapse;
-
-  font-size: 14px;
-  font-family: sans-serif;
-}
-
-.score-table tr:nth-child(even) {
-  background: #f3f3f3;
-}
-
-.score-table tr:hover {
-  background: #e3e3e3;
-}
-
-.score-table td,
-.score-table th {
-  padding: 4px;
-}
-
 .notification {
   position: absolute;
   top: 15px;
