@@ -1,20 +1,13 @@
-<div class="map-wrapper">
-  <div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}">
-    <AircraftLayer/>
-    <AircraftShadowLayer/>
-    <TaskLayer @task={{@task}}/>
+<div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}">
+  <AircraftLayer/>
+  <AircraftShadowLayer/>
+  <TaskLayer @task={{@task}}/>
 
-    {{#if (not (media "isStandalone"))}}
-      <FullscreenButton @map={{this.map}}/>
-    {{/if}}
+  {{#if (not (media "isStandalone"))}}
+    <FullscreenButton @map={{this.map}}/>
+  {{/if}}
 
-    {{#if (not (media "coarsePointer"))}}
-      <ZoomButtons @map={{this.map}}/>
-    {{/if}}
-  </div>
-  {{#if (and hasDeviceFilter @task)}}
-    <div class="scores-wrapper">
-      <ScoreTable @task={{@task}}/>
-    </div>
+  {{#if (not (media "coarsePointer"))}}
+    <ZoomButtons @map={{this.map}}/>
   {{/if}}
 </div>

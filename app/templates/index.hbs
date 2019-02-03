@@ -1,5 +1,10 @@
+<Map @task={{this.task}}/>
 {{#if loadDataTask.isRunning}}
-  <div class="loading">Loading...</div>
+  <Notification @text={{if (media "isMobile") "Loading..." "Loading task and competitor list..."}}/>
 {{else}}
-  <Map @task={{this.task}}/>
+  {{#if (and hasDeviceFilter this.task)}}
+    <div class="scores-wrapper">
+      <ScoreTable @task={{this.task}}/>
+    </div>
+  {{/if}}
 {{/if}}
