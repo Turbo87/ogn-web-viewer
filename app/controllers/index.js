@@ -16,13 +16,24 @@ export default Controller.extend({
   scoring: service(),
   mapService: service('map'),
 
+  queryParams: {
+    taskURL: 'tsk',
+    filterURL: 'lst',
+  },
+
+  taskURL: null,
+  filterURL: null,
+
   hasDeviceFilter: alias('filter.hasFilter'),
 
   loadDataTask: task(function*() {
     let hash = location.hash || '';
     let params = new URLSearchParams(hash.substr(1));
 
-    yield Promise.all([this.loadDeviceFilter(params.get('lst')), this.loadTask(params.get('tsk'))]);
+    let filterURL = params.get('lst');
+    let taskURL = params.get('tsk');
+
+    yield Promise.all([this.loadDeviceFilter(filterURL), this.loadTask(taskURL)]);
 
     this.mapService.map.updateSize();
   }),
