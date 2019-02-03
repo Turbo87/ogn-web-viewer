@@ -1,0 +1,28 @@
+@value overlay-shadow from 'ogn-web-viewer/styles/shadows';
+
+@value spinner-size: 20px;
+
+.notification {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background: white;
+  display: flex;
+  padding: 6px 8px;
+  border-radius: spinner-size;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 14px;
+  box-shadow: overlay-shadow;
+}
+
+.notification > img {
+  width: spinner-size;
+  height: spinner-size;
+  flex-shrink: 0;
+}
+
+.notification > span {
+  margin: 0 5px 0 10px;
+}
