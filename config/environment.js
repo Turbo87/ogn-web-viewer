@@ -22,8 +22,8 @@ module.exports = function(environment) {
       // when it is created
     },
 
-    API_HOST: process.env.API_HOST || 'https://ogn.fva.cloud',
-    WS_HOST: (process.env.API_HOST && process.env.API_HOST.replace(/^http/, 'ws')) || 'wss://ogn.fva.cloud',
+    API_HOST: process.env.API_HOST || 'https://ogn.cloud',
+    WS_HOST: (process.env.API_HOST && process.env.API_HOST.replace(/^http/, 'ws')) || 'wss://ogn.cloud',
 
     sentry: {
       development: true,
