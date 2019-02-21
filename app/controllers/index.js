@@ -14,6 +14,8 @@ const EPSG_3857 = 'EPSG:3857';
 export default Controller.extend({
   filter: service(),
   scoring: service(),
+  history: service(),
+  ws: service(),
   mapService: service('map'),
 
   hasDeviceFilter: alias('filter.hasFilter'),
@@ -30,6 +32,14 @@ export default Controller.extend({
   async loadDeviceFilter(url) {
     if (url) {
       await this.filter.load(url);
+
+      if (this.filter.hasFilter) {
+        for (let row of this.filter.filter) {
+          this.ws.subscribeToId(row.ID);
+        }
+
+        this.history.loadForIds(...this.filter.filter.map(row => row.ID));
+      }
     }
   },
 

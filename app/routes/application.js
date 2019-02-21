@@ -18,12 +18,5 @@ export default Route.extend({
     this.ddb.update();
 
     this.ws.start();
-    if (this.filter.hasFilter) {
-      for (let row of this.filter.filter) {
-        this.ws.subscribeToId(row.ID);
-      }
-
-      this.history.loadForIds(...this.filter.filter.map(row => row.ID));
-    }
   },
 });
