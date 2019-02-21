@@ -10,6 +10,7 @@
     "ember-concurrency": "*",
     "ember-fetch": "*",
     "igc-parser": "*",
+    "lolex": "*",
     "mock-socket": "*"
   }
 }
