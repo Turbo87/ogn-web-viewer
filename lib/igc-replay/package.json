@@ -2,5 +2,8 @@
   "name": "igc-replay",
   "keywords": [
     "ember-addon"
-  ]
+  ],
+  "dependencies": {
+    "igc-parser": "*"
+  }
 }
