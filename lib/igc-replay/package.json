@@ -4,7 +4,12 @@
     "ember-addon"
   ],
   "dependencies": {
+    "@turf/bearing": "*",
+    "ember-auto-import": "*",
     "ember-cli-babel": "*",
-    "igc-parser": "*"
+    "ember-concurrency": "*",
+    "ember-fetch": "*",
+    "igc-parser": "*",
+    "mock-socket": "*"
   }
 }
