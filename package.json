@@ -15,6 +15,7 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint . --cache",
     "start": "ember serve",
+    "start:replay": "REPLAY=true ember serve",
     "test": "ember test"
   },
   "devDependencies": {
