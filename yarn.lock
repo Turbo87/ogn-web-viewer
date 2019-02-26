@@ -617,14 +617,14 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@ember-decorators/utils@^3.1.0":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@ember-decorators/utils/-/utils-3.1.5.tgz#8f692582329a88553192e998012c7ca59e547c37"
-  integrity sha512-SqckJdUgnsZGZw6XHdRMeOk7YEdXHOZjJNOeJgNzjUdhS9jWSNu3OQrXcwYjJZBW8ICdqV87lpJB/rozTCezoQ==
+"@ember-decorators/utils@^3.1.0 || ^5.0.0":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@ember-decorators/utils/-/utils-5.1.3.tgz#c9ae884ce51943718a2ce9b5ed7abe6677645756"
+  integrity sha512-kYCxPL1yxN3iwKllI1wfbkxmcLxgZMbrLCat+JEPYEw4xJBzLRFzZO2qg+KAFDh7rG/WgS3L7Ji0THOj422/yw==
   dependencies:
-    babel-plugin-debug-macros "^0.1.11"
+    babel-plugin-debug-macros "^0.2.0"
     ember-cli-babel "^7.1.3"
-    ember-cli-version-checker "^2.1.2"
+    ember-cli-version-checker "^3.0.0"
     ember-compatibility-helpers "^1.1.2"
     semver "^5.6.0"
 
@@ -2005,7 +2005,7 @@ babel-plugin-check-es2015-constants@^6.22.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-debug-macros@^0.1.10, babel-plugin-debug-macros@^0.1.11:
+babel-plugin-debug-macros@^0.1.10:
   version "0.1.11"
   resolved "https://registry.yarnpkg.com/babel-plugin-debug-macros/-/babel-plugin-debug-macros-0.1.11.tgz#6c562bf561fccd406ce14ab04f42c218cf956605"
   integrity sha512-hZw5qNNGAR02Y+yBUrtsnJHh8OXavkayPRqKGAXnIm4t5rWVpj3ArwsC7TWdpZsBguQvHAeyTxZ7s23yY60HHg==
@@ -4713,12 +4713,12 @@ ember-concurrency@^0.8.27:
     ember-cli-babel "^6.8.2"
     ember-maybe-import-regenerator "^0.1.5"
 
-ember-css-modules@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.1.0.tgz#ee3e2dfd23e8f63295d0744de0772f996e15f3d4"
-  integrity sha512-JqSjQQwyOPhTos9UbGKpfLo0K2wbGGm7SoGJkx2NQlWvZ/EEiAti+92SzPPCW/zVca1qzmW2c/inMqOvCXPiKA==
+ember-css-modules@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.1.1.tgz#acb6f58e576d0d6fd8cb9d90a8de71ad90d6b6ff"
+  integrity sha512-o0CVo8N20pPM3bUig0ao7m0JU2HIavnfpkkdvWDeBpbau2c28Tp8ZforAIR/fBg1vjDxw29BjSqGHky3QukUGA==
   dependencies:
-    "@ember-decorators/utils" "^3.1.0"
+    "@ember-decorators/utils" "^3.1.0 || ^5.0.0"
     broccoli-concat "^3.2.2"
     broccoli-css-modules "^0.6.2"
     broccoli-funnel "^2.0.1"
