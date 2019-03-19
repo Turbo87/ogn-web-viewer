@@ -68,5 +68,6 @@ module.exports = function(defaults) {
 
   app.import('node_modules/ol/ol.css');
 
-  return app.toTree();
+  const Webpack = require('@embroider/webpack').Webpack;
+  return require('@embroider/compat').compatBuild(app, Webpack);
 };
