@@ -4820,10 +4820,10 @@ ember-concurrency@^0.8.27:
     ember-cli-babel "^6.8.2"
     ember-maybe-import-regenerator "^0.1.5"
 
-ember-css-modules@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.1.1.tgz#acb6f58e576d0d6fd8cb9d90a8de71ad90d6b6ff"
-  integrity sha512-o0CVo8N20pPM3bUig0ao7m0JU2HIavnfpkkdvWDeBpbau2c28Tp8ZforAIR/fBg1vjDxw29BjSqGHky3QukUGA==
+ember-css-modules@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.1.2.tgz#89b28a862440a818940a5e963e257e38dd593a90"
+  integrity sha512-EvcL52q48nkuuBrtNsrdDtFhKASO0HgY3Cs3vBpbldDeWfe2/hE9OcPlskRQixuk154urn+uUCBZExO+8SfpmA==
   dependencies:
     "@ember-decorators/utils" "^3.1.0 || ^5.0.0"
     broccoli-concat "^3.2.2"
