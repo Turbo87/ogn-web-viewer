@@ -35,7 +35,7 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-uglify": "^3.0.0",
     "ember-concurrency": "^0.8.27",
-    "ember-css-modules": "^1.1.2",
+    "ember-css-modules": "^1.2.0",
     "ember-fetch": "^6.5.0",
     "ember-load-initializers": "^2.0.0",
     "ember-maybe-import-regenerator": "^0.1.6",
