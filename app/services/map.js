@@ -37,7 +37,7 @@ export default Service.extend({
           new TileLayer({
             maxResolution: 2500,
             source: new XYZSource({
-              url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/{z}/{x}/{y}.png',
+              url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/EPSG3857/{z}/{x}/{y}.png',
             }),
           }),
         ],
