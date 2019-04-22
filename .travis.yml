@@ -27,4 +27,5 @@ install:
 script:
   - yarn lint:hbs
   - yarn lint:js
+  - yarn ember dependency-lint
   - yarn test
