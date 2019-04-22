@@ -53,7 +53,7 @@
     "loader.js": "^4.7.0",
     "lolex": "^4.0.1",
     "mock-socket": "^8.0.5",
-    "neat-csv": "^4.0.0",
+    "neat-csv": "^5.0.0",
     "ol": "^5.3.2",
     "prettier": "1.17.0",
     "qunit-dom": "^0.8.0",

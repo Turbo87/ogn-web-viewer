@@ -8264,10 +8264,10 @@ ndjson@^1.4.0:
     split2 "^2.1.0"
     through2 "^2.0.3"
 
-neat-csv@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/neat-csv/-/neat-csv-4.0.0.tgz#4d8c20fdd84d8c57968d57acafe1d34a5e81c135"
-  integrity sha512-CWgKOy5+IGWrW1nWuDkD+S+beLT6S6vSWJWlVP3IvYDIfhxm9XjLK+FPshZPVaXV/40Tx1zNc/926D3y4ksnmA==
+neat-csv@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/neat-csv/-/neat-csv-5.0.0.tgz#f9e7d1008dfdf819331b57606bff724200433e15"
+  integrity sha512-5MhNNZ+5+EiSGIenYOM2mAQTLp/WVfvmuNliGRZ3L0vbVP0Ju0NYN+WEj740skzS+ldHyw+7nVFFiYGXd4c08g==
   dependencies:
     csv-parser "^2.1.0"
     get-stream "^4.1.0"
