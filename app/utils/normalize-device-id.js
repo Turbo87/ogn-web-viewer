@@ -1,7 +1,15 @@
+const RE_HEXDEC = /^[0-9a-fA-F]+$/;
+
 export function normalizeDeviceId(id) {
-  if (id.length === 8) {
-    let senderDetails = parseInt(id.substring(0, 2), 16);
-    if (!isNaN(senderDetails)) {
+  let length = id.length;
+
+  if (length === 6) {
+    if (RE_HEXDEC.test(id)) {
+      return `FLR${id}`;
+    }
+  } else if (length === 8) {
+    if (RE_HEXDEC.test(id)) {
+      let senderDetails = parseInt(id.substring(0, 2), 16);
       let addressType = senderDetails & 0b00000011;
       if (addressType === 0b01) {
         return `ICA${id.substring(2)}`;
@@ -11,16 +19,10 @@ export function normalizeDeviceId(id) {
         return `OGN${id.substring(2)}`;
       }
     }
-
-    return null;
-  }
-
-  if (id.length === 6 && !isNaN(parseInt(id, 16))) {
-    return `FLR${id}`;
-  }
-
-  if (id.length === 9 && !isNaN(parseInt(id.substring(3), 16))) {
-    return id;
+  } else if (length === 9) {
+    if (RE_HEXDEC.test(id.substring(3))) {
+      return id;
+    }
   }
 
   return null;
