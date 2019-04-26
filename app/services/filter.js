@@ -18,7 +18,7 @@ export default Service.extend({
       'filter',
       data.map(row => ({
         ...row,
-        ID: normalizeDeviceId(row.ID),
+        ID: normalizeDeviceId(row.ID) || row.ID,
         HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
       })),
     );
