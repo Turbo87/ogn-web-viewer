@@ -8,6 +8,10 @@ module('normalizeDeviceId()', function() {
     ['OGNE95A16', 'OGNE95A16'],
     ['06DDA524', 'FLRDDA524'],
     ['DDA524', 'FLRDDA524'],
+    ['XX123456', null],
+    ['053E5E5C', 'ICA3E5E5C'],
+    ['22D00442', 'FLRD00442'],
+    ['3AA007', 'FLR3AA007'],
   ];
 
   for (let [input, expected] of TESTS) {
