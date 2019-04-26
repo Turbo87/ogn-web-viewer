@@ -9,7 +9,15 @@ module.exports = function(defaults) {
 
   let repoInfo = getRepoInfo();
 
+  let pluginsToBlacklist = [];
+  if (!process.env.REPLAY) {
+    pluginsToBlacklist.push('igc-replay');
+  }
+
   let app = new EmberApp(defaults, {
+    addons: {
+      blacklist: pluginsToBlacklist,
+    },
     babel: {
       plugins: [require('ember-auto-import/babel-plugin')],
     },

@@ -1,0 +1,26 @@
+<Task aat_min_time="150" fai_finish="1" finish_min_height="0" finish_min_height_ref="0" homogeneous_tps="0" is_closed="True" max_points="0" min_points="0" start_max_height="0" start_max_height_ref="0" start_max_speed="0" task_scored="0" type="AAT">
+	<Point type="Start">
+		<Waypoint altitude="None" comment="" id="0" name="184WBR">
+			<Location latitude="49.945" longitude="11.7277833333333"/>
+		</Waypoint>
+		<ObservationZone length="20000" type="Line"/>
+	</Point>
+	<Point type="Turn">
+		<Waypoint altitude="None" comment="" id="1" name="156SKV">
+			<Location latitude="49.5677833333333" longitude="13.0466666666667"/>
+		</Waypoint>
+		<ObservationZone radius="17000" type="Cylinder"/>
+	</Point>
+	<Point type="Turn">
+		<Waypoint altitude="None" comment="" id="2" name="190WFD">
+			<Location latitude="49.02445" longitude="12.5425"/>
+		</Waypoint>
+		<ObservationZone radius="45000" type="Cylinder"/>
+	</Point>
+	<Point type="Finish">
+		<Waypoint altitude="None" comment="" id="3" name="001BTH">
+			<Location latitude="49.98445" longitude="11.6386166666667"/>
+		</Waypoint>
+		<ObservationZone radius="4000" type="Cylinder"/>
+	</Point>
+</Task>

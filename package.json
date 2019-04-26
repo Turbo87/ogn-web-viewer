@@ -15,6 +15,7 @@
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint . --cache",
     "start": "ember serve",
+    "start:replay": "REPLAY=true ember serve",
     "test": "ember test"
   },
   "devDependencies": {
@@ -51,6 +52,7 @@
     "eslint-plugin-ember": "^6.4.1",
     "eslint-plugin-prettier": "^3.0.1",
     "git-repo-info": "^2.1.0",
+    "igc-parser": "^0.4.0",
     "loader.js": "^4.7.0",
     "lolex": "^4.0.1",
     "mock-socket": "^8.0.5",
@@ -65,5 +67,10 @@
   },
   "resolutions": {
     "favicons": "^5.3.0"
+  },
+  "ember-addon": {
+    "paths": [
+      "lib/igc-replay"
+    ]
   }
 }

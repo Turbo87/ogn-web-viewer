@@ -1,0 +1,16 @@
+{
+  "name": "igc-replay",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "@turf/bearing": "*",
+    "ember-auto-import": "*",
+    "ember-cli-babel": "*",
+    "ember-concurrency": "*",
+    "ember-fetch": "*",
+    "igc-parser": "*",
+    "lolex": "*",
+    "mock-socket": "*"
+  }
+}
