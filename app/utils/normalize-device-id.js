@@ -15,7 +15,7 @@ export function normalizeDeviceId(id) {
     return null;
   }
 
-  if (id.length === 6) {
+  if (id.length === 6 && !isNaN(parseInt(id, 16))) {
     return `FLR${id}`;
   }
 
