@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import { notEmpty } from '@ember/object/computed';
 import fetchText from 'ogn-web-viewer/utils/fetch-text';
+import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 
 export default Service.extend({
   init() {
@@ -17,7 +18,7 @@ export default Service.extend({
       'filter',
       data.map(row => ({
         ...row,
-        ID: parseID(row.ID),
+        ID: normalizeDeviceId(row.ID) || row.ID,
         HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
       })),
     );
@@ -29,16 +30,4 @@ export default Service.extend({
 async function loadNeatCSV() {
   let neatCSV = await import('neat-csv');
   return neatCSV.default;
-}
-
-export function parseID(id) {
-  if (id.startsWith('06') && id.length === 8) {
-    return `FLR${id.substr(2)}`;
-  }
-
-  if (id.length === 6) {
-    return `FLR${id}`;
-  }
-
-  return id;
 }
