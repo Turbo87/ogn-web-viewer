@@ -62,7 +62,7 @@
     "git-repo-info": "^2.1.0",
     "loader.js": "^4.7.0",
     "prettier": "1.17.0",
-    "qunit-dom": "^0.8.0"
+    "qunit-dom": "^0.8.5"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
