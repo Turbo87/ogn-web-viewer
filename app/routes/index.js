@@ -7,6 +7,7 @@ import { scaleFromCenter } from 'ol/extent';
 import { transformExtent } from 'ol/proj';
 
 import fetchText from 'ogn-web-viewer/utils/fetch-text';
+import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
@@ -26,6 +27,22 @@ export default class extends Route {
   }
 
   setupController(controller, [filter, task]) {
+    if (filter.length !== 0) {
+      let records = filter.map(row => ({
+        ...row,
+        ID: normalizeDeviceId(row.ID) || row.ID,
+        HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
+      }));
+
+      run(() => this.filter.add(...records));
+
+      for (let row of filter) {
+        this.ws.subscribeToId(row.ID);
+      }
+
+      this.history.loadForIds(...filter.map(row => row.ID));
+    }
+
     run(() => this.scoring.set('task', task));
     this.mapService.map.updateSize();
 
@@ -37,22 +54,16 @@ export default class extends Route {
 
       this.mapService.map.getView().fit(extent);
     }
-
-    if (filter.length !== 0) {
-      for (let row of filter) {
-        this.ws.subscribeToId(row.ID);
-      }
-
-      this.history.loadForIds(...filter.map(row => row.ID));
-    }
   }
 
   async loadDeviceFilter(url) {
     if (url) {
-      await this.filter.load(url);
+      let [text, { default: neatCSV }] = await Promise.all([fetchText(url), import('neat-csv')]);
+
+      return await neatCSV(text);
     }
 
-    return this.filter.filter;
+    return [];
   }
 
   async loadTask(url) {
