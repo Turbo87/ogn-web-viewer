@@ -11,9 +11,8 @@ export default class extends Service {
 
     let data = await neatCSV(text);
 
-    this.set(
-      'filter',
-      data.map(row => ({
+    this.add(
+      ...data.map(row => ({
         ...row,
         ID: normalizeDeviceId(row.ID) || row.ID,
         HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
@@ -22,6 +21,10 @@ export default class extends Service {
   }
 
   @notEmpty('filter') hasFilter;
+
+  add(...records) {
+    this.set('filter', [...this.filter, ...records]);
+  }
 }
 
 async function loadNeatCSV() {
