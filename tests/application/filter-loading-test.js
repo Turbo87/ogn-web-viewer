@@ -36,12 +36,12 @@ module('Application | filter-loading', function(hooks) {
 
     assert.equal(filter.filter.length, 3);
     assert.deepEqual(filter.filter[2], {
-      ID: 'FLRDD897F',
-      CALL: 'D-9106',
-      CN: 'C1',
-      TYPE: 'LS 4',
-      HANDICAP: 1.025,
-      NAME: 'Jane Doe',
+      id: 'FLRDD897F',
+      registration: 'D-9106',
+      callsign: 'C1',
+      type: 'LS 4',
+      handicap: 1.025,
+      name: 'Jane Doe',
     });
   });
 });

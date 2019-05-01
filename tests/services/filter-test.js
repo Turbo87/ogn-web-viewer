@@ -8,15 +8,15 @@ module('Service | filter', function(hooks) {
     let filter = this.owner.lookup('service:filter');
 
     filter.add({
-      ID: 'FLRDD897F',
-      CALL: 'D-9106',
-      CN: 'C1',
-      TYPE: 'LS 4',
-      HANDICAP: 1.025,
-      NAME: 'Jane Doe',
+      id: 'FLRDD897F',
+      registration: 'D-9106',
+      callsign: 'C1',
+      type: 'LS 4',
+      handicap: 1.025,
+      name: 'Jane Doe',
     });
 
     assert.equal(filter.filter.length, 1);
-    assert.deepEqual(filter.filter[0].NAME, 'Jane Doe');
+    assert.deepEqual(filter.filter[0].name, 'Jane Doe');
   });
 });

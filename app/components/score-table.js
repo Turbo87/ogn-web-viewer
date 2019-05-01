@@ -36,7 +36,7 @@ export default class extends Component {
       // Td: task.options.aatMinTime || 0,
 
       // Lowest Handicap (H) of all competitors
-      Ho: Math.min(...this.filter.filter.map(it => it.HANDICAP)),
+      Ho: Math.min(...this.filter.filter.map(it => it.handicap)),
 
       // Minimum Handicapped Distance to validate the Day [km]
       Dm: 100,
@@ -63,7 +63,7 @@ export default class extends Component {
 
   update() {
     let results = this.filter.filter.map(filterRow => {
-      let fixes = this.history.forId(filterRow.ID);
+      let fixes = this.history.forId(filterRow.id);
 
       let solver = this.task.options.isAAT ? new AreaTaskSolver(this.task) : new RacingTaskSolver(this.task);
 
@@ -82,7 +82,7 @@ export default class extends Component {
         startTimestamp = start && result.distance ? start.time : null;
 
         // Competitor’s Handicap, if handicapping is being used; otherwise H=1
-        let H = filterRow.HANDICAP / 100;
+        let H = filterRow.handicap / 100;
 
         dayResult =
           landed || result.completed || this.task.options.isAAT
@@ -116,9 +116,9 @@ export default class extends Component {
 
         return {
           num: `${result.landed || result._completed ? ' ' : '!'} ${i + 1}`,
-          cn: filterRow.CN,
-          name: filterRow.NAME,
-          type: filterRow.TYPE,
+          cn: filterRow.callsign,
+          name: filterRow.name,
+          type: filterRow.type,
           startTime: result.startTimestamp ? formatTime(result.startTimestamp) : '',
           time: result._T ? formatDuration(result._T) : '',
           distance: result._D ? `${result._D.toFixed(1)} km` : '',

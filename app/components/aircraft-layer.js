@@ -68,9 +68,9 @@ export default class extends Component {
     let rotation = course * (Math.PI / 180);
     style.getImage().setRotation(rotation);
 
-    let filterRow = this.filter.filter.find(row => row.ID === id) || {};
+    let filterRow = this.filter.filter.find(row => row.id === id) || {};
 
-    let labelParts = [filterRow.CN || filterRow.CALL || device.callsign || device.registration];
+    let labelParts = [filterRow.callsign || filterRow.registration || device.callsign || device.registration];
 
     if (resolution < 100) {
       labelParts.push(`${altitude}m`);

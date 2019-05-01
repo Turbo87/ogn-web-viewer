@@ -28,19 +28,23 @@ export default class extends Route {
 
   setupController(controller, [filter, task]) {
     if (filter.length !== 0) {
-      let records = filter.map(row => ({
-        ...row,
-        ID: normalizeDeviceId(row.ID) || row.ID,
-        HANDICAP: 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0,
-      }));
+      let records = filter.map(row => {
+        let id = normalizeDeviceId(row.ID) || row.ID;
+        let name = row.NAME;
+        let registration = row.CALL;
+        let callsign = row.CN;
+        let type = row.TYPE;
+        let handicap = 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0;
+        return { id, name, registration, callsign, type, handicap };
+      });
 
       run(() => this.filter.add(...records));
 
-      for (let row of filter) {
-        this.ws.subscribeToId(row.ID);
+      for (let record of records) {
+        this.ws.subscribeToId(record.id);
       }
 
-      this.history.loadForIds(...filter.map(row => row.ID));
+      this.history.loadForIds(...records.map(record => record.id));
     }
 
     run(() => this.scoring.set('task', task));
