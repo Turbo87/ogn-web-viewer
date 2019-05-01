@@ -32,16 +32,17 @@ const TASK_AREA_STYLE = new Style({
   }),
 });
 
-export default Component.extend({
-  mapService: service('map'),
+export default class extends Component {
+  @service('map') mapService;
 
-  tagName: '',
+  tagName = '';
 
-  task: null,
+  task = null;
 
-  map: alias('mapService.map'),
+  @alias('mapService.map') map;
 
-  source: computed('task', function() {
+  @computed('task')
+  get source() {
     let taskSource = new VectorSource({ features: [] });
 
     if (this.task) {
@@ -56,10 +57,10 @@ export default Component.extend({
     }
 
     return taskSource;
-  }),
+  }
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
 
     this.set(
       'layer',
@@ -73,15 +74,15 @@ export default Component.extend({
     );
 
     this.map.addLayer(this.layer);
-  },
+  }
 
   didUpdateAttrs() {
-    this._super(...arguments);
+    super.didUpdateAttrs(...arguments);
     this.layer.setSource(this.source);
-  },
+  }
 
   willDestroyElement() {
     this.map.removeLayer(this.layer);
-    this._super(...arguments);
-  },
-});
+    super.willDestroyElement(...arguments);
+  }
+}

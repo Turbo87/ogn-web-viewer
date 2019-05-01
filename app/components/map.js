@@ -7,20 +7,20 @@ import { transformExtent } from 'ol/proj';
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
-export default Component.extend({
-  ddb: service(),
-  filter: service(),
-  history: service(),
-  ws: service(),
-  mapService: service('map'),
+export default class extends Component {
+  @service ddb;
+  @service filter;
+  @service history;
+  @service ws;
+  @service('map') mapService;
 
-  tagName: '',
+  tagName = '';
 
-  hasDeviceFilter: alias('filter.hasFilter'),
-  map: alias('mapService.map'),
+  @alias('filter.hasFilter') hasDeviceFilter;
+  @alias('mapService.map') map;
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
 
     this.map.on('moveend', () => {
       if (!this.filter.hasFilter) {
@@ -31,15 +31,15 @@ export default Component.extend({
     this.map.setTarget('map');
 
     this.ws.on('record', this, 'handleRecord');
-  },
+  }
 
   willDestroyElement() {
     this.ws.off('record', this, 'handleRecord');
 
     this.map.setTarget(null);
 
-    this._super(...arguments);
-  },
+    super.willDestroyElement(...arguments);
+  }
 
   handleRecord(record) {
     if (this.filter.hasFilter) {
@@ -52,10 +52,10 @@ export default Component.extend({
         },
       ]);
     }
-  },
+  }
 
   getBBox() {
     let extent = this.map.getView().calculateExtent();
     return transformExtent(extent, EPSG_3857, EPSG_4326);
-  },
-});
+  }
+}

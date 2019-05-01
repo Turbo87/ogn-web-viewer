@@ -7,19 +7,15 @@ import Sockette from 'sockette';
 
 import config from 'ogn-web-viewer/config/environment';
 
-export default Service.extend(Evented, {
-  init() {
-    this._super(...arguments);
-
-    this._ws = null;
-    this._bbox = null;
-    this._subscriptions = [];
-  },
+export default class extends Service.extend(Evented) {
+  _ws = null;
+  _bbox = null;
+  _subscriptions = [];
 
   willDestroy() {
-    this._super(...arguments);
+    super.willDestroy(...arguments);
     this.stop();
-  },
+  }
 
   start() {
     if (!this._ws) {
@@ -38,25 +34,25 @@ export default Service.extend(Evented, {
         onerror: e => console.log('Error:', e),
       });
     }
-  },
+  }
 
   stop() {
     if (this._ws) {
       this._ws.close();
       this._ws = null;
     }
-  },
+  }
 
   onMessage(message) {
     for (let line of message.split('\n')) {
       let record = parseMessage(line);
       this.onRecord(record);
     }
-  },
+  }
 
   onRecord(record) {
     this.trigger('record', record);
-  },
+  }
 
   subscribeToId(id) {
     this._subscriptions.push(id);
@@ -65,7 +61,7 @@ export default Service.extend(Evented, {
     } catch (e) {
       // ignore
     }
-  },
+  }
 
   unsubscribeFromId(id) {
     this._subscriptions = this._subscriptions.filter(_id => _id !== id);
@@ -74,12 +70,12 @@ export default Service.extend(Evented, {
     } catch (e) {
       // ignore
     }
-  },
+  }
 
   setBBox(bbox) {
     this._bbox = bbox;
     this._sendBBox();
-  },
+  }
 
   _sendBBox() {
     if (!this._ws || !this._bbox) return;
@@ -91,8 +87,8 @@ export default Service.extend(Evented, {
     } catch (e) {
       // ignore
     }
-  },
-});
+  }
+}
 
 export function parseMessage(message) {
   let fields = message.split('|');

@@ -2,7 +2,8 @@ import Ember from 'ember';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { task, timeout } from 'ember-concurrency';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 
 import {
   calculateDayFactors,
@@ -15,13 +16,18 @@ import AreaTaskSolver from 'aeroscore/dist/src/task/solver/area-task-solver';
 import RacingTaskSolver from 'aeroscore/dist/src/task/solver/racing-task-solver';
 import { formatDuration, formatTime } from 'aeroscore/dist/src/format-result';
 
-export default Component.extend({
-  filter: service(),
-  history: service(),
+export default class extends Component {
+  @service filter;
+  @service history;
 
-  tagName: '',
+  tagName = '';
 
-  initialDayFactors: computed('filter.filter', function() {
+  dayFactors = null;
+  results = [];
+  rows = [];
+
+  @computed('filter.filter')
+  get initialDayFactors() {
     return {
       // Task Distance [km]
       // Dt: task.distance / 1000,
@@ -35,24 +41,25 @@ export default Component.extend({
       // Minimum Handicapped Distance to validate the Day [km]
       Dm: 100,
     };
-  }),
+  }
 
-  init() {
-    this._super(...arguments);
+  didInsertElement() {
+    super.didInsertElement(...arguments);
+    this.updateTask.perform();
+  }
 
-    this.set('dayFactors', null);
-    this.set('results', []);
-    this.set('rows', []);
-  },
+  willDestroyElement() {
+    super.willDestroyElement(...arguments);
+    this.updateTask.cancelAll();
+  }
 
-  updateTask: task(function*() {
+  @task
+  updateTask = function*() {
     while (!Ember.testing) {
       this.update();
       yield timeout(3000);
     }
-  })
-    .on('didInsertElement')
-    .cancelOn('willDestroyElement'),
+  };
 
   update() {
     let results = this.filter.filter.map(filterRow => {
@@ -121,5 +128,5 @@ export default Component.extend({
         };
       }),
     );
-  },
-});
+  }
+}
