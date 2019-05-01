@@ -5,37 +5,33 @@ import { alias } from '@ember/object/computed';
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style, Text, Stroke } from 'ol/style';
 
-export default Component.extend({
-  aircraft: service(),
-  ddb: service(),
-  filter: service(),
-  mapService: service('map'),
+export default class extends Component {
+  @service aircraft;
+  @service ddb;
+  @service filter;
+  @service('map') mapService;
 
-  tagName: '',
+  tagName = '';
 
-  map: alias('mapService.map'),
+  @alias('mapService.map') map;
 
-  init() {
-    this._super(...arguments);
+  _iconStyles = new WeakMap();
+  _labelStyles = new WeakMap();
 
-    this._iconStyles = new WeakMap();
-    this._labelStyles = new WeakMap();
-
-    this.layer = new VectorLayer({
-      source: this.aircraft.source,
-      style: (...args) => this._getFeatureStyle(...args),
-    });
-  },
+  layer = new VectorLayer({
+    source: this.aircraft.source,
+    style: (...args) => this._getFeatureStyle(...args),
+  });
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.map.addLayer(this.layer);
-  },
+  }
 
   willDestroyElement() {
     this.map.removeLayer(this.layer);
-    this._super(...arguments);
-  },
+    super.willDestroyElement(...arguments);
+  }
 
   _getFeatureStyle(feature, resolution) {
     let { course, id, altitude } = feature.getProperties();
@@ -83,8 +79,8 @@ export default Component.extend({
     labelStyle.getText().setText(labelParts.filter(Boolean).join('\n'));
 
     return [style, labelStyle];
-  },
-});
+  }
+}
 
 /*
  * `category` means:

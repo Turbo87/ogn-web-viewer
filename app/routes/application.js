@@ -1,14 +1,14 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  ddb: service(),
-  filter: service(),
-  history: service(),
-  ws: service(),
+export default class extends Route {
+  @service ddb;
+  @service filter;
+  @service history;
+  @service ws;
 
   afterModel() {
-    this._super(...arguments);
+    super.afterModel(...arguments);
 
     // remove loading spinner from the page (see `index.html`)
     let spinnner = document.querySelector('#initial-load-spinner');
@@ -18,5 +18,5 @@ export default Route.extend({
     this.ddb.update();
 
     this.ws.start();
-  },
-});
+  }
+}

@@ -9,21 +9,20 @@ import { transform } from 'ol/proj';
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
-export default Service.extend({
-  ws: service(),
+export default class extends Service {
+  @service ws;
 
-  source: null,
+  source = new VectorSource({ features: [] });
 
   init() {
-    this._super(...arguments);
-    this.set('source', new VectorSource({ features: [] }));
+    super.init(...arguments);
     this.ws.on('record', this, 'handleRecord');
-  },
+  }
 
   willDestroy() {
     this.ws.off('record', this, 'handleRecord');
-    this._super(...arguments);
-  },
+    super.willDestroy(...arguments);
+  }
 
   handleRecord(record) {
     let geometry = new Point(transform([record.longitude, record.latitude], EPSG_4326, EPSG_3857));
@@ -42,5 +41,5 @@ export default Service.extend({
     }
 
     feature.setProperties(record);
-  },
-});
+  }
+}

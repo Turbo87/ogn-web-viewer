@@ -7,37 +7,33 @@ import { Icon, Style } from 'ol/style';
 
 import { imageSrcForDevice } from './aircraft-layer';
 
-export default Component.extend({
-  aircraft: service(),
-  ddb: service(),
-  mapService: service('map'),
+export default class extends Component {
+  @service aircraft;
+  @service ddb;
+  @service('map') mapService;
 
-  tagName: '',
+  tagName = '';
 
-  map: alias('mapService.map'),
+  @alias('mapService.map') map;
 
-  init() {
-    this._super(...arguments);
+  _iconStyles = new WeakMap();
 
-    this._iconStyles = new WeakMap();
-
-    this.layer = new VectorLayer({
-      source: this.aircraft.source,
-      opacity: 0.2,
-      maxResolution: 500,
-      style: (...args) => this._getFeatureStyle(...args),
-    });
-  },
+  layer = new VectorLayer({
+    source: this.aircraft.source,
+    opacity: 0.2,
+    maxResolution: 500,
+    style: (...args) => this._getFeatureStyle(...args),
+  });
 
   didInsertElement() {
-    this._super(...arguments);
+    super.didInsertElement(...arguments);
     this.map.addLayer(this.layer);
-  },
+  }
 
   willDestroyElement() {
     this.map.removeLayer(this.layer);
-    this._super(...arguments);
-  },
+    super.willDestroyElement(...arguments);
+  }
 
   _getFeatureStyle(feature) {
     let { id } = feature.getProperties();
@@ -71,5 +67,5 @@ export default Component.extend({
     icon.setAnchor(anchor);
 
     return style;
-  },
-});
+  }
+}

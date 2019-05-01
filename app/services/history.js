@@ -3,11 +3,8 @@ import ajax from 'ember-fetch/ajax';
 
 import config from 'ogn-web-viewer/config/environment';
 
-export default Service.extend({
-  init() {
-    this._super(...arguments);
-    this._byId = {};
-  },
+export default class extends Service {
+  _byId = {};
 
   async loadForIds(...ids) {
     let after = Math.round(Date.now() / 1000) - 8 * 60 * 60;
@@ -32,7 +29,7 @@ export default Service.extend({
         }),
       );
     }
-  },
+  }
 
   forId(id) {
     let old = this._byId[id];
@@ -41,11 +38,11 @@ export default Service.extend({
       this._byId[id] = old;
     }
     return old;
-  },
+  }
 
   addRecords(id, records) {
     let array = this.forId(id);
     array.push(...records);
     array.sort((a, b) => a.time - b.time);
-  },
-});
+  }
+}

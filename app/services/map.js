@@ -8,10 +8,10 @@ import TileLayer from 'ol/layer/Tile';
 import TileJSON from 'ol/source/TileJSON';
 import XYZSource from 'ol/source/XYZ';
 
-export default Service.extend({
-  media: service(),
+export default class extends Service {
+  @service media;
 
-  _map: null,
+  _map = null;
 
   get map() {
     if (!this._map) {
@@ -50,5 +50,5 @@ export default Service.extend({
     }
 
     return this._map;
-  },
-});
+  }
+}

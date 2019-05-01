@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { alias } from '@ember/object/computed';
-import { task } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 
 import { scaleFromCenter } from 'ol/extent';
 import { transformExtent } from 'ol/proj';
@@ -11,23 +11,24 @@ import fetchText from 'ogn-web-viewer/utils/fetch-text';
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
-export default Controller.extend({
-  filter: service(),
-  scoring: service(),
-  history: service(),
-  ws: service(),
-  mapService: service('map'),
+export default class extends Controller {
+  @service filter;
+  @service scoring;
+  @service history;
+  @service ws;
+  @service('map') mapService;
 
-  hasDeviceFilter: alias('filter.hasFilter'),
+  @alias('filter.hasFilter') hasDeviceFilter;
 
-  loadDataTask: task(function*() {
+  @task
+  loadDataTask = function*() {
     let hash = location.hash || '';
     let params = new URLSearchParams(hash.substr(1));
 
     yield Promise.all([this.loadDeviceFilter(params.get('lst')), this.loadTask(params.get('tsk'))]);
 
     this.mapService.map.updateSize();
-  }),
+  };
 
   async loadDeviceFilter(url) {
     if (url) {
@@ -41,7 +42,7 @@ export default Controller.extend({
         this.history.loadForIds(...this.filter.filter.map(row => row.ID));
       }
     }
-  },
+  }
 
   async loadTask(url) {
     if (url) {
@@ -56,5 +57,5 @@ export default Controller.extend({
 
       this.mapService.map.getView().fit(extent);
     }
-  },
-});
+  }
+}
