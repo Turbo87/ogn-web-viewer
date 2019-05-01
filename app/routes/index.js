@@ -56,7 +56,7 @@ export default class extends Route {
       scaleFromCenter(bbox, 0.3);
       let extent = transformExtent(bbox, EPSG_4326, EPSG_3857);
 
-      this.mapService.map.getView().fit(extent);
+      setTimeout(() => this.mapService.map.getView().fit(extent, { duration: 1000 }), 100);
     }
   }
 
