@@ -72,8 +72,8 @@ export default class extends Route {
 
   async loadTask(url) {
     if (url) {
-      let { readTaskFromString } = await import('aeroscore/dist/src/read-task');
-      return readTaskFromString(await fetchText(url));
+      let [text, { readTaskFromString }] = await Promise.all([fetchText(url), import('aeroscore/dist/src/read-task')]);
+      return readTaskFromString(text);
     }
   }
 }
