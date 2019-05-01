@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { run } from '@ember/runloop';
+import window from 'ember-window-mock';
 
 import { scaleFromCenter } from 'ol/extent';
 import { transformExtent } from 'ol/proj';
@@ -18,7 +19,7 @@ export default class extends Route {
   @service('map') mapService;
 
   async model() {
-    let hash = location.hash || '';
+    let hash = window.location.hash || '';
     let params = new URLSearchParams(hash.substr(1));
 
     return Promise.all([this.loadDeviceFilter(params.get('lst')), this.loadTask(params.get('tsk'))]);
