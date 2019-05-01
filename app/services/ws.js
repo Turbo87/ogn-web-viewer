@@ -25,8 +25,10 @@ export default class extends Service.extend(Evented) {
           console.log('Connected!');
           this._sendBBox();
 
-          for (let id of this._subscriptions) {
-            this._ws.send(`+id|${id}`);
+          if (this._ws) {
+            for (let id of this._subscriptions) {
+              this._ws.send(`+id|${id}`);
+            }
           }
         },
         onmessage: e => this.onMessage(e.data),
