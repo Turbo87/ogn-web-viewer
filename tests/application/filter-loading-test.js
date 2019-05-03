@@ -1,14 +1,12 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { visit } from '@ember/test-helpers';
-import window, { setupWindowMock } from 'ember-window-mock';
 import { setupReplay } from 'igc-replay/test-support';
 
 const URL = 'https://gist.githubusercontent.com/Turbo87/1234567890/raw/club-filter.csv';
 
 module('Application | filter-loading', function(hooks) {
   setupApplicationTest(hooks);
-  setupWindowMock(hooks);
   setupReplay(hooks);
 
   test('visiting / loads the filter file when available', async function(assert) {
@@ -25,8 +23,7 @@ module('Application | filter-loading', function(hooks) {
       return res.status(200).send(file);
     });
 
-    window.location.hash = `#lst=${URL}`;
-    await visit('/');
+    await visit(`/?lst=${URL}`);
 
     let filter = this.owner.lookup('service:filter');
 
