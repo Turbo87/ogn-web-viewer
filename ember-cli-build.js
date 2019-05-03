@@ -10,7 +10,7 @@ module.exports = function(defaults) {
   let repoInfo = getRepoInfo();
 
   let pluginsToBlacklist = [];
-  if (!process.env.REPLAY) {
+  if (isProductionEnv) {
     pluginsToBlacklist.push('igc-replay');
   }
 
