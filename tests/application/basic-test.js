@@ -10,7 +10,7 @@ module('Application', function(hooks) {
   test('visiting / shows the map', async function(assert) {
     await visit('/');
 
-    assert.dom('#map').exists();
-    assert.dom('.scores-wrapper').doesNotExist();
+    assert.dom('[data-test-map]').exists();
+    assert.dom('[data-test-scores]').doesNotExist();
   });
 });
