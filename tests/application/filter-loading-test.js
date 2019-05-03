@@ -1,22 +1,18 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { visit } from '@ember/test-helpers';
-import { setupQunit as setupPolly } from '@pollyjs/core';
 import window, { setupWindowMock } from 'ember-window-mock';
+import { setupReplay } from 'igc-replay/test-support';
 
 const URL = 'https://gist.githubusercontent.com/Turbo87/1234567890/raw/club-filter.csv';
 
 module('Application | filter-loading', function(hooks) {
   setupApplicationTest(hooks);
-  setupPolly(hooks, { recordIfMissing: false });
   setupWindowMock(hooks);
+  setupReplay(hooks);
 
   test('visiting / loads the filter file when available', async function(assert) {
-    const { server } = this.polly;
-
-    server.get('https://maps.tilehosting.com/*').passthrough();
-    server.get('/api/ddb').intercept((req, res) => res.status(200).send({}));
-    server.get('/api/records/:ids').intercept((req, res) => res.status(200).send({}));
+    const { server } = this.replay.polly;
 
     server.get(URL).intercept((req, res) => {
       let file = [
