@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 
-module('normalizeDeviceId()', function() {
+module('Utils | normalizeDeviceId()', function() {
   const TESTS = [
     ['FLRDDA5BA', 'FLRDDA5BA'],
     ['ICA4B0E3A', 'ICA4B0E3A'],
