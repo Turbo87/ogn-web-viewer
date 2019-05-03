@@ -4,7 +4,6 @@
   border-collapse: collapse;
 
   font-size: 14px;
-  font-family: sans-serif;
 }
 
 .score-table tr:nth-child(even) {

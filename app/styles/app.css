@@ -3,6 +3,8 @@ body {
 
   display: flex;
   flex-direction: column;
+
+  font-family: sans-serif;
 }
 
 .scores-wrapper {
