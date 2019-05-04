@@ -3,10 +3,6 @@
 @value spinner-size: 20px;
 
 .notification {
-  position: absolute;
-  top: 15px;
-  left: 50%;
-  transform: translate(-50%, 0);
   background: white;
   display: flex;
   padding: 6px 8px;
