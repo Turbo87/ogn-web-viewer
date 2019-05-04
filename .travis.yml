@@ -17,6 +17,11 @@ env:
     # See https://git.io/vdao3 for details.
     - JOBS=1
 
+    # Percy secrets are included here to enable Percy's GitHub integration
+    # on community-submitted PRs
+    - PERCY_PROJECT=Turbo87/ogn-web-viewer
+    - PERCY_TOKEN=d6b6456af13fa817605de7c7b9b2a1b68be327749ff09e25db1500bcb678cc4b
+
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
