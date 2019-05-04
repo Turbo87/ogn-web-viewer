@@ -1,2 +1,9 @@
-<FreestyleGuide @title='OGN WebViewer'>
+<FreestyleGuide @title="OGN WebViewer">
+  <FreestyleSection @name="Components" as |section|>
+    {{#each components as |componentName|}}
+      <section.subsection @name={{componentName}}>
+        {{component (concat "usage/" componentName)}}
+      </section.subsection>
+    {{/each}}
+  </FreestyleSection>
 </FreestyleGuide>
