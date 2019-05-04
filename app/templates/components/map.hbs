@@ -1,4 +1,4 @@
-<div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}">
+<div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}" data-test-map>
   <TaskLayer @task={{@task}}/>
 
   <AircraftShadowLayer/>
