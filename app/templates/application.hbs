@@ -1,9 +1,13 @@
-<Map @task={{this.scoring.task}}/>
+{{#if onFreestyleRoute}}
+  {{outlet}}
+{{else}}
+  <Map @task={{this.scoring.task}}/>
 
-{{#if (and hasDeviceFilter this.scoring.task)}}
-  <div class="scores-wrapper" style="height: 30%; overflow-y: scroll;">
-    <ScoreTable @task={{this.scoring.task}}/>
-  </div>
+  {{#if (and hasDeviceFilter this.scoring.task)}}
+    <div class="scores-wrapper" style="height: 30%; overflow-y: scroll;">
+      <ScoreTable @task={{this.scoring.task}}/>
+    </div>
+  {{/if}}
+
+  {{outlet}}
 {{/if}}
-
-{{outlet}}
