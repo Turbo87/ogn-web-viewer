@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 
@@ -17,15 +18,9 @@ export default class extends Service {
     if (!this._map) {
       let controls = [new ScaleLine(), new Attribution()];
 
-      this._map = new Map({
-        controls,
-
-        interactions: interactionDefaults({
-          altShiftDragRotate: false,
-          pinchRotate: false,
-        }),
-
-        layers: [
+      let layers = [];
+      if (!Ember.testing) {
+        layers = [
           new TileLayer({
             source: new TileJSON({
               opacity: 0.5,
@@ -40,7 +35,18 @@ export default class extends Service {
               url: 'https://skylines.aero/mapproxy/tiles/1.0.0/airspace+airports/EPSG3857/{z}/{x}/{y}.png',
             }),
           }),
-        ],
+        ];
+      }
+
+      this._map = new Map({
+        controls,
+
+        interactions: interactionDefaults({
+          altShiftDragRotate: false,
+          pinchRotate: false,
+        }),
+
+        layers,
 
         view: new View({
           center: [750998, 6567417],
