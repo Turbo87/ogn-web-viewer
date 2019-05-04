@@ -9,3 +9,10 @@ body {
   overflow: auto;
   border-top: 1px solid #666;
 }
+
+:global(.top-centered) {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
