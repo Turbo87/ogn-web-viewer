@@ -11,6 +11,8 @@ module.exports = function(defaults) {
 
   let pluginsToBlacklist = [];
   if (isProductionEnv) {
+    pluginsToBlacklist.push('ember-freestyle');
+    pluginsToBlacklist.push('freestyle');
     pluginsToBlacklist.push('igc-replay');
   }
 
@@ -58,6 +60,10 @@ module.exports = function(defaults) {
           yandex: isProductionEnv,
         },
       },
+    },
+
+    freestyle: {
+      snippetSearchPaths: ['lib/freestyle/app'],
     },
   });
 

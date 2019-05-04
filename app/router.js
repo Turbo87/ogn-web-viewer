@@ -7,7 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('freestyle');
+  if (config.environment !== 'production') {
+    this.route('freestyle');
+  }
 });
 
 export default Router;

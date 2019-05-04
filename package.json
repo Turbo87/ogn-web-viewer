@@ -78,6 +78,7 @@
   },
   "ember-addon": {
     "paths": [
+      "lib/freestyle",
       "lib/igc-replay"
     ]
   }
