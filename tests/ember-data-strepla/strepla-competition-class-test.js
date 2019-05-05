@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-import { COMPETITION_CLASS_LIST_URL } from 'ember-data-strepla/urls';
+import { COMPETITION_LIST_URL, COMPETITION_CLASS_LIST_URL } from 'ember-data-strepla/urls';
 
 module('ember-data-strepla | strepla-competition-class', function(hooks) {
   setupTest(hooks);
@@ -61,5 +61,28 @@ module('ember-data-strepla | strepla-competition-class', function(hooks) {
         assert.equal(this.store.peekAll('strepla-competition-class').length, 0);
       }
     });
+  });
+
+  test('has an async `competition` relationship', async function(assert) {
+    this.server.get(COMPETITION_LIST_URL).intercept((req, res) =>
+      res.status(200).send([
+        {
+          id: 577,
+          name: 'EuregioCup 2019',
+          Location: 'Aachen-Merzbrück',
+          firstDay: '2019-06-06T00:00:00',
+          lastDay: '2019-06-10T00:00:00',
+          fnLogo: '',
+        },
+      ]),
+    );
+
+    let records = await this.store.query('strepla-competition-class', { competitionId: 577 });
+
+    let c1 = records.objectAt(0);
+    assert.strictEqual(c1.id, '856');
+
+    let competition = await c1.competition;
+    assert.equal(competition.name, 'EuregioCup 2019');
   });
 });
