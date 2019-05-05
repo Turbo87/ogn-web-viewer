@@ -1,5 +1,5 @@
-import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { module, test } from 'qunit';
 
 module('ember-data-strepla | Transforms | strepla-date', function(hooks) {
   setupTest(hooks);
@@ -30,7 +30,7 @@ module('ember-data-strepla | Transforms | strepla-date', function(hooks) {
   });
 
   module('serialize()', function() {
-    test('is not available', function (assert) {
+    test('is not available', function(assert) {
       assert.strictEqual(this.transform.serialize, null);
     });
   });
