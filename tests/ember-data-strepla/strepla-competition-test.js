@@ -15,8 +15,8 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
   });
 
   hooks.beforeEach(function() {
-    this.server.get('http://www.strepla.de/scs/ws/competition.ashx?cmd=active').intercept((req, res) =>
-      res.status(200).send([
+    this.server.get('http://www.strepla.de/scs/ws/competition.ashx?cmd=active').intercept((req, res) => {
+      let competitions = [
         {
           id: 577,
           name: 'EuregioCup 2019',
@@ -26,14 +26,6 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
           fnLogo: '',
         },
         {
-          id: 571,
-          name: 'DM Club- und Standardklasse 2017',
-          Location: 'VLP Zwickau',
-          firstDay: '2017-05-20T00:00:00',
-          lastDay: '2017-05-31T00:00:00',
-          fnLogo: 'logo.png',
-        },
-        {
           id: 487,
           name: 'Internationaler Bayreuth Wettbewerb 2018',
           Location: 'Bayreuth-Bindlacher Berg (EDQD)',
@@ -41,15 +33,29 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
           lastDay: '2018-06-01T00:00:00',
           fnLogo: 'logo.jpg',
         },
-      ]),
-    );
+      ];
+
+      let { daysPeriod } = req.query;
+      if (daysPeriod && daysPeriod >= 360) {
+        competitions.push({
+          id: 571,
+          name: 'DM Club- und Standardklasse 2017',
+          Location: 'VLP Zwickau',
+          firstDay: '2017-05-20T00:00:00',
+          lastDay: '2017-05-31T00:00:00',
+          fnLogo: 'logo.png',
+        });
+      }
+
+      return res.status(200).send(competitions);
+    });
   });
 
   module('query()', function() {
     test('requests data from the API and transforms it to Ember Data models', async function(assert) {
       let records = await this.store.query('strepla-competition', {});
 
-      assert.equal(records.length, 3);
+      assert.equal(records.length, 2);
 
       let comp1 = records.objectAt(0);
       assert.strictEqual(comp1.id, '577');
@@ -60,18 +66,33 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
       assert.strictEqual(comp1.logoFilename, null);
 
       let comp2 = records.objectAt(1);
-      assert.strictEqual(comp2.id, '571');
-      assert.equal(comp2.name, 'DM Club- und Standardklasse 2017');
-      assert.equal(comp2.logoFilename, 'logo.png');
+      assert.strictEqual(comp2.id, '487');
+      assert.equal(comp2.name, 'Internationaler Bayreuth Wettbewerb 2018');
+      assert.equal(comp2.logoFilename, 'logo.jpg');
+    });
+
+    test('supports the `daysPeriod` parameter', async function(assert) {
+      let records = await this.store.query('strepla-competition', { daysPeriod: 360 });
+
+      assert.equal(records.length, 3);
+
+      let comp1 = records.objectAt(0);
+      assert.strictEqual(comp1.id, '577');
+      assert.equal(comp1.name, 'EuregioCup 2019');
+
+      let comp2 = records.objectAt(1);
+      assert.strictEqual(comp2.id, '487');
+      assert.equal(comp2.name, 'Internationaler Bayreuth Wettbewerb 2018');
 
       let comp3 = records.objectAt(2);
-      assert.strictEqual(comp3.id, '487');
+      assert.strictEqual(comp3.id, '571');
+      assert.equal(comp3.name, 'DM Club- und Standardklasse 2017');
     });
 
     test('caches Ember Data models in the store', async function(assert) {
       await this.store.query('strepla-competition', {});
 
-      assert.equal(this.store.peekAll('strepla-competition').length, 3);
+      assert.equal(this.store.peekAll('strepla-competition').length, 2);
 
       let comp = this.store.peekRecord('strepla-competition', '577');
       assert.strictEqual(comp.id, '577');
