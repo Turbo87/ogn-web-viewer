@@ -130,6 +130,13 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
       assert.strictEqual(record.logoFilename, null);
     });
 
+    test('finds past competitions too', async function(assert) {
+      let record = await this.store.findRecord('strepla-competition', 571);
+
+      assert.ok(record);
+      assert.strictEqual(record.id, '571');
+    });
+
     test('caches Ember Data models in the store', async function(assert) {
       await this.store.findRecord('strepla-competition', 577);
 
