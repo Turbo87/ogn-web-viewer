@@ -78,6 +78,7 @@ module('ember-data-strepla | strepla-task', function(hooks) {
       assert.equal(record.name, 'Tagesaufgabe A');
       assert.equal(record.distance, '361 km');
       assert.equal(record.ruleName, 'Racing-Task (RT)');
+      assert.strictEqual(record.minTime, null);
       assert.deepEqual(record.turnpoints, [
         {
           tp: {
@@ -118,6 +119,27 @@ module('ember-data-strepla | strepla-task', function(hooks) {
           },
         },
       ]);
+    });
+
+    test('can read AAT tasks too', async function(assert) {
+      this.server.get(TASK_URL).intercept((req, res) =>
+        res.status(200).send({
+          id: '7609',
+          name: 'Tagesaufgabe A',
+          distance: '190 km',
+          numLegs: '4',
+          rule: 'Speed Assigned Area Task (AAT)',
+          min_time: '02:15',
+          tps: [],
+        }),
+      );
+
+      let record = await this.store.queryRecord('strepla-task', { competitionId: 577, competitionDayId: 5917 });
+
+      assert.ok(record);
+      assert.strictEqual(record.id, '7609');
+      assert.equal(record.ruleName, 'Speed Assigned Area Task (AAT)');
+      assert.strictEqual(record.minTime, 135);
     });
 
     test('caches the Ember Data model in the store', async function(assert) {
