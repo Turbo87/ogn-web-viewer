@@ -79,6 +79,7 @@
   },
   "ember-addon": {
     "paths": [
+      "lib/ember-data-strepla",
       "lib/freestyle",
       "lib/igc-replay"
     ]
