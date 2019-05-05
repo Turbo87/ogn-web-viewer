@@ -123,7 +123,7 @@ module('ember-data-strepla | strepla-competitor', function(hooks) {
         await this.store.query('strepla-competitor', { competitionId: 577 });
         assert.fail('query() unexpectedly did not fail');
       } catch (error) {
-        assert.equal(error.toString(), 'Error: strepla-competitor: query() failed');
+        assert.equal(error.toString(), 'Error: The adapter operation failed due to a server error');
         assert.equal(error.response.status, 500);
         assert.equal(this.store.peekAll('strepla-competitor').length, 0);
       }
