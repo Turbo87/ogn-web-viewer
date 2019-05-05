@@ -96,6 +96,20 @@ module('ember-data-strepla | strepla-competitor', function(hooks) {
       assert.equal(record.name, 'Doe, John');
     });
 
+    test('accepts a `className` filter', async function(assert) {
+      let records = await this.store.query('strepla-competitor', { competitionId: 577, className: 'Hasen' });
+
+      assert.equal(records.length, 2);
+
+      let record = records.objectAt(0);
+      assert.strictEqual(record.id, '577-1');
+      assert.equal(record.name, 'Mustermann, Max');
+
+      record = records.objectAt(1);
+      assert.strictEqual(record.id, '577-3');
+      assert.equal(record.name, 'Doe, John');
+    });
+
     test('caches Ember Data models in the store', async function(assert) {
       await this.store.query('strepla-competitor', { competitionId: 577 });
       assert.equal(this.store.peekAll('strepla-competitor').length, 3);
