@@ -120,6 +120,9 @@ module('ember-data-strepla | strepla-task', function(hooks) {
           },
         },
       ]);
+
+      assert.ok(record.isRacing);
+      assert.notOk(record.isAAT);
     });
 
     test('can read AAT tasks too', async function(assert) {
@@ -141,6 +144,9 @@ module('ember-data-strepla | strepla-task', function(hooks) {
       assert.strictEqual(record.id, '7609');
       assert.equal(record.ruleName, 'Speed Assigned Area Task (AAT)');
       assert.strictEqual(record.minTime, 135);
+
+      assert.notOk(record.isRacing);
+      assert.ok(record.isAAT);
     });
 
     test('caches the Ember Data model in the store', async function(assert) {
