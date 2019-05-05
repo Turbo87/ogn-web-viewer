@@ -1,0 +1,9 @@
+{
+  "name": "ember-data-strepla",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-cli-babel": "*"
+  }
+}
