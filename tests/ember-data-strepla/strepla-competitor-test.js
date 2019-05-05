@@ -1,9 +1,12 @@
 import { setupTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
+import DS from 'ember-data';
 import { COMPETITION_LIST_URL, COMPETITOR_LIST_URL } from 'ember-data-strepla/urls';
 
 import { setupQunit as setupPolly } from '@pollyjs/core';
+
+const { ForbiddenError } = DS;
 
 module('ember-data-strepla | strepla-competitor', function(hooks) {
   setupTest(hooks);
@@ -114,6 +117,24 @@ module('ember-data-strepla | strepla-competitor', function(hooks) {
     test('caches Ember Data models in the store', async function(assert) {
       await this.store.query('strepla-competitor', { competitionId: 577 });
       assert.equal(this.store.peekAll('strepla-competitor').length, 3);
+    });
+
+    test('throws an error if the server responds with an error message', async function(assert) {
+      this.server.get(COMPETITOR_LIST_URL).intercept((req, res) =>
+        res.status(200).send({
+          msg: `No competitors for ${req.query.cID} found, please check access rights`,
+        }),
+      );
+
+      try {
+        await this.store.query('strepla-competitor', { competitionId: 577 });
+        assert.fail('query() unexpectedly did not fail');
+      } catch (error) {
+        assert.ok(error instanceof ForbiddenError);
+        assert.equal(error.toString(), 'Error: No competitors for 577 found, please check access rights');
+        assert.equal(error.response.status, 200);
+        assert.equal(this.store.peekAll('strepla-competitor').length, 0);
+      }
     });
 
     test('throws an error if the server responds with an error', async function(assert) {
