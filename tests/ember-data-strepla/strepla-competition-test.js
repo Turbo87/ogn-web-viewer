@@ -3,6 +3,8 @@ import { setupTest } from 'ember-qunit';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 import DS from 'ember-data';
 
+import { COMPETITION_LIST_URL } from 'ember-data-strepla/urls';
+
 const { NotFoundError } = DS;
 
 module('ember-data-strepla | strepla-competition', function(hooks) {
@@ -15,7 +17,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
   });
 
   hooks.beforeEach(function() {
-    this.server.get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active').intercept((req, res) => {
+    this.server.get(COMPETITION_LIST_URL).intercept((req, res) => {
       let competitions = [
         {
           id: 577,
@@ -102,9 +104,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
     });
 
     test('throws an error if the server responds with an error', async function(assert) {
-      this.server
-        .get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active')
-        .intercept((req, res) => res.status(500).send());
+      this.server.get(COMPETITION_LIST_URL).intercept((req, res) => res.status(500).send());
 
       try {
         await this.store.query('strepla-competition', {});
@@ -161,9 +161,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
     });
 
     test('throws an error if the server responds with an error', async function(assert) {
-      this.server
-        .get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active')
-        .intercept((req, res) => res.status(500).send());
+      this.server.get(COMPETITION_LIST_URL).intercept((req, res) => res.status(500).send());
 
       try {
         await this.store.findRecord('strepla-competition', 577);
