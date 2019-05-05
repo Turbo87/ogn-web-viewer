@@ -132,7 +132,7 @@ module('ember-data-strepla | strepla-task', function(hooks) {
         await this.store.queryRecord('strepla-task', { competitionId: 577, competitionDayId: 5917 });
         assert.fail('queryRecord() unexpectedly did not fail');
       } catch (error) {
-        assert.equal(error.toString(), 'Error: strepla-task: queryRecord() failed');
+        assert.equal(error.toString(), 'Error: The adapter operation failed due to a server error');
         assert.equal(error.response.status, 500);
         assert.equal(this.store.peekAll('strepla-task').length, 0);
       }

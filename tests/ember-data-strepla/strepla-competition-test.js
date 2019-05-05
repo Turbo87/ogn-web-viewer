@@ -110,7 +110,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
         await this.store.query('strepla-competition', {});
         assert.fail('query() unexpectedly did not fail');
       } catch (error) {
-        assert.equal(error.toString(), 'Error: strepla-competition: query() failed');
+        assert.equal(error.toString(), 'Error: The adapter operation failed due to a server error');
         assert.equal(error.response.status, 500);
         assert.equal(this.store.peekAll('strepla-competition').length, 0);
       }
@@ -167,7 +167,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
         await this.store.findRecord('strepla-competition', 577);
         assert.fail('findRecord() unexpectedly did not fail');
       } catch (error) {
-        assert.equal(error.toString(), 'Error: strepla-competition: findRecord(577) failed');
+        assert.equal(error.toString(), 'Error: The adapter operation failed due to a server error');
         assert.equal(error.response.status, 500);
         assert.equal(this.store.peekAll('strepla-competition').length, 0);
       }

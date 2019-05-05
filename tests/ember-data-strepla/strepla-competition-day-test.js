@@ -90,7 +90,7 @@ module('ember-data-strepla | strepla-competition-day', function(hooks) {
         await this.store.query('strepla-competition-day', { competitionId: 577 });
         assert.fail('query() unexpectedly did not fail');
       } catch (error) {
-        assert.equal(error.toString(), 'Error: strepla-competition-day: query() failed');
+        assert.equal(error.toString(), 'Error: The adapter operation failed due to a server error');
         assert.equal(error.response.status, 500);
         assert.equal(this.store.peekAll('strepla-competition-day').length, 0);
       }
