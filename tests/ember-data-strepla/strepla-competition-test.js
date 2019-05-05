@@ -15,7 +15,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
   });
 
   hooks.beforeEach(function() {
-    this.server.get('http://www.strepla.de/scs/ws/competition.ashx?cmd=active').intercept((req, res) => {
+    this.server.get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active').intercept((req, res) => {
       let competitions = [
         {
           id: 577,
@@ -103,7 +103,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
 
     test('throws an error if the server responds with an error', async function(assert) {
       this.server
-        .get('http://www.strepla.de/scs/ws/competition.ashx?cmd=active')
+        .get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active')
         .intercept((req, res) => res.status(500).send());
 
       try {
@@ -162,7 +162,7 @@ module('ember-data-strepla | strepla-competition', function(hooks) {
 
     test('throws an error if the server responds with an error', async function(assert) {
       this.server
-        .get('http://www.strepla.de/scs/ws/competition.ashx?cmd=active')
+        .get('https://www.strepla.de/scs/ws/competition.ashx?cmd=active')
         .intercept((req, res) => res.status(500).send());
 
       try {
