@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
+import Ember from 'ember';
 
-import { Attribution, ScaleLine } from 'ol/control';
 import { Map, View } from 'ol';
+import { Attribution, ScaleLine } from 'ol/control';
 import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import TileJSON from 'ol/source/TileJSON';

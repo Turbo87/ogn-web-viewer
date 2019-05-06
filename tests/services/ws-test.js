@@ -1,6 +1,7 @@
-import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
 import { waitUntil } from '@ember/test-helpers';
+import { setupTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
 import { Server } from 'mock-socket';
 
 import config from 'ogn-web-viewer/config/environment';

@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+
 import { task } from 'ember-concurrency-decorators';
 import ajax from 'ember-fetch/ajax';
 

@@ -1,4 +1,5 @@
 import QUnit from 'qunit';
+
 import { percySnapshot as _percySnapshot } from 'ember-percy';
 
 export async function percySnapshot(nameSuffix, options = {}) {

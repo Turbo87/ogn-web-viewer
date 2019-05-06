@@ -1,10 +1,9 @@
-import Ember from 'ember';
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { inject as service } from '@ember/service';
+import Ember from 'ember';
 
+import { formatDuration, formatTime } from 'aeroscore/dist/src/format-result';
 import {
   calculateDayFactors,
   calculateDayResult,
@@ -14,7 +13,8 @@ import {
 } from 'aeroscore/dist/src/scoring';
 import AreaTaskSolver from 'aeroscore/dist/src/task/solver/area-task-solver';
 import RacingTaskSolver from 'aeroscore/dist/src/task/solver/racing-task-solver';
-import { formatDuration, formatTime } from 'aeroscore/dist/src/format-result';
+import { timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
 
 export default class extends Component {
   @service filter;

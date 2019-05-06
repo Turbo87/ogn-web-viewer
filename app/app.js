@@ -1,8 +1,11 @@
 import Application from '@ember/application';
-import Resolver from './resolver';
+
 import loadInitializers from 'ember-load-initializers';
+
 import { hashToQueryParams } from 'ogn-web-viewer/utils/hash-to-qp';
+
 import config from './config/environment';
+import Resolver from './resolver';
 
 hashToQueryParams();
 

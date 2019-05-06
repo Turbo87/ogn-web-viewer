@@ -2,9 +2,9 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 
 import Feature from 'ol/Feature';
-import VectorSource from 'ol/source/Vector';
 import Point from 'ol/geom/Point';
 import { transform } from 'ol/proj';
+import VectorSource from 'ol/source/Vector';
 
 const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';

@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 import { run } from '@ember/runloop';
+import { inject as service } from '@ember/service';
 
 import { scaleFromCenter } from 'ol/extent';
 import { transformExtent } from 'ol/proj';
