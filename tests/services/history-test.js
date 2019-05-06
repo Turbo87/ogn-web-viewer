@@ -1,6 +1,8 @@
-import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
 import { setupQunit as setupPolly } from '@pollyjs/core';
+
 import setupLolex from 'ogn-web-viewer/tests/test-helpers/lolex';
 
 module('Service | history', function(hooks) {

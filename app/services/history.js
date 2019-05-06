@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+
 import ajax from 'ember-fetch/ajax';
 
 import config from 'ogn-web-viewer/config/environment';

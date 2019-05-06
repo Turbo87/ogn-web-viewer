@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 
-import Ember from 'ember';
-import Service from '@ember/service';
 import Evented from '@ember/object/evented';
+import Service from '@ember/service';
+import Ember from 'ember';
+
 import Sockette from 'sockette';
 
 import config from 'ogn-web-viewer/config/environment';

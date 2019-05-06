@@ -1,6 +1,7 @@
-import { module, test } from 'qunit';
-import { setupApplicationTest } from 'ember-qunit';
 import { visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
 import { setupDDBMock } from 'ogn-web-viewer/tests/test-helpers/ddb';
 import { percySnapshot } from 'ogn-web-viewer/tests/test-helpers/percy';
 

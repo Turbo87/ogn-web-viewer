@@ -1,6 +1,7 @@
-import { module, test } from 'qunit';
-import { setupApplicationTest } from 'ember-qunit';
 import { visit } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { module, test } from 'qunit';
+
 import { setupReplay } from 'igc-replay/test-support';
 
 const URL = 'https://gist.githubusercontent.com/Turbo87/1234567890/raw/club-filter.csv';

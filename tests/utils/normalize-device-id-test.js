@@ -1,4 +1,5 @@
 import { module, test } from 'qunit';
+
 import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 
 module('Utils | normalizeDeviceId()', function() {

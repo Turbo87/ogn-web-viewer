@@ -1,4 +1,5 @@
 import { module, test } from 'qunit';
+
 import window, { setupWindowMock } from 'ember-window-mock';
 
 import { hashToQueryParams } from 'ogn-web-viewer/utils/hash-to-qp';
