@@ -7,6 +7,7 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL,
 });
 
+// eslint-disable-next-line array-callback-return
 Router.map(function() {
   if (config.environment !== 'production') {
     this.route('freestyle');
