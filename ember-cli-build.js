@@ -62,6 +62,10 @@ module.exports = function(defaults) {
       },
     },
 
+    svgJar: {
+      sourceDirs: ['public/svg'],
+    },
+
     freestyle: {
       snippetSearchPaths: ['lib/freestyle/app'],
     },
