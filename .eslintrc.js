@@ -5,7 +5,7 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module',
   },
-  plugins: ['ember', 'prettier', 'import-helpers'],
+  plugins: ['ember', 'prettier', 'promise', 'import-helpers'],
   extends: ['eslint:recommended', 'plugin:ember/recommended', 'prettier'],
   env: {
     browser: true,
@@ -55,6 +55,15 @@ module.exports = {
     'prefer-numeric-literals': 'error',
 
     'prettier/prettier': 'error',
+
+    'promise/catch-or-return': 'error',
+    'promise/no-return-wrap': 'error',
+    'promise/param-names': 'error',
+    'promise/no-nesting': 'error',
+    'promise/no-new-statics': 'error',
+    'promise/no-return-in-finally': 'error',
+    'promise/valid-params': 'error',
+    'promise/prefer-await-to-then': 'error',
 
     'import-helpers/order-imports': [
       'error',
