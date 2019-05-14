@@ -71,7 +71,7 @@
     "eslint-plugin-promise": "^4.1.1",
     "git-repo-info": "^2.1.0",
     "loader.js": "^4.7.0",
-    "prettier": "1.17.0",
+    "prettier": "1.17.1",
     "qunit-dom": "^0.8.5"
   },
   "engines": {
