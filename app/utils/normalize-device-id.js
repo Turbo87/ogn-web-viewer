@@ -1,6 +1,8 @@
 const RE_HEXDEC = /^[0-9a-fA-F]+$/;
 
 export function normalizeDeviceId(id) {
+  if (!id) return null;
+
   let length = id.length;
 
   if (length === 6) {
