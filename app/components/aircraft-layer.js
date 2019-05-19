@@ -3,7 +3,10 @@ import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 import VectorLayer from 'ol/layer/Vector';
-import { Icon, Style, Text, Stroke } from 'ol/style';
+import { Icon, Stroke, Style, Text } from 'ol/style';
+
+const REGULAR_OPACITY = 1.0;
+const FILTERED_OPACITY = 0.3;
 
 export default class extends Component {
   @service aircraft;
@@ -65,10 +68,17 @@ export default class extends Component {
       this._labelStyles.set(feature, labelStyle);
     }
 
+    let filterRow = this.filter.filter.find(row => row.id === id) || {};
+    let hasFilter = this.filter.filter.length !== 0;
+    let isFiltered = hasFilter && !filterRow.id;
+
     let rotation = course * (Math.PI / 180);
     style.getImage().setRotation(rotation);
+    style.getImage().setOpacity(isFiltered ? FILTERED_OPACITY : REGULAR_OPACITY);
 
-    let filterRow = this.filter.filter.find(row => row.id === id) || {};
+    if (isFiltered) {
+      return [style];
+    }
 
     let labelParts = [filterRow.callsign || filterRow.registration || device.callsign || device.registration];
 

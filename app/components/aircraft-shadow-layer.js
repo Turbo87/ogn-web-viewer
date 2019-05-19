@@ -10,6 +10,7 @@ import { imageSrcForDevice } from './aircraft-layer';
 export default class extends Component {
   @service aircraft;
   @service ddb;
+  @service filter;
   @service('map') mapService;
 
   tagName = '';
@@ -38,6 +39,14 @@ export default class extends Component {
   _getFeatureStyle(feature) {
     let { id } = feature.getProperties();
     let device = this.ddb.devices[id] || {};
+
+    let filterRow = this.filter.filter.find(row => row.id === id) || {};
+    let hasFilter = this.filter.filter.length !== 0;
+    let isFiltered = hasFilter && !filterRow.id;
+
+    if (isFiltered) {
+      return [];
+    }
 
     let imageSrc = imageSrcForDevice(device);
 
