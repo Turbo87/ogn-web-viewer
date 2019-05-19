@@ -4,6 +4,9 @@ import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 
 module('Utils | normalizeDeviceId()', function() {
   const TESTS = [
+    [undefined, null],
+    [null, null],
+    ['', null],
     ['FLRDDA5BA', 'FLRDDA5BA'],
     ['ICA4B0E3A', 'ICA4B0E3A'],
     ['OGNE95A16', 'OGNE95A16'],
