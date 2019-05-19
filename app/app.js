@@ -6,6 +6,9 @@ import { hashToQueryParams } from 'ogn-web-viewer/utils/hash-to-qp';
 
 import config from './config/environment';
 import Resolver from './resolver';
+import { startSentry } from './sentry';
+
+startSentry();
 
 hashToQueryParams();
 

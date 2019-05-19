@@ -19,6 +19,8 @@
     "test": "ember test"
   },
   "dependencies": {
+    "@sentry/browser": "^5.2.1",
+    "@sentry/integrations": "^5.2.0",
     "aeroscore": "^0.2.1",
     "igc-parser": "^0.4.0",
     "lolex": "^4.0.1",
@@ -41,7 +43,6 @@
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-htmlbars-inline-precompile": "^2.1.0",
     "ember-cli-inject-live-reload": "^2.0.1",
-    "ember-cli-sentry": "^4.1.0",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-uglify": "^3.0.0",
     "ember-concurrency": "^0.10.0",

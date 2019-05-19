@@ -22,8 +22,7 @@ module.exports = function(environment) {
     WS_HOST: (process.env.API_HOST && process.env.API_HOST.replace(/^http/, 'ws')) || 'wss://ogn.cloud',
 
     sentry: {
-      development: true,
-      dsn: 'https://fb74a283ef1f4414a61cd89e5eabcd10@sentry.io/1243387',
+      environment,
     },
   };
 
@@ -60,7 +59,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.sentry.development = false;
+    ENV.sentry.dsn = 'https://fb74a283ef1f4414a61cd89e5eabcd10@sentry.io/1243387';
   }
 
   return ENV;
