@@ -10,7 +10,8 @@ export default class extends Service {
   async loadForIds(...ids) {
     let after = Math.round(Date.now() / 1000) - 8 * 60 * 60;
 
-    let url = `${config.API_HOST}/api/records/${ids.join(',')}?after=${after}`;
+    let idList = encodeURIComponent(ids.join(','));
+    let url = `${config.API_HOST}/api/records/${idList}?after=${after}`;
     let data = await ajax(url);
 
     for (let id of ids) {
