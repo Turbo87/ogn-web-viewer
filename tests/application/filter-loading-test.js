@@ -2,16 +2,16 @@ import { visit } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
-import { setupReplay } from 'igc-replay/test-support';
+import { setupMockServer } from 'igc-replay/test-support';
 
 const URL = 'https://gist.githubusercontent.com/Turbo87/1234567890/raw/club-filter.csv';
 
 module('Application | filter-loading', function(hooks) {
   setupApplicationTest(hooks);
-  setupReplay(hooks);
+  setupMockServer(hooks);
 
   test('visiting / loads the filter file when available', async function(assert) {
-    const { server } = this.replay.polly;
+    const { server } = this.server.polly;
 
     server.get(URL).intercept((req, res) => {
       let file = [

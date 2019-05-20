@@ -1,3 +1,4 @@
+import { getOwner } from '@ember/application';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
@@ -6,6 +7,13 @@ export default class extends Route {
   @service filter;
   @service history;
   @service ws;
+
+  async beforeModel(transition) {
+    if (transition.to.queryParams.replay) {
+      let replay = getOwner(this).lookup('service:igc-replay');
+      await replay.start();
+    }
+  }
 
   afterModel() {
     super.afterModel(...arguments);
