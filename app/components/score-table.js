@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Ember from 'ember';
 
+import * as Sentry from '@sentry/browser';
 import { formatDuration, formatTime } from 'aeroscore/dist/src/format-result';
 import {
   calculateDayFactors,
@@ -89,8 +90,7 @@ export default class extends Component {
             ? createInitialDayResult(result, this.initialDayFactors, H)
             : createIntermediateDayResult(result, this.initialDayFactors, H, this.task, Date.now() / 1000);
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
+        Sentry.captureException(error);
 
         altitude = null;
         landed = false;
