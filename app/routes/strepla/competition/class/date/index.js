@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 import { scaleFromCenter } from 'ol/extent';
 import { transformExtent } from 'ol/proj';
 
+import fetchText from 'ogn-web-viewer/utils/fetch-text';
 import { normalizeDeviceId } from 'ogn-web-viewer/utils/normalize-device-id';
 import { convertTask } from 'ogn-web-viewer/utils/strepla-to-xcsoar';
 
@@ -18,13 +19,18 @@ export default class extends Route {
   @service ws;
   @service('map') mapService;
 
-  async model() {
+  async model(params, transition) {
+    let { queryParams } = transition.to;
+
     let competition = this.modelFor('strepla.competition');
     let competitionClass = this.modelFor('strepla.competition.class');
     let competitionDay = this.modelFor('strepla.competition.class.date');
 
     let [competitors, task] = await Promise.all([
-      this.loadCompetitors(competition.id, competitionClass.name),
+      queryParams.lst
+        ? this.loadFilterFromURL(queryParams.lst)
+        : this.loadCompetitors(competition.id, competitionClass.name),
+
       this.loadTask(competition.id, competitionDay.id),
     ]);
 
@@ -58,6 +64,21 @@ export default class extends Route {
       let callsign = it.callsign;
       let type = it.type;
       let handicap = it.handicap || 1;
+      return { id, name, registration, callsign, type, handicap };
+    });
+  }
+
+  async loadFilterFromURL(url) {
+    let [text, { default: neatCSV }] = await Promise.all([fetchText(url), import('neat-csv')]);
+    let records = await neatCSV(text);
+
+    return records.map(row => {
+      let id = normalizeDeviceId(row.ID) || row.ID;
+      let name = row.NAME;
+      let registration = row.CALL;
+      let callsign = row.CN;
+      let type = row.TYPE;
+      let handicap = 'HANDICAP' in row ? parseFloat(row.HANDICAP) : 1.0;
       return { id, name, registration, callsign, type, handicap };
     });
   }
