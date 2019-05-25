@@ -11,7 +11,7 @@ export default class extends IntlService {
 
     return negotiateLanguages(requestedLocales, config.intl.locales, {
       strategy: 'lookup',
-      defaultLocale: 'en-US',
+      defaultLocale: 'en',
     })[0];
   }
 
