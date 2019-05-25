@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(environment) {
+  let globby = require('globby');
+
   let repoInfo = require('git-repo-info')();
 
   let ENV = {
@@ -26,6 +28,10 @@ module.exports = function(environment) {
     sentry: {
       environment,
       release: repoInfo.sha,
+    },
+
+    intl: {
+      locales: globby.sync('*.yaml', { cwd: `${__dirname}/../translations` }).map(it => it.slice(0, it.length - 5)),
     },
   };
 

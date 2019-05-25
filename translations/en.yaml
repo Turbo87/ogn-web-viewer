@@ -1,0 +1,12 @@
+loading: Loading...
+loading-task-and-competitors: Loading task and competitor list...
+score-table:
+  name: Name
+  altitude: Altitude
+  aircraft: Aircraft
+  start-time: Start
+  duration: Time
+  distance: Distance
+  speed: Speed
+  score: Score
+
