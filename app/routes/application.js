@@ -6,6 +6,7 @@ export default class extends Route {
   @service ddb;
   @service filter;
   @service history;
+  @service intl;
   @service ws;
 
   async beforeModel(transition) {
@@ -13,6 +14,10 @@ export default class extends Route {
       let replay = getOwner(this).lookup('service:igc-replay');
       await replay.start();
     }
+
+    let locale = this.intl.negotiateLocale();
+    await this.intl.loadTranslations(locale);
+    this.intl.setLocale(locale);
   }
 
   afterModel() {

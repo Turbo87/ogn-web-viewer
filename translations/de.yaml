@@ -1,0 +1,12 @@
+loading: Lade...
+loading-task-and-competitors: Lade Aufgabe und Teilnehmerliste...
+score-table:
+  name: Name
+  altitude: Höhe
+  aircraft: Flugzeug
+  start-time: Start
+  duration: Zeit
+  distance: Distanz
+  speed: Geschw.
+  score: Punkte
+

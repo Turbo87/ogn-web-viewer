@@ -4,6 +4,7 @@ export function setupDDBMock(hooks, response = {}) {
   setupPolly(hooks, { recordIfMissing: false });
 
   hooks.beforeEach(function() {
+    this.polly.server.get('/translations/*').passthrough();
     this.polly.server.get('/api/ddb').intercept((req, res) => res.status(200).send(response));
   });
 }
