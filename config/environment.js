@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(environment) {
+  let repoInfo = require('git-repo-info')();
+
   let ENV = {
     modulePrefix: 'ogn-web-viewer',
     environment,
@@ -23,6 +25,7 @@ module.exports = function(environment) {
 
     sentry: {
       environment,
+      release: repoInfo.sha,
     },
   };
 
