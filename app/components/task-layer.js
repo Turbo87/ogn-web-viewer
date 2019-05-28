@@ -65,6 +65,7 @@ export default class extends Component {
     this.set(
       'layer',
       new VectorLayer({
+        id: 'task',
         source: this.source,
         style(feature) {
           let id = feature.getId();
