@@ -1,3 +1,7 @@
+error-dialog:
+  title: "Ein Fehler ist aufgetreten"
+  loading-url-failed: "Laden von {url} fehlgeschlagen: {status} {statusText}"
+
 loading: Lade...
 loading-task-and-competitors: Lade Aufgabe und Teilnehmerliste...
 page-not-found: Seite nicht gefunden
