@@ -3,7 +3,12 @@
     <div local-class="title">{{t "error-dialog.title"}}</div>
 
     <div data-test-error>
-      {{#if this.fetchResponse}}
+      {{#if (eq this.error.name "InvalidTaskError")}}
+        {{t "error-dialog.invalid-task-error"
+          url=this.error.url
+          cause=this.error.cause.message
+        }}
+      {{else if this.fetchResponse}}
         {{t "error-dialog.loading-url-failed"
           url=this.fetchResponse.url
           status=this.fetchResponse.status

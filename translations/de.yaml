@@ -1,6 +1,7 @@
 error-dialog:
   title: "Ein Fehler ist aufgetreten"
   loading-url-failed: "Laden von {url} fehlgeschlagen: {status} {statusText}"
+  invalid-task-error: "Die Taskdatei von {url} konnte nicht gelesen werden: {cause}"
 
 loading: Lade...
 loading-task-and-competitors: Lade Aufgabe und Teilnehmerliste...
