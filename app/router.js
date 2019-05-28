@@ -9,6 +9,8 @@ const Router = EmberRouter.extend({
 
 // eslint-disable-next-line array-callback-return
 Router.map(function() {
+  this.route('404', { path: '/*path' });
+
   if (config.environment !== 'production') {
     this.route('freestyle');
   }
