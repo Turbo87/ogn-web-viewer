@@ -71,7 +71,21 @@ export default class extends Route {
   async loadTask(url) {
     if (url) {
       let [text, { readTaskFromString }] = await Promise.all([fetchText(url), import('aeroscore/dist/src/read-task')]);
-      return readTaskFromString(text);
+
+      try {
+        return readTaskFromString(text);
+      } catch (cause) {
+        throw new InvalidTaskError({ url, cause });
+      }
     }
+  }
+}
+
+class InvalidTaskError extends Error {
+  constructor({ url, cause }) {
+    super(cause.message);
+    this.name = 'InvalidTaskError';
+    this.cause = cause;
+    this.url = url;
   }
 }

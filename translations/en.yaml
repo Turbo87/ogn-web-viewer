@@ -1,3 +1,8 @@
+error-dialog:
+  title: "An error has occurred"
+  loading-url-failed: "Loading {url} failed: {status} {statusText}"
+  invalid-task-error: "The task file from {url} could not be read: {cause}"
+
 loading: Loading...
 loading-task-and-competitors: Loading task and competitor list...
 page-not-found: Page not found

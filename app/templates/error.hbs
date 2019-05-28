@@ -1,0 +1,30 @@
+{{#if showDialog}}
+  <div local-class="dialog" ...attributes data-test-error-dialog>
+    <div local-class="title">{{t "error-dialog.title"}}</div>
+
+    <div data-test-error>
+      {{#if (eq this.error.name "InvalidTaskError")}}
+        {{t "error-dialog.invalid-task-error"
+          url=this.error.url
+          cause=this.error.cause.message
+        }}
+      {{else if this.fetchResponse}}
+        {{t "error-dialog.loading-url-failed"
+          url=this.fetchResponse.url
+          status=this.fetchResponse.status
+          statusText=this.fetchResponse.statusText
+        }}
+      {{else}}
+        {{this.error.message}}
+      {{/if}}
+    </div>
+
+    <button
+      type="button"
+      data-test-close
+      {{action (mut showDialog false)}}
+    >
+      Close
+    </button>
+  </div>
+{{/if}}
