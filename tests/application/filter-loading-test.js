@@ -1,4 +1,4 @@
-import { visit } from '@ember/test-helpers';
+import { visit, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { module, test } from 'qunit';
 
@@ -37,5 +37,18 @@ module('Application | filter-loading', function(hooks) {
       handicap: 1.025,
       name: 'Jane Doe',
     });
+  });
+
+  test('404 shows an error dialog', async function(assert) {
+    const { server } = this.server.polly;
+    server.get(URL).intercept((req, res) => res.status(404).send());
+
+    await visit(`/?lst=${URL}`);
+
+    assert.dom('[data-test-error-dialog]').exists();
+    assert.dom('[data-test-error]').includesText('404 Not Found');
+
+    await click('[data-test-close]');
+    assert.dom('[data-test-error-dialog]').doesNotExist();
   });
 });
