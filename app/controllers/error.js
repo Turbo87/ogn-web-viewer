@@ -9,7 +9,15 @@ export default class extends Controller {
 
   @computed('error')
   get fetchResponse() {
-    return 'statusText' in this.error ? this.error : null;
+    if (this.error.response) {
+      return this.error.response;
+    }
+
+    if ('statusText' in this.error) {
+      return this.error;
+    }
+
+    return null;
   }
 
   setError(error) {
