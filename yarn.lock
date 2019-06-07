@@ -1135,23 +1135,23 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@pollyjs/adapter-fetch@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-fetch/-/adapter-fetch-2.4.0.tgz#915258c46f564473001215ca5354e57208aa98ce"
-  integrity sha512-p7sqQ/bqS4hdUYveGYn2fCUPrTuCnPflqxGfVrAOoE/e5MOsfJ7prVvg4wE6+2qJzbUtD0AWF2r78leSiymxNg==
+"@pollyjs/adapter-fetch@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-fetch/-/adapter-fetch-2.5.0.tgz#8dd565d40243f6045cef501bf92c12e435bdaf7f"
+  integrity sha512-n2vE4RPenaBCysHDqeRpvbTagkmZal5jixPLscnWTgmPMthmH5bGRgin4sgfvJi8iSNgFFceh+dMKCXINSEl8Q==
   dependencies:
     "@pollyjs/adapter" "^2.4.0"
     "@pollyjs/utils" "^2.1.0"
     detect-node "^2.0.4"
 
-"@pollyjs/adapter-xhr@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-xhr/-/adapter-xhr-2.4.0.tgz#3fe93ea420995a3db30e9ff3385eb2ff2a0e77c5"
-  integrity sha512-y3nqClVn3hPZ6DrdU7lWa9Rn/w7tKkrJGHWfgFN44F+ki/ZmrneAKO7ef2w0mT8RGcqVUzfw88snzPDU85Kngw==
+"@pollyjs/adapter-xhr@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-xhr/-/adapter-xhr-2.5.0.tgz#7c2dde29d4855ab4dc682932e84d0b4f6e0d5482"
+  integrity sha512-7Eh6sI8m6kt71x2XY9Xe5GambN2raOVZtq29A0yKnqAvvAAAhZxaM0IPSOF6gBPp6nOaS96KWFQshYcSQkn4Vg==
   dependencies:
     "@pollyjs/adapter" "^2.4.0"
     "@pollyjs/utils" "^2.1.0"
-    nise "^1.4.6"
+    nise "^1.5.0"
 
 "@pollyjs/adapter@^2.4.0":
   version "2.4.0"
@@ -1160,10 +1160,10 @@
   dependencies:
     "@pollyjs/utils" "^2.1.0"
 
-"@pollyjs/core@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/core/-/core-2.4.0.tgz#0eeab23dac20274fdbd8a3d0eb56551d00f82598"
-  integrity sha512-xdfr1FX4TSrMKwFQISp5r1lZFzv++UQxrjEBnayO2i+pUWooO/BaZ9XFDTMzdXsux77yA3RJPID8nTWlRuk3Iw==
+"@pollyjs/core@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pollyjs/core/-/core-2.5.0.tgz#f5df10179df259bdcdbd3c0c93c2a26b1eee8a9b"
+  integrity sha512-wvwoqRjYzHxiRlTKI428JpEVm9HAYcHB53KOOboTK2jTWVu5YtU2RUhcEAotzFWspShLJJOtIbCXCmMSoqnIjg==
   dependencies:
     "@pollyjs/utils" "^2.1.0"
     "@sindresorhus/fnv1a" "^1.0.0"
@@ -1174,14 +1174,14 @@
     route-recognizer "^0.3.4"
     slugify "^1.3.3"
 
-"@pollyjs/ember@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/ember/-/ember-2.4.0.tgz#30134aa85a520e377d52d4bfdda3952990d4a1f1"
-  integrity sha512-BI1ZFkFmuFxmh8ixzm322B7jPhdbKvZ5ZXCtpxlzdNdkfm30G2Som28wYIROnkqXJUEe2Z14Kmxn1nps31jtXA==
+"@pollyjs/ember@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@pollyjs/ember/-/ember-2.5.0.tgz#7d5ef52d648165e546bc560ab0ae179fc3b60dfa"
+  integrity sha512-SfjPBFMCWV66CEAoOZe5hoZWLNJZCA4kz79J5bAHJ3/FqAKsnpU8f/rfcwwYNEZ4iwBDw7Y0y1rpbwdM+7dKpA==
   dependencies:
-    "@pollyjs/adapter-fetch" "^2.4.0"
-    "@pollyjs/adapter-xhr" "^2.4.0"
-    "@pollyjs/core" "^2.4.0"
+    "@pollyjs/adapter-fetch" "^2.5.0"
+    "@pollyjs/adapter-xhr" "^2.5.0"
+    "@pollyjs/core" "^2.5.0"
     "@pollyjs/node-server" "^2.1.0"
     "@pollyjs/persister-local-storage" "^2.1.0"
     "@pollyjs/persister-rest" "^2.1.0"
@@ -1342,6 +1342,11 @@
     "@sinonjs/commons" "^1.0.2"
     array-from "^2.1.1"
     lodash.get "^4.4.2"
+
+"@sinonjs/text-encoding@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
+  integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
 "@turf/bbox@6.x", "@turf/bbox@^6.0.1":
   version "6.0.1"
@@ -8846,11 +8851,6 @@ log-update@^2.3.0:
     cli-cursor "^2.0.0"
     wrap-ansi "^3.0.1"
 
-lolex@^2.3.2:
-  version "2.7.5"
-  resolved "https://registry.yarnpkg.com/lolex/-/lolex-2.7.5.tgz#113001d56bfc7e02d56e36291cc5c413d1aa0733"
-  integrity sha512-l9x0+1offnKKIzYVjyXU2SiwhXDLekRzKyhnbyldPHvC7BvLPVpdNUNR2KeMAiCN2D/kLNttZgQD5WjSxuBx3Q==
-
 lolex@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-4.1.0.tgz#ecdd7b86539391d8237947a3419aa8ac975f0fe1"
@@ -9418,16 +9418,16 @@ nice-try@^1.0.4:
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
 
-nise@^1.4.6:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/nise/-/nise-1.4.8.tgz#ce91c31e86cf9b2c4cac49d7fcd7f56779bfd6b0"
-  integrity sha512-kGASVhuL4tlAV0tvA34yJYZIVihrUt/5bDwpp4tTluigxUr2bBlJeDXmivb6NuEdFkqvdv/Ybb9dm16PSKUhtw==
+nise@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/nise/-/nise-1.5.0.tgz#d03ea0e6c1b75c638015aa3585eddc132949a50d"
+  integrity sha512-Z3sfYEkLFzFmL8KY6xnSJLRxwQwYBjOXi/24lb62ZnZiGA0JUzGGTI6TBIgfCSMIDl9Jlu8SRmHNACLTemDHww==
   dependencies:
     "@sinonjs/formatio" "^3.1.0"
+    "@sinonjs/text-encoding" "^0.7.1"
     just-extend "^4.0.2"
-    lolex "^2.3.2"
+    lolex "^4.1.0"
     path-to-regexp "^1.7.0"
-    text-encoding "^0.6.4"
 
 no-case@^2.2.0:
   version "2.3.2"
@@ -12166,11 +12166,6 @@ testem@^2.14.0:
     tap-parser "^7.0.0"
     tmp "0.0.33"
     xmldom "^0.1.19"
-
-text-encoding@^0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/text-encoding/-/text-encoding-0.6.4.tgz#e399a982257a276dae428bb92845cb71bdc26d19"
-  integrity sha1-45mpgiV6J22uQou5KEXLcb3CbRk=
 
 text-table@^0.2.0:
   version "0.2.0"
