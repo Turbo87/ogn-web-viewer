@@ -74,7 +74,7 @@
     "git-repo-info": "^2.1.0",
     "globby": "^9.2.0",
     "loader.js": "^4.7.0",
-    "prettier": "1.18.0",
+    "prettier": "1.18.2",
     "qunit-dom": "^0.8.5"
   },
   "engines": {
