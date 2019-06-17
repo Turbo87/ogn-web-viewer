@@ -11488,10 +11488,10 @@ socket.io@^2.1.0:
     socket.io-client "2.2.0"
     socket.io-parser "~3.3.0"
 
-sockette@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/sockette/-/sockette-2.0.5.tgz#e72cc2958e5a11a1aa49bc9a052093650b8de5d3"
-  integrity sha512-jQbd/n+bHKdOfd9ii95aZ+TTHlaNCbKUpOW4YxiNx/U8OxfhvM9g/SpMSHl/hGSZ5BUYtltXBz02p+ih11M3WQ==
+sockette@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/sockette/-/sockette-2.0.6.tgz#63b533f3cfe3b592fc84178beea6577fa18cebf3"
+  integrity sha512-W6iG8RGV6Zife3Cj+FhuyHV447E6fqFM2hKmnaQrTvg3OydINV3Msj3WPFbX76blUlUxvQSMMMdrJxce8NqI5Q==
 
 sort-keys@^2.0.0:
   version "2.0.0"
