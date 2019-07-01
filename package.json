@@ -59,7 +59,7 @@
     "ember-qunit": "^4.4.1",
     "ember-resolver": "^5.1.3",
     "ember-responsive": "^3.0.3",
-    "ember-source": "~3.11.0",
+    "ember-source": "~3.11.1",
     "ember-svg-jar": "^1.2.2",
     "ember-template-lint": "^1.3.0",
     "ember-test-selectors": "^3.0.0-beta.2",
