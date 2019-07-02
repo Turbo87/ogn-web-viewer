@@ -6502,10 +6502,10 @@ flight-recorder-manufacturers@^1.0.1, flight-recorder-manufacturers@^1.1.0:
   resolved "https://registry.yarnpkg.com/flight-recorder-manufacturers/-/flight-recorder-manufacturers-1.1.0.tgz#66639d5d3f33cdac147e3fe35a7011a899b505f9"
   integrity sha1-ZmOdXT8zzawUfj/jWnARqJm1Bfk=
 
-fluent-langneg@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/fluent-langneg/-/fluent-langneg-0.1.1.tgz#8a6a95e0c57a1c339aa598cb1ee7e3df0c976adb"
-  integrity sha512-7lCFviLfesnxV4SnwAJh1epnKw97doF1Fmrjx3rAjq1/bbgrmuC43rpL7Qx81keB4Eu+YsjFZ7hCMg2mM25SyA==
+fluent-langneg@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/fluent-langneg/-/fluent-langneg-0.2.0.tgz#50e59182d9f1db9c629f754d38e73f92228cee1e"
+  integrity sha512-C1HIOeOzu7S66xpWbmLVv+qd51oxd9ndFbkI4qZWLQMVLZTGuvhxgbcPTzmWNBMMvpvQCuOEQeNPQAzsSKaCNg==
 
 flush-write-stream@^1.0.0:
   version "1.0.3"
