@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@sentry/browser": "^5.4.3",
-    "@sentry/integrations": "^5.4.2",
+    "@sentry/integrations": "^5.5.0",
     "aeroscore": "^0.2.1",
     "fluent-langneg": "^0.2.0",
     "igc-parser": "^0.4.0",
