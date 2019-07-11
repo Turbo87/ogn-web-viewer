@@ -1,0 +1,13 @@
+{
+  "name": "ember-data-strepla",
+  "keywords": [
+    "ember-addon"
+  ],
+  "dependencies": {
+    "ember-cli-babel": "*"
+  },
+  "peerDependencies": {
+    "ember-fetch": "*",
+    "ember-data": "^3.9.1"
+  }
+}
