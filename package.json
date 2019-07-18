@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
-    "@pollyjs/ember": "^2.5.0",
+    "@pollyjs/ember": "^2.6.0",
     "babel-eslint": "^10.0.2",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.2",
