@@ -36,7 +36,7 @@ export default class extends Route {
         return { id, name, registration, callsign, type, handicap };
       });
 
-      run(() => this.filter.add(...records));
+      run(() => this.filter.setFilter(records));
 
       for (let record of records) {
         this.ws.subscribeToId(record.id);

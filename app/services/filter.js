@@ -6,7 +6,7 @@ export default class extends Service {
 
   @notEmpty('filter') hasFilter;
 
-  add(...records) {
-    this.set('filter', [...this.filter, ...records]);
+  setFilter(records) {
+    this.set('filter', records);
   }
 }

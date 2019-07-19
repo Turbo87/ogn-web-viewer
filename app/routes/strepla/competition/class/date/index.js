@@ -85,7 +85,7 @@ export default class extends Route {
 
   setupController(controller, { competitors, task }) {
     if (competitors.length !== 0) {
-      run(() => this.filter.add(...competitors));
+      run(() => this.filter.setFilter(competitors));
 
       for (let record of competitors) {
         this.ws.subscribeToId(record.id);
