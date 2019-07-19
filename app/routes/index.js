@@ -45,7 +45,7 @@ export default class extends Route {
       this.history.loadForIds(...records.map(record => record.id));
     }
 
-    run(() => this.scoring.set('task', task));
+    run(() => this.scoring.setTask(task));
     this.mapService.map.updateSize();
 
     if (task) {
