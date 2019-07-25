@@ -25,7 +25,7 @@
     "fluent-langneg": "^0.2.0",
     "igc-parser": "^0.4.0",
     "lolex": "^4.1.0",
-    "mock-socket": "^8.0.5",
+    "mock-socket": "^8.1.0",
     "neat-csv": "^4.0.0",
     "ol": "^5.3.3",
     "sockette": "^2.0.6"
