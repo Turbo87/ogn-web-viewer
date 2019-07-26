@@ -115,6 +115,7 @@ export default class extends Component {
         let { filterRow } = result;
 
         return {
+          id: filterRow.id,
           num: `${result.landed || result._completed ? ' ' : '!'} ${i + 1}`,
           cn: filterRow.callsign,
           name: filterRow.name,
