@@ -5,7 +5,7 @@ import { Map, View } from 'ol';
 import { Attribution, ScaleLine } from 'ol/control';
 import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
-import TileJSON from 'ol/source/TileJSON';
+import OSMSource from 'ol/source/OSM';
 import XYZSource from 'ol/source/XYZ';
 
 export default class extends Service {
@@ -21,9 +21,8 @@ export default class extends Service {
       if (!Ember.testing) {
         layers = [
           new TileLayer({
-            source: new TileJSON({
-              opacity: 0.5,
-              url: 'https://maps.tilehosting.com/styles/topo.json?key=TT3Oo3SiDCq2wNJ6Rgs9',
+            opacity: 0.5,
+            source: new OSMSource({
               crossOrigin: 'anonymous',
             }),
           }),
