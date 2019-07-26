@@ -1,7 +1,12 @@
 'use strict';
 
+const Rollup = require('broccoli-rollup');
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const getRepoInfo = require('git-repo-info');
+const commonjs = require('rollup-plugin-commonjs');
+const builtins = require('rollup-plugin-node-builtins');
+const globals = require('rollup-plugin-node-globals');
+const resolve = require('rollup-plugin-node-resolve');
 
 module.exports = function(defaults) {
   let env = EmberApp.env();
@@ -86,5 +91,43 @@ module.exports = function(defaults) {
 
   app.import('node_modules/ol/ol.css');
 
-  return app.toTree();
+  let babelAddon = app.project.addons.find(addon => addon.name === 'ember-cli-babel');
+
+  let workerTree = new Rollup('lib/aeroscore-worker', {
+    rollup: {
+      input: 'main.js',
+      output: {
+        file: 'assets/aeroscore-worker.js',
+        format: 'iife',
+        sourcemap: true,
+      },
+      plugins: [
+        globals(),
+
+        // rollup and webpack interpret ES6 imports from CommonJS modules differently
+        // this special case for `@turf/sector` is currently needed to make rollup
+        // not crash when trying to use the function from this module.
+        resolve({
+          mainFields: ['main'],
+          only: ['@turf/sector'],
+          preferBuiltins: true,
+        }),
+
+        resolve({
+          mainFields: ['browser', 'module', 'main'],
+          preferBuiltins: true,
+        }),
+        commonjs(),
+        builtins(),
+      ],
+    },
+  });
+
+  workerTree = babelAddon.transpileTree(workerTree, {
+    'ember-cli-babel': {
+      compileModules: false,
+    },
+  });
+
+  return app.toTree([workerTree]);
 };

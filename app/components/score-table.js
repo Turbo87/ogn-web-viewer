@@ -3,21 +3,12 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Ember from 'ember';
 
-import * as Sentry from '@sentry/browser';
 import { formatDuration, formatTime } from 'aeroscore/dist/src/format-result';
-import {
-  calculateDayFactors,
-  calculateDayResult,
-  compareDayResults,
-  createInitialDayResult,
-  createIntermediateDayResult,
-} from 'aeroscore/dist/src/scoring';
-import AreaTaskSolver from 'aeroscore/dist/src/task/solver/area-task-solver';
-import RacingTaskSolver from 'aeroscore/dist/src/task/solver/racing-task-solver';
 import { timeout } from 'ember-concurrency';
 import { task } from 'ember-concurrency-decorators';
 
 export default class extends Component {
+  @service aeroscore;
   @service filter;
   @service history;
 
@@ -57,58 +48,14 @@ export default class extends Component {
   @task
   updateTask = function*() {
     while (!Ember.testing) {
+      this.set('results', yield this.aeroscore.getResults());
       this.update();
-      yield timeout(3000);
+
+      yield timeout(300);
     }
   };
 
   update() {
-    let results = this.filter.filter.map(filterRow => {
-      let fixes = this.history.forId(filterRow.id);
-
-      let solver = this.task.options.isAAT ? new AreaTaskSolver(this.task) : new RacingTaskSolver(this.task);
-
-      let dayResult, landed, startTimestamp, altitude;
-      try {
-        solver.consume(fixes);
-
-        let lastFix = fixes[fixes.length - 1];
-        altitude = lastFix ? lastFix.altitude : null;
-
-        let result = solver.result;
-
-        landed = false; // TODO
-
-        let start = result.path[0];
-        startTimestamp = start && result.distance ? start.time : null;
-
-        // Competitor’s Handicap, if handicapping is being used; otherwise H=1
-        let H = filterRow.handicap / 100;
-
-        dayResult =
-          landed || result.completed || this.task.options.isAAT
-            ? createInitialDayResult(result, this.initialDayFactors, H)
-            : createIntermediateDayResult(result, this.initialDayFactors, H, this.task, Date.now() / 1000);
-      } catch (error) {
-        Sentry.captureException(error);
-
-        altitude = null;
-        landed = false;
-        startTimestamp = null;
-        dayResult = {
-          completed: false,
-          distance: 0,
-          time: 0,
-        };
-      }
-
-      return { ...dayResult, landed, filterRow, startTimestamp, altitude };
-    });
-
-    this.set('dayFactors', calculateDayFactors(results, this.initialDayFactors));
-
-    this.set('results', results.map(result => calculateDayResult(result, this.dayFactors)).sort(compareDayResults));
-
     this.set(
       'rows',
       this.results.map((result, i) => {

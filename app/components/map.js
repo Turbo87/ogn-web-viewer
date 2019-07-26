@@ -8,6 +8,7 @@ const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
 export default class extends Component {
+  @service aeroscore;
   @service ddb;
   @service filter;
   @service history;
@@ -43,14 +44,18 @@ export default class extends Component {
 
   handleRecord(record) {
     if (this.filter.hasFilter) {
-      this.history.addRecords(record.id, [
-        {
-          time: record.timestamp * 1000,
-          coordinate: [record.longitude, record.latitude],
-          valid: true,
-          altitude: record.altitude,
-        },
-      ]);
+      let historyRecord = {
+        time: record.timestamp * 1000,
+        coordinate: [record.longitude, record.latitude],
+        valid: true,
+        altitude: record.altitude,
+      };
+
+      this.history.addRecords(record.id, [historyRecord]);
+
+      if (this.filter.filter.some(it => it.id === record.id)) {
+        this.aeroscore.addFixes({ [record.id]: [historyRecord] });
+      }
     }
   }
 

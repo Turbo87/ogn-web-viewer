@@ -12,6 +12,7 @@ const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
 export default class extends Route {
+  @service aeroscore;
   @service filter;
   @service scoring;
   @service history;
@@ -24,7 +25,7 @@ export default class extends Route {
     return Promise.all([this.loadDeviceFilter(queryParams.lst), this.loadTask(queryParams.tsk)]);
   }
 
-  setupController(controller, [filter, task]) {
+  setupController(controller, [filter, [task, taskText]]) {
     if (filter.length !== 0) {
       let records = filter.map(row => {
         let id = normalizeDeviceId(row.ID) || row.ID;
@@ -46,6 +47,7 @@ export default class extends Route {
     }
 
     run(() => this.scoring.setTask(task));
+    run(() => this.aeroscore.setTask(taskText));
     this.mapService.map.updateSize();
 
     if (task) {
@@ -70,10 +72,15 @@ export default class extends Route {
 
   async loadTask(url) {
     if (url) {
-      let [text, { readTaskFromString }] = await Promise.all([fetchText(url), import('aeroscore/dist/src/read-task')]);
+      let [text, { readITaskFromString }, { createTask }] = await Promise.all([
+        fetchText(url),
+        import('aeroscore/dist/src/read-task'),
+        import('aeroscore/dist/src/create-task'),
+      ]);
 
       try {
-        return readTaskFromString(text);
+        let task = readITaskFromString(text);
+        return [createTask(task), task];
       } catch (cause) {
         throw new InvalidTaskError({ url, cause });
       }

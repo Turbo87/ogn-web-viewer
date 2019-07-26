@@ -13,6 +13,7 @@ const EPSG_4326 = 'EPSG:4326';
 const EPSG_3857 = 'EPSG:3857';
 
 export default class extends Route {
+  @service aeroscore;
   @service filter;
   @service scoring;
   @service history;
@@ -26,7 +27,7 @@ export default class extends Route {
     let competitionClass = this.modelFor('strepla.competition.class');
     let competitionDay = this.modelFor('strepla.competition.class.date');
 
-    let [competitors, task] = await Promise.all([
+    let [competitors, [task, taskText]] = await Promise.all([
       queryParams.lst
         ? this.loadFilterFromURL(queryParams.lst)
         : this.loadCompetitors(competition.id, competitionClass.name),
@@ -34,21 +35,24 @@ export default class extends Route {
       this.loadTask(competition.id, competitionDay.id),
     ]);
 
-    return { competitors, task };
+    return { competitors, task, taskText };
   }
 
   async loadTask(competitionId, competitionDayId) {
-    let [taskRecord, { readTaskFromString }] = await Promise.all([
+    let [taskRecord, { createTask }, { readITaskFromString }] = await Promise.all([
       this.store.queryRecord('strepla-task', {
         competitionId,
         competitionDayId,
       }),
+      import('aeroscore/dist/src/create-task'),
       import('aeroscore/dist/src/read-task'),
     ]);
 
     let xmlTask = convertTask(taskRecord);
+    let jsonTask = readITaskFromString(xmlTask);
+    let task = createTask(jsonTask);
 
-    return readTaskFromString(xmlTask);
+    return [task, jsonTask];
   }
 
   async loadCompetitors(competitionId, className) {
@@ -83,18 +87,28 @@ export default class extends Route {
     });
   }
 
-  setupController(controller, { competitors, task }) {
+  setupController(controller, { competitors, task, taskText }) {
     if (competitors.length !== 0) {
       run(() => this.filter.setFilter(competitors));
+      run(() => this.aeroscore.setPilots(competitors.toArray()));
 
       for (let record of competitors) {
         this.ws.subscribeToId(record.id);
       }
 
-      this.history.loadForIds(...competitors.map(record => record.id));
+      // eslint-disable-next-line promise/prefer-await-to-then
+      this.history.loadForIds(...competitors.map(record => record.id)).then(() => {
+        let fixesPerPilot = Object.create(null);
+        for (let { id } of competitors) {
+          fixesPerPilot[id] = this.history.forId(id);
+        }
+
+        this.aeroscore.addFixes(fixesPerPilot);
+      });
     }
 
     run(() => this.scoring.setTask(task));
+    run(() => this.aeroscore.setTask(taskText));
     this.mapService.map.updateSize();
 
     if (task) {
