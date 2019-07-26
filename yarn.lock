@@ -2157,10 +2157,10 @@ acorn@^6.0.7:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.0.tgz#b0a3be31752c97a0f7013c5f4903b71a05db6818"
   integrity sha512-MW/FjM+IvU9CgBzjO3UIPCE2pyEwUsoFl+VGdczOPEdxfGFjuKny/gN54mOuX7Qxmb9Rg9MCn2oKiSUeW+pjrw==
 
-aeroscore@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/aeroscore/-/aeroscore-0.2.1.tgz#1ee98896917331c372402642b8d13a3f4db2b116"
-  integrity sha512-F/cvZjW/wEuGre9qmkqDwU+VuBz9QBV5i4iGW0gKfUQcL8F+RdNPkAsW+sESB3lOCQqs/BN6XyCLXLeiz9HQUA==
+aeroscore@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/aeroscore/-/aeroscore-0.2.2.tgz#80bfef3edf98e21ad3b1462cb5c1897aa3591db6"
+  integrity sha512-/Zb3nCgIKo0PoxtiVIA49ILk/qVxxPFVWmg4jczjauOxd/pQdCezIORO2s/wJEv1B/QABuBcG8SbaU/zXkUDyQ==
   dependencies:
     "@turf/bbox" "^6.0.1"
     "@turf/bearing" "^6.0.1"
