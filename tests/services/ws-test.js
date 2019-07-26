@@ -122,6 +122,7 @@ module('Service | ws', function(hooks) {
       await waitUntil(() => receivedMessages.length === 1);
       assert.equal(receivedMessages[0], '+id|FLRDF1685');
 
+      // eslint-disable-next-line require-atomic-updates
       serverSocket = await new Promise(resolve => {
         once(this.server, 'connection', resolve);
         serverSocket.close({ code: 1012 });
@@ -186,6 +187,7 @@ module('Service | ws', function(hooks) {
       await waitUntil(() => receivedMessages.length === 1);
       assert.equal(receivedMessages[0], 'bbox|-12.521|25.171|28.704|61.963');
 
+      // eslint-disable-next-line require-atomic-updates
       serverSocket = await new Promise(resolve => {
         once(this.server, 'connection', resolve);
         serverSocket.close({ code: 1012 });
