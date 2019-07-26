@@ -1,7 +1,7 @@
+import { negotiateLanguages } from '@fluent/langneg';
 import * as Sentry from '@sentry/browser';
 import IntlService from 'ember-intl/services/intl';
 import fetch from 'fetch';
-import { negotiateLanguages } from 'fluent-langneg';
 
 import config from 'ogn-web-viewer/config/environment';
 
