@@ -7,6 +7,7 @@ import { defaults as interactionDefaults } from 'ol/interaction';
 import TileLayer from 'ol/layer/Tile';
 import OSMSource from 'ol/source/OSM';
 import XYZSource from 'ol/source/XYZ';
+import TileWMS from 'ol/source/TileWMS';
 
 export default class extends Service {
   @service media;
@@ -27,6 +28,40 @@ export default class extends Service {
             }),
           }),
 
+          //=========== DWD SAT Image Overlay
+          new TileLayer({
+             visible: true,
+             source: new TileWMS({
+             url: 'https://maps.dwd.de:443/geoserver/dwd/wms',
+             params: {'FORMAT': 'image/png',
+                   'VERSION': '1.1.1',
+                    tiled: true,
+                    "LAYERS": 'dwd:SAT_WELT_KOMPOSIT',
+                    "exceptions": 'application/vnd.ogc.se_inimage',
+                    tilesOrigin: -15.074981 + "," + 34.7373759815055
+                    },
+             opacity: 0.5,
+             attributions: ['Source <a href="https://www.dwd.de">Deutscher Wetterdienst</a>',],
+             }),
+          }),
+
+          //=========== DWD Rain Radar Overlay
+          new TileLayer({
+             visible: true,
+             source: new TileWMS({
+             url: 'https://maps.dwd.de:443/geoserver/dwd/wms',
+             params: {'FORMAT': 'image/png',
+                   'VERSION': '1.1.1',
+                    tiled: true,
+                    "LAYERS": 'dwd:FX-Produkt',
+                    "exceptions": 'application/vnd.ogc.se_inimage',
+                    tilesOrigin: -15.074981 + "," + 34.7373759815055
+                    },
+             opacity: 1.0,
+             }),
+          }),
+
+          //=========== Airspace Layer from skylines
           new TileLayer({
             maxResolution: 2500,
             source: new XYZSource({
