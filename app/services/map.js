@@ -38,7 +38,7 @@ export default class extends Service {
 
       this._map = new Map({
         controls,
-
+        keyboardEventTarget: document,
         interactions: interactionDefaults({
           altShiftDragRotate: false,
           pinchRotate: false,
