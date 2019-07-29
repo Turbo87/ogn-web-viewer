@@ -64,6 +64,9 @@ module.exports = function(defaults) {
 
     svgJar: {
       sourceDirs: ['public/svg'],
+      optimizer: {
+        plugins: [{ removeViewBox: false }],
+      },
     },
 
     freestyle: {
