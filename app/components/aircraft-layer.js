@@ -123,6 +123,8 @@ export function imageSrcForDevice(device) {
         return '/aircraft/libelle.svg';
       } else if (device.model.includes('Hornet')) {
         return '/aircraft/hornet.svg';
+      } else if (device.model.includes('Kestrel')) {
+        return '/aircraft/Kestrel.svg';
       }
     }
 
