@@ -17,7 +17,7 @@ export function normalizeDeviceId(id) {
         return `ICA${id}`;
       } else if (parseInt(id, 16) >= 0x000000 && parseInt(id, 16) <= 0x003fff) {
         // In case device ID is between 0x000000 to 0x003FFF  assume it is an OGN ID
-        return `OGN${id.substring(2)}`;
+        return `OGN${id}`;
       } else {
         // If nothing of the above matches assume FLARM as best guess
         return `FLR${id}`;
