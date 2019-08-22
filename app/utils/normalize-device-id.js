@@ -9,14 +9,14 @@ export function normalizeDeviceId(id) {
     if (RE_HEXDEC.test(id)) {
       // Perform guestimates based on 6-digit device ID.
       // In case device ID is in the range D00000 to DFFFFF it is most likely a FLARM ID
-      if ((parseInt(id,16) >= 0xD00000 ) && (parseInt(id,16) <= 0xDFFFFF )) {
+      if ((parseInt(id, 16) >= 0xD00000 ) && (parseInt(id, 16) <= 0xDFFFFF )) {
         return `FLR${id}`;
-      // In case device ID is between 004000 to E94FFF it is most likely a ICAO-ID - this logic coule be elaborated more based on the country correlation
-      // See http://www.aerotransport.org/html/ICAO_hex_decode.html
-      } else if ((parseInt(id,16) >= 0x004000 ) && (parseInt(id,16) <= 0xE94FFF )) {
+      } else if ((parseInt(id, 16) >= 0x004000 ) && (parseInt(id, 16) <= 0xE94FFF )) {
+        // In case device ID is between 004000 to E94FFF it is most likely a ICAO-ID - this logic coule be elaborated more based on the country correlation
+        // See http://www.aerotransport.org/html/ICAO_hex_decode.html
         return `ICA${id}`;
-      // In case device ID is between 0x000000 to 0x003FFF  assume it is an OGN ID
-      } else if ((parseInt(id,16) >= 0x000000 ) && (parseInt(id,16) <= 0x003FFF )) {
+      } else if ((parseInt(id, 16) >= 0x000000 ) && (parseInt(id, 16) <= 0x003FFF )) {
+        // In case device ID is between 0x000000 to 0x003FFF  assume it is an OGN ID
         return `OGN${id.substring(2)}`;
       } else {
         // If nothing of the above matches assume FLARM as best guess
