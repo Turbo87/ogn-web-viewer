@@ -15,7 +15,7 @@ module('Utils | normalizeDeviceId()', function() {
     ['XX123456', null],
     ['053E5E5C', 'ICA3E5E5C'],
     ['22D00442', 'FLRD00442'],
-    ['3AA007', 'FLR3AA007'],
+    ['3AA007', 'ICA3AA007'],
     ['XXXXXX', null],
     ['FLRXXXXXX', null],
     ['1234567890', null],
