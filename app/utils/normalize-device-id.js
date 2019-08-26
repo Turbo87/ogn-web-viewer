@@ -16,9 +16,6 @@ export function normalizeDeviceId(id) {
       } else if (hexid >= 0x004000 && hexid <= 0xe94fff) {
         // In case device ID is between 004000 to E94FFF it is most likely a ICAO-ID - this logic could be elaborated more based on the country correlation
         return `ICA${id}`;
-      } else if (hexid >= 0x000000 && hexid <= 0x003fff) {
-        // In case device ID is between 0x000000 to 0x003FFF  assume it is an OGN ID
-        return `OGN${id}`;
       } else {
         // If nothing of the above matches assume FLARM as best guess
         return `FLR${id}`;
