@@ -24,8 +24,8 @@ module('Utils | normalizeDeviceId()', function() {
     ['DFFFFF', 'FLRDFFFFF'],
     ['004000', 'ICA004000'],
     ['E94FFF', 'ICAE94FFF'],
-    ['000000', 'OGN000000'],
-    ['003FFF', 'OGN003FFF'],
+    ['000000', 'FLR000000'],
+    ['003FFF', 'FLR003FFF'],
     // Some test cases taken from reality - here DM Stendal 2019 competition - open class
     ['3ED364', 'ICA3ED364'],
     ['DF0EDE', 'FLRDF0EDE'],
