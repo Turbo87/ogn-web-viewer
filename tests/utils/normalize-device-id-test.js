@@ -15,10 +15,23 @@ module('Utils | normalizeDeviceId()', function() {
     ['XX123456', null],
     ['053E5E5C', 'ICA3E5E5C'],
     ['22D00442', 'FLRD00442'],
-    ['3AA007', 'FLR3AA007'],
+    ['3AA007', 'ICA3AA007'],
     ['XXXXXX', null],
     ['FLRXXXXXX', null],
     ['1234567890', null],
+    // Generic tests for boundaries of 6-digit Flarm ID ranges
+    ['D00000', 'FLRD00000'],
+    ['DFFFFF', 'FLRDFFFFF'],
+    ['004000', 'ICA004000'],
+    ['E94FFF', 'ICAE94FFF'],
+    ['000000', 'FLR000000'],
+    ['003FFF', 'FLR003FFF'],
+    // Some test cases taken from reality - here DM Stendal 2019 competition - open class
+    ['3ED364', 'ICA3ED364'],
+    ['DF0EDE', 'FLRDF0EDE'],
+    ['D003B7', 'FLRD003B7'],
+    ['3F0678', 'ICA3F0678'],
+    ['DF1407', 'FLRDF1407'],
   ];
 
   for (let [input, expected] of TESTS) {
