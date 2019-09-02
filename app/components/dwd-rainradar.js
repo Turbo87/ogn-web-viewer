@@ -1,9 +1,9 @@
+//=========== This component provided DWD Rain Radar Overlay
 import Component from '@ember/component';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
-
-
+import { TileWMS } from 'ol/source/TileWMS';
 
 export default class extends Component {
   @service aircraft;
@@ -15,9 +15,19 @@ export default class extends Component {
 
   @alias('mapService.map') map;
 
-  layer = new VectorLayer({
-    source: this.aircraft.source,
-    style: (...args) => this._getFeatureStyle(...args),
+  layer = new TileLayer({
+             visible: true,
+             source: new TileWMS({
+             url: 'https://maps.dwd.de:443/geoserver/dwd/wms',
+             params: {'FORMAT': 'image/png',
+                   'VERSION': '1.1.1',
+                    tiled: true,
+                    "LAYERS": 'dwd:FX-Produkt',
+                    "exceptions": 'application/vnd.ogc.se_inimage',
+                    tilesOrigin: -15.074981 + "," + 34.7373759815055
+                    },
+             opacity: 1.0,
+             }),
   });
 
   didInsertElement() {
