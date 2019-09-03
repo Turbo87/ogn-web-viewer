@@ -7,9 +7,6 @@ import TileLayer from 'ol/layer/Tile';
 import TileWMS from 'ol/source/TileWMS';
 
 export default class extends Component {
-  @service aircraft;
-  @service ddb;
-  @service filter;
   @service('map') mapService;
 
   tagName = '';
