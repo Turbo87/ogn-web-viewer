@@ -1,0 +1,33 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    name: Tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    
+    - name: install
+      run: yarn install  
+
+    - name: lint
+      run: |
+        yarn lint:hbs
+        yarn lint:js
+        yarn ember dependency-lint
+
+    - name: test
+      env:
+        CI: true
+        # Percy secrets are included here to enable Percy's GitHub integration
+        # on community-submitted PRs
+        PERCY_PROJECT: Turbo87/ogn-web-viewer
+        PERCY_TOKEN: d6b6456af13fa817605de7c7b9b2a1b68be327749ff09e25db1500bcb678cc4b
+      run: yarn test
