@@ -1,7 +1,7 @@
-import Component from '@ember/component';
 import { computed, action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 
 import { Feature } from 'ol';
 import { LineString } from 'ol/geom';
@@ -35,24 +35,20 @@ const TASK_AREA_STYLE = new Style({
 export default class extends Component {
   @service('map') mapService;
 
-  tagName = '';
-
-  task = null;
-
   @alias('mapService.map') map;
 
-  @computed('task')
+  @computed('args.task')
   get source() {
     let taskSource = new VectorSource({ features: [] });
 
-    if (this.task) {
+    if (this.args.task) {
       let legsFeature = new Feature({
-        geometry: new LineString(this.task.points.map(pt => transform(pt.shape.center, EPSG_4326, EPSG_3857))),
+        geometry: new LineString(this.args.task.points.map(pt => transform(pt.shape.center, EPSG_4326, EPSG_3857))),
       });
       legsFeature.setId('legs');
       taskSource.addFeature(legsFeature);
 
-      let areas = this.task.points.map(pt => GeoJSON.readFeature(pt.shape.toGeoJSON()));
+      let areas = this.args.task.points.map(pt => GeoJSON.readFeature(pt.shape.toGeoJSON()));
       taskSource.addFeatures(areas);
     }
 
@@ -76,7 +72,7 @@ export default class extends Component {
 
   willDestroy() {
     this.map.removeLayer(this.layer);
-    super.willDestroy(...arguments);
+    super.willDestroy();
   }
 
   @action
