@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
@@ -59,31 +59,28 @@ export default class extends Component {
     return taskSource;
   }
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
+  constructor() {
+    super(...arguments);
 
-    this.set(
-      'layer',
-      new VectorLayer({
-        id: 'task',
-        source: this.source,
-        style(feature) {
-          let id = feature.getId();
-          return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
-        },
-      }),
-    );
+    this.layer = new VectorLayer({
+      id: 'task',
+      source: this.source,
+      style(feature) {
+        let id = feature.getId();
+        return id === 'legs' ? TASK_LEGS_STYLE : TASK_AREA_STYLE;
+      },
+    });
 
     this.map.addLayer(this.layer);
   }
 
-  didUpdateAttrs() {
-    super.didUpdateAttrs(...arguments);
-    this.layer.setSource(this.source);
+  willDestroy() {
+    this.map.removeLayer(this.layer);
+    super.willDestroy(...arguments);
   }
 
-  willDestroyElement() {
-    this.map.removeLayer(this.layer);
-    super.willDestroyElement(...arguments);
+  @action
+  updateSource() {
+    this.layer.setSource(this.source);
   }
 }
