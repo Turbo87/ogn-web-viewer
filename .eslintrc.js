@@ -74,7 +74,7 @@ module.exports = {
           // Testing modules
           ['/^qunit/', '/^ember-qunit/', '/^@ember/test-helpers/', '/^ember-exam/'],
           // Ember.js modules
-          ['/^ember$/', '/^@ember/', '/^ember-data/'],
+          ['/^ember$/', '/^@ember/', '/^ember-data/', '/^@glimmer//'],
           ['module'],
           [`/^${require('./package.json').name}\\//`],
           ['parent', 'sibling', 'index'],
