@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
@@ -28,15 +29,11 @@ export default class extends Component {
       }
     });
 
-    this.map.setTarget('map');
-
     this.ws.on('record', this, 'handleRecord');
   }
 
   willDestroyElement() {
     this.ws.off('record', this, 'handleRecord');
-
-    this.map.setTarget(null);
 
     super.willDestroyElement(...arguments);
   }
@@ -57,5 +54,10 @@ export default class extends Component {
   getBBox() {
     let extent = this.map.getView().calculateExtent();
     return transformExtent(extent, EPSG_3857, EPSG_4326);
+  }
+
+  @action
+  setMapTarget(element) {
+    this.map.setTarget(element);
   }
 }
