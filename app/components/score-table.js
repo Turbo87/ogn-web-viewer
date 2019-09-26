@@ -44,16 +44,6 @@ export default class extends Component {
     };
   }
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
-    this.updateTask.perform();
-  }
-
-  willDestroyElement() {
-    super.willDestroyElement(...arguments);
-    this.updateTask.cancelAll();
-  }
-
   @task
   updateTask = function*() {
     while (!Ember.testing) {
