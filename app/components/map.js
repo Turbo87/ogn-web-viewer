@@ -1,7 +1,7 @@
-import Component from '@ember/component';
 import { action } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 
 import { transformExtent } from 'ol/proj';
 
@@ -15,13 +15,11 @@ export default class extends Component {
   @service ws;
   @service('map') mapService;
 
-  tagName = '';
-
   @alias('filter.hasFilter') hasDeviceFilter;
   @alias('mapService.map') map;
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.map.on('moveend', () => {
       if (!this.filter.hasFilter) {
@@ -32,10 +30,10 @@ export default class extends Component {
     this.ws.on('record', this, 'handleRecord');
   }
 
-  willDestroyElement() {
+  willDestroy() {
     this.ws.off('record', this, 'handleRecord');
 
-    super.willDestroyElement(...arguments);
+    super.willDestroy(...arguments);
   }
 
   handleRecord(record) {
