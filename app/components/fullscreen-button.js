@@ -1,20 +1,18 @@
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 
 import { FullScreen } from 'ol/control';
 
 export default class extends Component {
-  tagName = '';
-
   map = null;
   control = new FullScreen();
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
-    this.map.addControl(this.control);
+  constructor() {
+    super(...arguments);
+    this.args.map.addControl(this.control);
   }
 
-  willDestroyElement() {
-    this.map.removeControl(this.control);
-    super.willDestroyElement(...arguments);
+  willDestroy() {
+    this.args.map.removeControl(this.control);
+    super.willDestroy();
   }
 }
