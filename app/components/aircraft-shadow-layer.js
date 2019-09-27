@@ -1,6 +1,6 @@
-import Component from '@ember/component';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import Component from '@glimmer/component';
 
 import VectorLayer from 'ol/layer/Vector';
 import { Icon, Style } from 'ol/style';
@@ -13,8 +13,6 @@ export default class extends Component {
   @service filter;
   @service('map') mapService;
 
-  tagName = '';
-
   @alias('mapService.map') map;
 
   _iconStyles = new WeakMap();
@@ -26,14 +24,14 @@ export default class extends Component {
     style: (...args) => this._getFeatureStyle(...args),
   });
 
-  didInsertElement() {
-    super.didInsertElement(...arguments);
+  constructor() {
+    super(...arguments);
     this.map.addLayer(this.layer);
   }
 
-  willDestroyElement() {
+  willDestroy() {
     this.map.removeLayer(this.layer);
-    super.willDestroyElement(...arguments);
+    super.willDestroy();
   }
 
   _getFeatureStyle(feature) {

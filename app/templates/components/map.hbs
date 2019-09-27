@@ -1,4 +1,10 @@
-<div id="map" style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}" data-test-map>
+<div
+  id="map"
+  style="width: 100%; height: {{if (and hasDeviceFilter @task) "70%" "100%"}}"
+  data-test-map
+  {{did-insert this.setMapTarget}}
+  {{will-destroy (fn this.setMapTarget null)}}
+>
   <TaskLayer @task={{@task}}/>
 
   <AircraftShadowLayer/>
