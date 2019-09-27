@@ -27,7 +27,7 @@
     "lolex": "^4.2.0",
     "mock-socket": "^9.0.0",
     "neat-csv": "^4.0.0",
-    "ol": "^5.3.3",
+    "ol": "^6.0.0",
     "sockette": "^2.0.6"
   },
   "devDependencies": {
