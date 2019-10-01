@@ -10334,10 +10334,10 @@ object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
-ol@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.0.0.tgz#d71939b78ee08dbefd98d334fc1f0a483a89a90d"
-  integrity sha512-SLgcWuXOjWun3fjVdthQZ/f3QUHqEa1Ug5I0URbfgMMKEpoIUl/nmbLyPNC6V/wtpudlleK01BaG70PEM/rhCg==
+ol@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.0.1.tgz#acef0f29dfbe079637eac85568efbb6394ff2bf2"
+  integrity sha512-gjTziZlJWwOhPkCFW9eT0uscrWnF7DlxPutmgorDE1lYGqpLF/XTnb/5f+2ikHXay7S1EDIi/9U3ccuMeY/4HQ==
   dependencies:
     "@openlayers/pepjs" "^0.5.3"
     pbf "3.2.0"
