@@ -35,7 +35,7 @@
     "@ember/optional-features": "^1.0.0",
     "@ember/render-modifiers": "^1.0.1",
     "@glimmer/component": "^0.14.0-alpha.13",
-    "@pollyjs/ember": "^2.6.2",
+    "@pollyjs/ember": "^2.6.3",
     "babel-eslint": "^10.0.3",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^1.5.2",
