@@ -9851,10 +9851,10 @@ mktemp@~0.4.0:
   resolved "https://registry.yarnpkg.com/mktemp/-/mktemp-0.4.0.tgz#6d0515611c8a8c84e484aa2000129b98e981ff0b"
   integrity sha1-bQUVYRyKjITkhKogABKbmOmB/ws=
 
-mock-socket@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/mock-socket/-/mock-socket-9.0.0.tgz#2ac6b652aff10bb82d41aed4a36165c017b7ebf1"
-  integrity sha512-8Q3y/chmcYRJ6oxhAO9QJwSr6ZWU2zuzD0A7tHa0HOyL83nInIqimFWuke7936IYjEuhBaOrruV+aemlB1f+aA==
+mock-socket@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/mock-socket/-/mock-socket-9.0.1.tgz#38799faa19672af6b4bfaeb53bf671ca24316ee7"
+  integrity sha512-vm4kXy+qUK8CkDqsDedM6abiEM3vTgMEQADCEe804et/PJfb2wL+wjEMPe6UhjGNae0tzaCs8OemNFhebXaOZA==
   dependencies:
     url-parse "^1.4.4"
 
