@@ -24,7 +24,7 @@
     "@sentry/integrations": "^5.7.1",
     "aeroscore": "^0.2.2",
     "igc-parser": "^0.4.0",
-    "lolex": "^5.1.0",
+    "lolex": "^5.1.1",
     "mock-socket": "^9.0.2",
     "neat-csv": "^4.0.0",
     "ol": "^6.0.1",

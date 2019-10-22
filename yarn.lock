@@ -9278,10 +9278,10 @@ lolex@^4.1.0:
   resolved "https://registry.yarnpkg.com/lolex/-/lolex-4.2.0.tgz#ddbd7f6213ca1ea5826901ab1222b65d714b3cd7"
   integrity sha512-gKO5uExCXvSm6zbF562EvM+rd1kQDnB9AZBbiQVzf1ZmdDpxUSvpnAaVOP83N/31mRK8Ml8/VE8DMvsAZQ+7wg==
 
-lolex@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/lolex/-/lolex-5.1.0.tgz#0f432f3a5dcb4bd3c97d9964d40927d0bccf4991"
-  integrity sha512-R7zGwVaPIGu/PXS3OOCqnSpdUs0m5TeXTuP7PqaHGMkYsy2AfKaXXq4QqKCNK/avzpj6aoEwIQAt2tJ/tLdbVQ==
+lolex@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-5.1.1.tgz#9587144854511d27940ee5e113dcb7de9b0fd666"
+  integrity sha512-dEwHz1CJ8DsdgfpiimgQQEhEJYOEiJ69a0s4aJDNHajaTqOJuF34vBAWVa/sS0V8aQvt72p+KgQ3pRmEVJM+iA==
 
 longest@^1.0.1:
   version "1.0.1"
