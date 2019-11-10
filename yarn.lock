@@ -6205,6 +6205,14 @@ ember-qunit@^4.6.0:
     ember-cli-test-loader "^2.2.0"
     qunit "^2.9.3"
 
+ember-render-helpers@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ember-render-helpers/-/ember-render-helpers-0.1.0.tgz#9ae4a35939b168d99983ed94630c7a23b9ab25d3"
+  integrity sha512-6gd79oADJwhZ3isFkHvuKSLlyoI5QTfj0TVdm6gUwUIlS8uRCTRQHt382QCxAoC5wPkhcWSD56kOqGouxcPNAg==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+    ember-cli-typescript "^2.0.2"
+
 ember-resolver@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ember-resolver/-/ember-resolver-5.3.0.tgz#9fbeedfa63c094b588ac7647ba62f1305374f1d8"
