@@ -62,7 +62,7 @@
     "ember-page-title": "^5.1.0",
     "ember-percy": "^1.6.0",
     "ember-qunit": "^4.6.0",
-    "ember-render-helpers": "^0.1.0",
+    "ember-render-helpers": "^0.1.1",
     "ember-resolver": "^5.3.0",
     "ember-responsive": "^3.0.5",
     "ember-source": "~3.14.1",
