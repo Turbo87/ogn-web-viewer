@@ -8570,6 +8570,13 @@ igc-parser@^0.4.0:
   dependencies:
     flight-recorder-manufacturers "^1.0.1"
 
+igc-parser@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/igc-parser/-/igc-parser-0.5.0.tgz#57d3e8781cd2984cc5a357dc7cdeb9389a447232"
+  integrity sha512-XpuPcl7MTu3H+FPjOpH21AQhZWOeaqFpk/T5M5r63ROxRpLF9idgb6SS7/NyQHXOe1L1pdgDKIErKfkxqp90OA==
+  dependencies:
+    flight-recorder-manufacturers "^1.0.1"
+
 ignore-walk@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ignore-walk/-/ignore-walk-3.0.1.tgz#a83e62e7d272ac0e3b551aaa82831a19b69f82f8"
