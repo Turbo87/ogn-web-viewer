@@ -25,7 +25,7 @@
     "aeroscore": "^0.2.2",
     "igc-parser": "^0.5.0",
     "lolex": "^5.1.2",
-    "mock-socket": "^9.0.2",
+    "mock-socket": "^9.0.3",
     "neat-csv": "^4.0.0",
     "ol": "^6.1.1",
     "sockette": "^2.0.6"
