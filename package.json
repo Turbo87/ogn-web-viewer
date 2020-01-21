@@ -63,7 +63,7 @@
     "ember-percy": "^1.6.0",
     "ember-qunit": "^4.6.0",
     "ember-render-helpers": "^0.1.1",
-    "ember-resolver": "^6.0.1",
+    "ember-resolver": "^7.0.0",
     "ember-responsive": "^3.0.5",
     "ember-source": "~3.16.0",
     "ember-svg-jar": "^2.2.3",
