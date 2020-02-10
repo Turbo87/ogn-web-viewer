@@ -5866,7 +5866,7 @@ ember-cli-babel@^6.0.0-beta.4, ember-cli-babel@^6.11.0, ember-cli-babel@^6.16.0,
     ember-cli-version-checker "^2.1.2"
     semver "^5.5.0"
 
-ember-cli-babel@^7.1.2, ember-cli-babel@^7.1.3, ember-cli-babel@^7.10.0, ember-cli-babel@^7.11.0, ember-cli-babel@^7.12.0, ember-cli-babel@^7.13.2, ember-cli-babel@^7.17.2, ember-cli-babel@^7.7.3, ember-cli-babel@^7.9.0:
+ember-cli-babel@^7.1.2, ember-cli-babel@^7.1.3, ember-cli-babel@^7.10.0, ember-cli-babel@^7.11.0, ember-cli-babel@^7.12.0, ember-cli-babel@^7.13.0, ember-cli-babel@^7.13.2, ember-cli-babel@^7.17.2, ember-cli-babel@^7.7.3, ember-cli-babel@^7.9.0:
   version "7.17.2"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.17.2.tgz#2c7717c6864425be3cd11913c722115fbf1448d2"
   integrity sha512-64jRwtRVtEp4ghhew/sHeMsPyUOg3t1TB2dary5mCbKkRasb3L7FwF7xnuzPihaz+AW/v2LqYLALXGCml5XNLA==
@@ -5986,7 +5986,7 @@ ember-cli-htmlbars@^3.0.1:
     json-stable-stringify "^1.0.1"
     strip-bom "^3.0.0"
 
-ember-cli-htmlbars@^4.0.5, ember-cli-htmlbars@^4.2.2:
+ember-cli-htmlbars@^4.0.5, ember-cli-htmlbars@^4.2.0, ember-cli-htmlbars@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-4.2.2.tgz#3db341a0c866b6e16919db071be9592b9702f014"
   integrity sha512-xhVYhdbS2H+XNHzSYfOZKRFIpZ8zOrNGMuAc7vJd6oUE8Aad2r5xjncIVQDioPp8sQfUpXt0uvkUZaOll/thXw==
@@ -6659,13 +6659,14 @@ ember-truth-helpers@^2.1.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-window-mock@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/ember-window-mock/-/ember-window-mock-0.5.4.tgz#a495250e823241922f78d2406f1e8217635b277c"
-  integrity sha512-clJz0Un2vgGdNwjF2hLOtRfDASuGLePfwspfM1CHHwm8cm3jYMQvcLzP/6p7pyDNW36vgz5eKYygWATkpqUUmg==
+ember-window-mock@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/ember-window-mock/-/ember-window-mock-0.6.0.tgz#3195b0c5704df8b5ef2ffcfd69f6255058db3080"
+  integrity sha512-c6hZhM7HnOMpPIxUlGkvQ5DHL4lVwfbRv7auPVZ6iv1fGphYBor8/s3PdH7IDkG/wcElz7KCkZ33EdpaQbwbDw==
   dependencies:
     broccoli-funnel "^2.0.1"
-    ember-cli-babel "^6.16.0"
+    ember-cli-babel "^7.13.0"
+    ember-cli-htmlbars "^4.2.0"
 
 emoji-regex@^7.0.1:
   version "7.0.3"
