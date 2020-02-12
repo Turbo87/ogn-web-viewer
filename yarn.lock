@@ -1716,11 +1716,6 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@openlayers/pepjs@^0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@openlayers/pepjs/-/pepjs-0.5.3.tgz#298c5994cc12de5f149f841affdd8a3e506228b5"
-  integrity sha512-Bgvi5c14BS0FJWyYWWFstNEnXsB30nK8Jt8hkAAdqr7E0gDdBBWVDglF3Ub19wTxvgJ/CVHyTY6VuCtnyRzglg==
-
 "@pollyjs/adapter-fetch@^2.6.3":
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/@pollyjs/adapter-fetch/-/adapter-fetch-2.6.3.tgz#20702f6e9eac7694c6dab44421a4f7e326730140"
@@ -5772,6 +5767,11 @@ elliptic@^6.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
+
+elm-pep@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/elm-pep/-/elm-pep-1.0.4.tgz#fa53db304ad7a53f7cf76a68e0b8214aa764d5e2"
+  integrity sha512-Agx1VJzKKjRWL06yipX6m+Ew7WLiB73VWdkynsFc1CoA4gyY/o8wi9cMcy4B3A5DKwEEqJlr5FU2IsKOEwKG+g==
 
 ember-assign-polyfill@^2.5.0, ember-assign-polyfill@^2.6.0:
   version "2.6.0"
@@ -10866,12 +10866,12 @@ object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
-ol@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.1.1.tgz#7f8ada284344a5872d552205de558ed4a904cd27"
-  integrity sha512-0dL3i3eJqgOpqIjDKEY3grkeQnjAYfV5L/JCxhOu4SxiaizRwFrFgeas6LILRoxKa03jhQFbut2r2bbgcLGQeA==
+ol@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.2.0.tgz#e0dc7b0b53965fa230f3eff38492968982f48872"
+  integrity sha512-kbc4mv0W2dkJpYnEopZ/SLoO2yZSKBAfU/+AYe6ozeLBYIMttU1xABsD0SVA6heSCaAXLxaRUrCzwxQTouHCww==
   dependencies:
-    "@openlayers/pepjs" "^0.5.3"
+    elm-pep "^1.0.4"
     pbf "3.2.1"
     pixelworks "1.1.0"
     rbush "^3.0.1"
