@@ -19,7 +19,7 @@
     "test": "ember test"
   },
   "dependencies": {
-    "@fluent/langneg": "^0.3.0",
+    "@fluent/langneg": "^0.4.0",
     "@sentry/browser": "^5.15.4",
     "@sentry/integrations": "^5.15.4",
     "aeroscore": "^0.2.2",
