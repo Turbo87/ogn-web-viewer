@@ -80,7 +80,7 @@
     "git-repo-info": "^2.1.1",
     "globby": "^11.0.0",
     "loader.js": "^4.7.0",
-    "prettier": "1.19.1",
+    "prettier": "2.0.3",
     "qunit-dom": "^1.1.0"
   },
   "engines": {
