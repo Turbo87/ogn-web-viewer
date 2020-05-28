@@ -6387,10 +6387,10 @@ ember-copy@^1.0.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-css-modules@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.3.0.tgz#f279a3c069bd1e00d1cf7ad6c741a9694a974d49"
-  integrity sha512-aaVp3QiYE1TpWjBD8xPNMG2rQ+kxZpu5PA1KuX3krMydDExhA2JFGImIFIaHOEzCmDhN26MLxANHPecWpAwzkQ==
+ember-css-modules@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/ember-css-modules/-/ember-css-modules-1.3.1.tgz#45f10dbe9fa00a2e13a95b81f1b5756493da12a4"
+  integrity sha512-LbjM2Rhjlm891wqxB1Bs1q99AEF4lBu6s8X/AGLxBLXIUOvbY1FtXJjAsZhRsuoWiFa9u1rTvmCGeMgLOdbKRA==
   dependencies:
     broccoli-bridge "^1.0.0"
     broccoli-concat "^3.2.2"
