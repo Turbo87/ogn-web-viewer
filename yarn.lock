@@ -12942,10 +12942,10 @@ quickselect@^2.0.0:
   resolved "https://registry.yarnpkg.com/quickselect/-/quickselect-2.0.0.tgz#f19680a486a5eefb581303e023e98faaf25dd018"
   integrity sha512-RKJ22hX8mHe3Y6wH/N3wCM6BWtjaxIyyUIkpHOvfFnxdI4yD4tBXEBKSbriGujF6jnSVkJrffuo6vxACiSSxIw==
 
-qunit-dom@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/qunit-dom/-/qunit-dom-1.4.0.tgz#912d3e99aac5f3ff8cb3296269ddc3855ae17801"
-  integrity sha512-kDR6A4IdDZBluyCRCfJLVoplWIAQdAijVfZdRN3yTBIjOyaFQT+BlHR0IsNTFbB7LAa0/6u/UQEYKClYvwjROQ==
+qunit-dom@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/qunit-dom/-/qunit-dom-1.5.0.tgz#f3e062562c18fb354b7657afd31890d89a24691d"
+  integrity sha512-VTFApYbzcYkL5Zg7XgZMgLgMI9JXEX+lwBS5bFy5hRkIaz9V38q7rN44svxFBNHWs96y3UaFaAYpOEmlQ0j+fw==
   dependencies:
     broccoli-funnel "^3.0.3"
     broccoli-merge-trees "^4.2.0"
