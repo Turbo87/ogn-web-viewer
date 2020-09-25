@@ -2568,10 +2568,10 @@
     detect-node "^2.0.4"
     to-arraybuffer "^1.0.1"
 
-"@pollyjs/adapter-xhr@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-xhr/-/adapter-xhr-5.0.0.tgz#487eb8e3bfb02843cf4185de6b7cf3c73e1482ec"
-  integrity sha512-sOQY5XunBAAlyktzIO0EP7C+PvRCYoyHDa6rIiAQGI1RqBgkXIuc/CWtEwmoYIxJ74xXJyegDRpwr0XSNOSwSQ==
+"@pollyjs/adapter-xhr@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@pollyjs/adapter-xhr/-/adapter-xhr-5.0.1.tgz#d1109c5e010c23d21f428f2bb4d635416fab1355"
+  integrity sha512-aU/V2TRKmBUaZCCblrOg8geNO0vDFqB2bg6mGzFVGcJzdqRnjhLLbodhtFnYyQ47kJ6kjjUuvtk+7CnPnKAkeg==
   dependencies:
     "@offirgolan/nise" "^4.1.0"
     "@pollyjs/adapter" "^5.0.0"
@@ -2599,13 +2599,13 @@
     route-recognizer "^0.3.4"
     slugify "^1.3.4"
 
-"@pollyjs/ember@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@pollyjs/ember/-/ember-5.0.0.tgz#39d3dbec883938cbaad00c57e5826731ba7789d0"
-  integrity sha512-/5OQv2qc6QH7RxGi9RGSwl5VCXLeOrVbNpX3ZUuPivWF634k5QBtsyqugNb/2T5vrPMqHRl4CvKle1AzSlobTw==
+"@pollyjs/ember@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@pollyjs/ember/-/ember-5.0.1.tgz#b4af14a074d7b701305b6967ac3ae4034fdbc097"
+  integrity sha512-orbZSYbUS/VdyvpFuXq9OIo161oV4eVMSDJU1UTggVk3KmW1bkZwtfkrxhedVIBrEi+9tLA+8SVtuqbd+oTPHw==
   dependencies:
     "@pollyjs/adapter-fetch" "^5.0.0"
-    "@pollyjs/adapter-xhr" "^5.0.0"
+    "@pollyjs/adapter-xhr" "^5.0.1"
     "@pollyjs/core" "^5.0.0"
     "@pollyjs/node-server" "^5.0.0"
     "@pollyjs/persister-local-storage" "^5.0.0"
