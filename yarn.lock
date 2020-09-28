@@ -7036,7 +7036,7 @@ ember-cli-htmlbars@^4.2.0, ember-cli-htmlbars@^4.3.1:
     strip-bom "^4.0.0"
     walk-sync "^2.0.2"
 
-ember-cli-htmlbars@^5.3.1:
+ember-cli-htmlbars@^5.2.0, ember-cli-htmlbars@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.3.1.tgz#61793964fc2599ce750db9e972ab55c6dd177c48"
   integrity sha512-ZjQTt44euDoqLvUkWbt1svgNCXgLzOztEbc2qqYMQvhQig416LMrWK7l3SSbNU+BtLD5UIxmwvLfF1tsO2CVyA==
@@ -7731,14 +7731,14 @@ ember-truth-helpers@^2.1.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-window-mock@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/ember-window-mock/-/ember-window-mock-0.6.0.tgz#3195b0c5704df8b5ef2ffcfd69f6255058db3080"
-  integrity sha512-c6hZhM7HnOMpPIxUlGkvQ5DHL4lVwfbRv7auPVZ6iv1fGphYBor8/s3PdH7IDkG/wcElz7KCkZ33EdpaQbwbDw==
+ember-window-mock@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/ember-window-mock/-/ember-window-mock-0.7.1.tgz#f7e8027846c542356ea1b4e19c423940cf3eea1c"
+  integrity sha512-xfpANDBJjQEvPbgoFM7EDGCIb7WV6+xAPnQ/ZY4n3nTpIz22Cz1pLpIzqLAAvAc0IP2ec+efiJ9NARlIGz5xXQ==
   dependencies:
-    broccoli-funnel "^2.0.1"
-    ember-cli-babel "^7.13.0"
-    ember-cli-htmlbars "^4.2.0"
+    broccoli-funnel "^3.0.3"
+    ember-cli-babel "^7.21.0"
+    ember-cli-htmlbars "^5.2.0"
 
 emoji-regex@^7.0.1:
   version "7.0.3"
