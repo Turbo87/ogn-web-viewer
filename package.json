@@ -65,7 +65,7 @@
     "ember-render-helpers": "^0.1.1",
     "ember-resolver": "^8.0.2",
     "ember-responsive": "^4.0.1",
-    "ember-source": "~3.21.3",
+    "ember-source": "~3.25.1",
     "ember-svg-jar": "^2.2.3",
     "ember-template-lint": "^1.14.0",
     "ember-test-selectors": "^5.0.0",
