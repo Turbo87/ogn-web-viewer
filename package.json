@@ -67,7 +67,7 @@
     "ember-responsive": "^4.0.1",
     "ember-source": "~3.21.3",
     "ember-svg-jar": "^2.2.3",
-    "ember-template-lint": "^1.14.0",
+    "ember-template-lint": "^2.21.0",
     "ember-test-selectors": "^5.0.0",
     "ember-truth-helpers": "^2.1.0",
     "ember-window-mock": "^0.6.0",
